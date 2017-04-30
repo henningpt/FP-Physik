@@ -1,4 +1,60 @@
 \section{Theorie}
 \label{sec:Theorie}
+Bei den Temperaturen, die bei den folgenden Untersuchungen erreicht werden, bewegen sich im Kristall hauptsächlich die zweiwertigen Ionen.
+Um eine neue Position im Gitter einzunehmen, muss eine Potential Barriere überwunden werden.
+Die dadurch bestimmte Energie ist die Aktivierungsenergie $W$.
+Aus statistischen Überlegungen lässt sich der Anteil der Ionen, die diese Energie besitzen, als 
+\begin{align}
+\exp \left(\frac{-W}{kT}\right)
+\label{eq:1}
+\end{align}
+bestimmen.
+Ebenso folgt die Relaxationszeit
+\begin{align}
+\tau(T)=\tau_0 \exp (\frac{W}{kT}\text{ ,}
+\label{eq:2}
+\end{align}
+welche die mittlere Zeit zwischen zwei Positionswechseln beschreibt.
 
-\cite{sample}
+\noindent
+Durch Anlegen eines elektrischen Feldes lassen sich die Dipole in eine Vorzugsrichtung ausrichten.
+Dabei ist zu beachten, dass aufgrund der thermischen Bewegungen nur ein bestimmter Anteil $y$ aller Dipole in diese Richtung weist.
+Dieser Anteil ist durch die Langevin-Funktion 
+\begin{align}
+y=L(x)=\cot (x) -\frac{1}{x}
+\label{eq:3}
+\end{align}
+gegeben, wobei $x=\frac{pE}{kT}$ gewählt wird.
+Da unter den folgenden Messbedingungen $pE<<kT$ gilt kann $y$ durch
+\begin{align}
+y(T)=\frac{pE}{3kT}
+\label{eq:4}
+\end{align}
+genährt werden.
+Die hier gewählte Messmethode erfordert ein Abkühlen der Probe, um den durch das elektrische Feld erzeugten Zustand einzufrieren.
+Durch Aufheizen der Probe können mit den im folgenden beschriebenen Methoden die Aktivierungsenergie $W$ und die Konstante $\tau_0$ aus Formel (\ref{eq:2}) bestimmt werden. 
+Um die Rechnung zu vereinfachen wird eine konstante Heizrate
+\begin{align}
+b=\frac{dT}{dt}=\text{const}
+\label{eq:5}
+\end{align}
+angenommen.
+Das Aufheizen der Probe und die damit verknüpfte wachsende thermische Energie des Kristallgitters führt zu einer wachsenden Anzahl an Dipolen, die aus der Vorzugsrichtung herausspringen können.
+In einem externen Stromkreis kann daher ein Depolarisationsstrom gemessen werden. 
+Die Depolarisationsstromdichte $j$ hängt von der Gesamtpolarisation, der Anzahl der Dipole in Vorzugsrichtung bei der Polarisationstemperatur $T_p$ und der Änderung der Dipole in Vorzugsrichtung ab
+\begin{align}
+j(T)=y(T_p)~p~\frac{dN}{dt} \overset{Gl. (\ref{eq:4})}{=} \frac{p^2E}{rkT_p}\frac{dN}{dt}\text{ .}
+\label{eq:6}
+\end{align}
+Die Anzahl der relaxierenden Dipole ist proportional zur Anzahl der ausgerichteten Dipole
+\begin{align}
+\frac{dN}{dt}=-\frac{N}{\tau(T)} \text{ .}
+\end{align}
+Daraus ergibt sich unter dem Einfluss der konstanten Heizrate
+\begin{align}
+N=N_p\exp \left(-\frac{1}{b} \int_{T_0}^T \frac{dT\prime}{\tau(T\prime)}\right) \text{ .}
+\end{align}
+Zusammen mit den Gleichungen (\ref{eq:4}) und (\ref{eq:6}) folgt für die Depolarisationsstromdichte
+\begin{align}
+j(T)=\frac{p^2E}{3kT}\frac{N_p}{\tau_0}\exp \left(-\frac{W}{kT}\right)\exp\left(-\frac{1}{b\tau_0}\int_{T_0}^T\exp\left(-\frac{W}{kT}\right)dT\prime\right) \text{ .}
+\end{align}
