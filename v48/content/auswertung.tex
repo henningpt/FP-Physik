@@ -1,9 +1,324 @@
 \section{Auswertung}
 \label{sec:Auswertung}
 
+\subsection{Bestimmung der Aktivierungsenergie aus dem anfänglichen Verlauf der Depolarisationskurve}
+\label{subsec:method1}
+Da sich der Zusammenhang für die Depolarisationskurve zu Beginn durch die Gleichung \eqref{eqn:anfangdepolar} in guter Näherung
+beschreiben lässt, ergibt sich für den logarithmierten Depolarisationsstrom in Abhängigkeit von $T^{-1}$ der Zusammenhang
+\\
+\begin{equation}
+  \label{eqn:lineardepolar}
+  \ln{I} = \frac{p^2 \cdot E N_\text{p} }{3 \cdot k_{b}
+   \cdot T_\text{p} \cdot \tau_{0}} -\frac{W}{k_{\text{B}}} \cdot T^{-1}
+\end{equation}
+
+Aus der Steigung des linearen Zusammenhangs \eqref{eqn:lineardepolar} lässt sich erkennen, dass sich
+die Aktivierungsenergie $W$\footnote{In Elektronenvolt} mit Hilfe eines linearen Fits der ersten Messwerte über
+\\
+\begin{equation}
+  \label{eqn:W}
+  W = -s \cdot k_\text{B} / e
+\end{equation}
+bestimmen lässt. Dabei bezeichnet $s$ die Steigung Fit-Funktion, $k_\text{B}$ die Boltzmann-Konstante und $e$ die Elementarladung.
+
+Anhand der in \ref{tab:linfit1} beziehungweise \ref{tab:linfit2} Wertepaare ergeben sich über einen unter \textbf{Python 3}
+durchgeführten linearen Fit, der mit der Funktion \textbf{curveFit} aus
+dem Paket \textbf{scipy} durchgeführt wurde, die Energien
+\\
+\begin{align*}
+  W_{1} &= \SI{0.262+-0.030}{\electronvolt} \\
+  W_{2} &= \SI{0.248+-0.017}{\electronvolt}.
+\end{align*}
+Dabei wurden die Fit-Parameter
+\\
+\begin{align*}
+  s_{1} &= \SI{-3040+-350}{}\\
+  s_{2} &= \SI{-2870+-200}{}\\
+  b_{1} &= \SI{-0.8+-1.5}{}\\
+  b_{2} &= \SI{-0.3+-0.9}{}
+\end{align*}
+berechnet.
+Die Fehler wurden anhand der von \textbf{curveFit} berechneten Kovarianzmatrix bestimmt. Alle Fehlerfortpflanzungen in diesem Versuchsprotokoll
+werden mit dem Paket \textbf{uncertainties}\cite{uncertainties} durchgeführt.
+
+Die Aufgenommenen Depolarisationskurven sind in Abbildungen \ref{fig:TI1} und \ref{fig:TI2} gezeigt. Da sich zusätzlich zum ersten Maximum noch weitere anschließen und die
+Kurve nicht wie im theoretischen Idealfall auf $0$ abfällt, wurde zur Vereinfachung der Auswertung, wie in \ref{fig:TI1} und \ref{fig:TI2} dargestellt jeweils eine lineare Korrekturfunktion
+im problematischen Bereich abgezogen. Dabei wurden weiterhin die Werte die anschließend unterhalb von $0$ lagen nach oben korrigiert.
+Graphische Darstellungen der linearen Fits\footnote{Fits zur Bestimmung der Aktivierungsenergien.} durch die dafür verwendeten Messwerte
+sind in Abbildungen \ref{fig:lin1} und \ref{fig:lin2} gegeben.
+
 \begin{figure}
   \centering
-  \includegraphics{plot.pdf}
-  \caption{Plot.}
-  \label{fig:plot}
+  \includegraphics[width=\textwidth]{python_data/plots/ti1.pdf}
+  \caption{Depolarisationskurve für Heizrate 1.}
+  \label{fig:TI1}
 \end{figure}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=\textwidth]{python_data/plots/ti2.pdf}
+  \caption{Depolarisationskurve für Heizrate 2.}
+  \label{fig:TI2}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=\textwidth]{python_data/plots/lin1.pdf}
+  \caption{Logarithmierte Stromdichte aufgetragen gegen reziproke Temperatur(Anfangskurve Heizrate1) zur Bestimmung der Aktivierungsenergie.}
+  \label{fig:lin1}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=\textwidth]{python_data/plots/lin2.pdf}
+  \caption{Logarithmierte Stromdichte aufgetragen gegen reziproke Temperatur(Anfangskurve Heizrate2) zur Bestimmung der Aktivierungsenergie.}
+  \label{fig:lin2}
+\end{figure}
+
+\FloatBarrier
+\begin{table}
+  \centering
+  \caption{Verwendete Messwerte für die Anfangskurve der ersten Messung zur Bestimmung der Aktivierungsenergie.}
+  \label{tab:linfit1}
+    \begin{tabular}{c c}
+      \toprule
+      $I \text{ in } \si{\pico\ampere}$ & $ T \text{ in } \si{\kelvin} $ \\
+      \midrule
+       7.90 & 211.35\\
+       7.80 & 214.85\\
+       8.10 & 218.05\\
+       8.70 & 220.75\\
+       9.30 & 223.65\\
+       9.90 & 226.45\\
+      11.40 & 229.55\\
+      12.00 & 232.15\\
+      14.40 & 234.75\\
+      15.30 & 237.15\\
+      20.70 & 239.65\\
+      26.70 & 242.25\\
+      35.00 & 244.55\\
+      47.00 & 247.15\\
+      64.00 & 249.75\\
+      85.00 & 251.85\\
+      \bottomrule
+    \end{tabular}
+\end{table}
+
+
+\begin{table}
+  \centering
+  \caption{Verwendete Messwerte für die Anfangskurve der zweiten Messung zur Bestimmung der Aktivierungsenergie.}
+  \label{tab:linfit2}
+  \begin{tabular}{c c}
+    \toprule
+    $I \text{ in } \si{\pico\ampere}$ & $ T \text{ in } \si{\kelvin} $ \\
+    \midrule
+    10.50 & 213.15\\
+    10.80 & 214.15\\
+    10.20 & 215.85\\
+     9.60 & 217.65\\
+     8.40 & 219.35\\
+    22.20 & 222.55\\
+    16.50 & 223.95\\
+    16.50 & 225.55\\
+    14.40 & 226.95\\
+    13.80 & 228.45\\
+    13.50 & 230.05\\
+    13.50 & 231.15\\
+    13.80 & 232.45\\
+    24.00 & 233.75\\
+    20.00 & 235.15\\
+    23.00 & 236.45\\
+    26.00 & 237.75\\
+    25.00 & 239.15\\
+    28.00 & 240.55\\
+    31.00 & 241.75\\
+    35.00 & 243.15\\
+    38.00 & 244.35\\
+    41.00 & 244.95\\
+    45.00 & 245.55\\
+    47.00 & 246.35\\
+    49.00 & 246.85\\
+    53.00 & 247.55\\
+    56.00 & 248.15\\
+    60.00 & 248.75\\
+    65.00 & 249.45\\
+    70.00 & 250.15\\
+    74.00 & 250.75\\
+    79.00 & 251.45\\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\FloatBarrier
+
+
+\subsection{Bestimmung der Aktivierungsenergie aus dem gesamten relevanten Kurvenverlauf}
+\label{subsec:method2}
+
+Um die Aktvierungsenergien genauer zu bestimmen zu können, wird im Folgenden jeweils der gesamte Verlauf, der in der Theorie vorhergesagten Depolarisationskurve,
+verwendet. Dazu wird Zusammenhang \eqref{eqn:depolar} verwendet. Die Integrationen wurden unter \textbf{Python 3} mit der Simpson-Integration aus dem Paket \textbf{scipy.integrate} durchgeführt.
+Durch einen Anschließenden linearen Fit der reziproken Temperatur aufgetragen gegen die rechte Seite von Gleichung \eqref{eqn:depolar} lässt sich die
+Aktivierungsenergie\footnote{In der Einheit Elektronenvolt.} durch
+\\
+\begin{equation}
+  \label{eqn:W2}
+  W = s \cdot k_\text{B} / e
+\end{equation}
+bestimmen.
+
+
+Es ergeben sich
+\\
+\begin{align*}
+  W_{1} &= \SI{0.22+-0.05}{\electronvolt} \\
+  W_{2} &= \SI{0.205+-035}{\electronvolt}.
+\end{align*}
+Dabei wurden die Fit-Parameter
+\\
+\begin{align*}
+  s_{1} &= \SI{2600+-600}{}  \\
+  s_{2} &= \SI{2400+-400}{}  \\
+  b_{1} &= \SI{-7.8+-2.5}{}  \\
+  b_{2} &= \SI{-4.8+-1.6}{}
+\end{align*}
+berechnet.
+\\
+Bei der Integration wurde nur nach möglichkeit soweit integriert, bis die Strom-Temperatur-Kurve auf einen Wert nahe des Werts zu Beginn der Integration abfällt, dies war vor allem für
+die Werte der zweiten Messung nur bedingt realisierbar.
+Die linearen Fits sowie die jeweils dazu gehörenden umgerechneten Messwerte sind in den Abbildungen \ref{fig:lin1l} und \ref{fig:lin2l} graphisch dargestellt.
+Die jeweils verwendeten Messwerte sind in den Tabellen \ref{tab:lnlinfit1} und \ref{tab:lnlinfit2} zu finden.
+\\
+
+\begin{figure}
+  \centering
+  \includegraphics[width=\textwidth]{python_data/plots/lnlin1.pdf}
+  \caption{Linearer Fit zur bestimmung der Aktivierungsenergie aus dem Gesamtverlauf der Depolarisationskurve(Heizrate 1).}
+  \label{fig:lin1l}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=\textwidth]{python_data/plots/lnlin2.pdf}
+  \caption{Linearer Fit zur bestimmung der Aktivierungsenergie aus dem Gesamtverlauf der Depolarisationskurve(Heizrate 2).}
+  \label{fig:lin2l}
+\end{figure}
+
+\FloatBarrier
+
+\begin{table}
+  \centering
+  \caption{Verwendete Messwerte für die Gesamtkurve der ersten Messung zur Bestimmung der Aktivierungsenergie.}
+  \label{tab:lnlinfit1}
+  \begin{tabular}{c c}
+    \toprule
+    $I \text{ in } \si{\pico\ampere}$ & $ T \text{ in } \si{\kelvin} $ \\
+    \midrule
+      9.30 & 223.65\\
+      9.90 & 226.45\\
+     11.40 & 229.55\\
+     12.00 & 232.15\\
+     14.40 & 234.75\\
+     15.23 & 237.15\\
+     20.70 & 239.65\\
+     26.70 & 242.25\\
+     35.00 & 244.55\\
+     47.00 & 247.15\\
+     64.00 & 249.75\\
+     85.00 & 251.85\\
+    152.99 & 254.05\\
+    186.00 & 256.55\\
+    224.99 & 259.15\\
+    257.99 & 262.05\\
+    269.99 & 264.65\\
+    252.00 & 267.65\\
+    207.00 & 270.15\\
+    158.99 & 272.45\\
+    122.99 & 275.15\\
+     44.34 & 277.45\\
+     35.39 & 279.85\\
+     32.19 & 282.45\\
+     29.37 & 284.75\\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\begin{table}
+  \centering
+  \caption{Verwendete Messwerte für die Gesamtkurve der zweiten Messung zur Bestimmung der Aktivierungsenergie.}
+  \label{tab:lnlinfit2}
+  \begin{tabular}{c c}
+    \toprule
+    $I \text{ in } \si{\pico\ampere}$ & $ T \text{ in } \si{\kelvin} $ \\
+    \midrule
+     28.00 & 267.25\\
+     31.00 & 268.05\\
+     35.00 & 268.85\\
+     38.00 & 269.45\\
+     41.00 & 213.15\\
+     45.00 & 214.15\\
+     47.00 & 215.85\\
+     49.00 & 217.65\\
+     53.00 & 219.35\\
+     56.00 & 222.55\\
+     60.00 & 223.95\\
+     65.00 & 225.55\\
+     70.00 & 226.95\\
+     75.00 & 228.45\\
+     79.00 & 230.05\\
+     85.00 & 231.15\\
+    102.00 & 232.45\\
+    109.00 & 233.75\\
+    114.00 & 347.75\\
+    117.00 & 349.05\\
+    120.00 & 350.35\\
+    120.00 & 351.85\\
+    120.00 & 353.35\\
+    120.00 & 354.85\\
+    120.00 & 356.45\\
+    117.00 & 358.25\\
+    114.00 & 359.45\\
+    111.00 & 360.75\\
+    105.00 & 235.15\\
+    102.00 & 236.45\\
+     93.00 & 237.75\\
+     87.00 & 239.15\\
+     81.00 & 240.55\\
+     75.00 & 241.75\\
+     69.00 & 243.15\\
+     63.00 & 244.35\\
+     60.00 & 244.95\\
+    \bottomrule
+  \end{tabular}
+\end{table}
+\FloatBarrier
+
+\subsection{Bestimmung der Relaxationszeit anhand der lage des Maximums der Depolarisationskurve}
+\label{subsec:zeit}
+Um die Relaxationszeit zu bestimmen wird jeweils die Temperatur $T_\text{max}$ bestimmt, bei der die Depolarisationskurve ihr Maximum annimmt.
+Daraus kann dann unter Verwendung des Zusammenhangs \eqref{eqn:relaxzeit} und Kenntnis der Aktivierungsenergie, $\tau_{0}$ bestimmt werden.
+Es ergeben sich die Werte
+\\
+\begin{align*}
+  \tau_{01} &= \SI{0.16+-0.25}{\micro\second}\\
+  \tau_{02} &= \SI{2.6+-1.9}{\micro\second}.
+\end{align*}
+
+Für die Berechnung der vorausgegangenen Größen wurden die durchschnittlichen
+Heizraten
+\\
+\begin{align*}
+  b_{1} = \SI{0.04}{\kelvin\per\second}\\
+  b_{2} = \SI{0.02}{\kelvin\per\second}
+\end{align*}
+
+sowie die Temperaturen $T^\text{max}$ bei denen der maximale Depolarisationsstrom gemessen wurde
+\\
+\begin{align*}
+  T^\text{max}_{1} = \SI{264.65}{\kelvin}
+  T^\text{max}_{2} = \SI{257.65}{\kelvin}
+\end{align*}
+verwendet.
+
+Direkt auffällig ist, dass die Fehler der Relaxationszeiten eine ähnliche
+Größe haben wie die berechneten Zeiten an sich.
