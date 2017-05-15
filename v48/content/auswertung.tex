@@ -1,9 +1,10 @@
+\newpage
 \section{Auswertung}
 \label{sec:Auswertung}
 
 \subsection{Bestimmung der Aktivierungsenergie aus dem anfänglichen Verlauf der Depolarisationskurve}
 \label{subsec:method1}
-Da sich der Zusammenhang für die Depolarisationskurve zu Beginn durch die Gleichung \eqref{eqn:anfangdepolar} in guter Näherung
+Da sich der Zusammenhang für die Depolarisationskurve zu Beginn durch die Gleichung \eqref{eq:t:11} in guter Näherung
 beschreiben lässt, ergibt sich für den logarithmierten Depolarisationsstrom in Abhängigkeit von $T^{-1}$ der Zusammenhang
 \\
 \begin{equation}
@@ -157,8 +158,8 @@ sind in Abbildungen \ref{fig:lin1} und \ref{fig:lin2} gegeben.
 \label{subsec:method2}
 
 Um die Aktvierungsenergien genauer zu bestimmen zu können, wird im Folgenden jeweils der gesamte Verlauf, der in der Theorie vorhergesagten Depolarisationskurve,
-verwendet. Dazu wird Zusammenhang \eqref{eqn:depolar} verwendet. Die Integrationen wurden unter \textbf{Python 3} mit der Simpson-Integration aus dem Paket \textbf{scipy.integrate} durchgeführt.
-Durch einen Anschließenden linearen Fit der reziproken Temperatur aufgetragen gegen die rechte Seite von Gleichung \eqref{eqn:depolar} lässt sich die
+verwendet. Dazu wird Zusammenhang \eqref{eq:t:15} verwendet. Die Integrationen wurden unter \textbf{Python 3} mit der Simpson-Integration aus dem Paket \textbf{scipy.integrate} durchgeführt.
+Durch einen Anschließenden linearen Fit der reziproken Temperatur aufgetragen gegen die rechte Seite von Gleichung \eqref{eq:t:15} lässt sich die
 Aktivierungsenergie\footnote{In der Einheit Elektronenvolt.} durch
 \\
 \begin{equation}
@@ -172,7 +173,7 @@ Es ergeben sich
 \\
 \begin{align*}
   W_{1} &= \SI{0.22+-0.05}{\electronvolt} \\
-  W_{2} &= \SI{0.205+-035}{\electronvolt}.
+  W_{2} &= \SI{0.205+-0.35}{\electronvolt}.
 \end{align*}
 Dabei wurden die Fit-Parameter
 \\
@@ -183,7 +184,8 @@ Dabei wurden die Fit-Parameter
   b_{2} &= \SI{-4.8+-1.6}{}
 \end{align*}
 berechnet.
-\\
+
+
 Bei der Integration wurde nur nach möglichkeit soweit integriert, bis die Strom-Temperatur-Kurve auf einen Wert nahe des Werts zu Beginn der Integration abfällt, dies war vor allem für
 die Werte der zweiten Messung nur bedingt realisierbar.
 Die linearen Fits sowie die jeweils dazu gehörenden umgerechneten Messwerte sind in den Abbildungen \ref{fig:lin1l} und \ref{fig:lin2l} graphisch dargestellt.
@@ -296,7 +298,7 @@ Die jeweils verwendeten Messwerte sind in den Tabellen \ref{tab:lnlinfit1} und \
 \subsection{Bestimmung der Relaxationszeit anhand der lage des Maximums der Depolarisationskurve}
 \label{subsec:zeit}
 Um die Relaxationszeit zu bestimmen wird jeweils die Temperatur $T_\text{max}$ bestimmt, bei der die Depolarisationskurve ihr Maximum annimmt.
-Daraus kann dann unter Verwendung des Zusammenhangs \eqref{eqn:relaxzeit} und Kenntnis der Aktivierungsenergie, $\tau_{0}$ bestimmt werden.
+Daraus kann dann unter Verwendung des Zusammenhangs \eqref{eq:t:16} und Kenntnis der Aktivierungsenergie, $\tau_{0}$ bestimmt werden.
 Es ergeben sich die Werte
 \\
 \begin{align*}
