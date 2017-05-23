@@ -196,7 +196,7 @@ Um der Symmetrie des Kugelresonators gerecht zu werden, werden die Ergebnisse in
 \subsection{Modell eines eindimensionalen Festkörpers}
 \label{subsec:Modell eines eindimensionalen Festkörpers}
 Die im Bereich zwischen 5~kHz und 9~kHz aufgenommenen Spektren der verschieden langen Röhren sind in den Abbildungen \ref{fig:4_1_75} bis \ref{fig:4_1_600} dargestellt.
-
+Die Messung zeigt eine höhere Dichte der Resonanzen bei zunehmender Rohrlänge.
 \begin{figure}
 \centering
 \includegraphics[width=1\textwidth]{content/messungen/Chapter4/4_1_75mm.jpg}
@@ -318,7 +318,7 @@ das Ergebnis dieser Messung ist. Dabei wurde die Abweichung durch die Gauß'sche
 \begin{align*}
 \Delta c=\sqrt{\sum_{i=1}^n (\Delta c_i)^2}
 \end{align*}
-berechnet.
+berechnet, wobei die $c_i$ die pro Rohr gemessenen Schallgeschwindigkeiten aus Tabelle \ref{tab:4:3} bezeichnen.
 \begin{table}
 \centering
 \caption{Schallgeschwindigkeiten, berechnet nach Tabelle \ref{tab:4:2} und Gleichung (\ref{a:eq:1}).}
@@ -332,3 +332,63 @@ in ms$^{-1}$&&&&&&&\\
 \end{tabular}
 \end{table}
 \FloatBarrier
+Abbildung \ref{fig:4_2_1} zeigt ein Übersichtsspektrum eines 600~mm langen Rohres.
+\begin{figure}
+\centering
+\includegraphics[width=1\textwidth]{content/messungen/Chapter4/4_2.jpg}
+\caption{Resonanzspektrum eines Rohres der Länge 600~mm zwischen 0.1~kHz und 12~kHz.}
+\label{fig:4_2_1}
+\end{figure}
+Durch abzählen der Peaks wird jedem Peak seine Wellenzahl
+\begin{align}
+k= n\frac{\pi}{L}
+\end{align}
+zugeordnet.
+Abbildung \ref{fig:4_2_2} zeigt einen Plot der Resonanzfrequenzen gegen die entsprechenden Wellenzahlen.
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{content/messungen/Chapter4/plot_4_2.jpg}
+\caption{Resonanzfrequenzen in einem 600~mm Rohr in Abhängigkeit der Wellenzahl.}
+\label{fig:4_2_2}
+\end{figure}
+Eine lineare Regression liefert die Ausgleichsgerade
+\begin{align*}
+f(k)=ak+b &&a=(54.96\pm 0.01)\text{ms}^{-1}&&b=(20\pm 1)\text{Hz} \text{ .}
+\end{align*}
+Es ist eindeutig eine lineare Dispersionsrelation zu erkennen.
+Mit der bekannten Gleichung
+\begin{align*}
+f(k)=\frac{c}{2\pi}k
+\end{align*}
+lässt sich wiederholt die Lichtgeschwindigkeit 
+\begin{align*}
+c=(345.33\pm0.06)\text{ms}^{-1}
+\end{align*}
+berechnen.
+\FloatBarrier
+Nun wird das 400~mm lange Rohr bestehend aus 8 Einheiten der Länge 50~mm und 6 Blenden mit den Durchmessern $d=10,13,16~mm$ betrachtet.
+Die Abbildungen \ref{fig:4_3_10} bis \ref{fig:4_3_16} zeigen die zugehörigen Resonanzspektren.
+Für alle drei Blendendurchmesser stimmen die Wellenzahlen der Bänder überein.
+Das erste Band liegen zwischen den Wellenzahlen $k^1_\text{min}=5.24~\text{m}^{-1}$ und $k^1_\text{max}=31.42~\text{m}^{-1}$, das zweite zwischen $k^2_\text{min}=36.65~\text{m}^{-1}$ und $k^2_\text{max}=62.83~\text{m}^{-1}$ und das dritte zwischen $k^3_\text{min}=68.07~\text{m}^{-1}$ und $k^3_\text{max}=94.25~\text{m}^{-1}$.
+Resonanzstellen des vierten Bandes sind nicht alle klar erkennbar. 
+Die Wellenzahlen dieses Bandes liegen zwischen $k^4_\text{min}=99.48~\text{m}^{-1}$ und $k^4_\text{max}=125.57~\text{m}^{-1}$.
+Zwischen den Bändern ist jeweils eine Bandlücke.
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{content/messungen/Chapter4/plot_4_3_10}
+\caption{Resonanzspektrum eines 400~mm langen Rohres mit 6 10~mm Blenden, jeweils im Abstand von 50~mm, zwischen 0.1~kHz und 12~kHz.}
+\label{fig:4_3_10}
+\end{figure}
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{content/messungen/Chapter4/plot_4_3_13}
+\caption{Resonanzspektrum eines 400~mm langen Rohres mit 6 13~mm Blenden, jeweils im Abstand von 50~mm, zwischen 0.1~kHz und 12~kHz.}
+\label{fig:4_3_13}
+\end{figure}
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{content/messungen/Chapter4/plot_4_3_16}
+\caption{Resonanzspektrum eines 400~mm langen Rohres mit 6 16~mm Blenden, jeweils im Abstand von 50~mm, zwischen 0.1~kHz und 12~kHz.}
+\label{fig:4_3_16}
+\end{figure}
