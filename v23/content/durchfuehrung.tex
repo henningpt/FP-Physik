@@ -1,2 +1,142 @@
 \section{Durchführung}
 \label{sec:Durchführung}
+
+\subsection{Simulation eines Teilchens im 1D Potentialtopf}
+\label{subsec:ch1}
+Um ein Teilchen in einem 1D-Potentialtopf zu simulieren,
+werden Schallwellen, die in einem Metallrohr stehende Wellen
+bilden, erzeugt. Um die Schallwellen zu erzeugen wird
+mit der Sounkarte eines Computers ein Signal mit bestimmter
+Frequenz, über einen Controller, auf einen Lautsprecher, der am Anfang einer Schiene
+befestigt ist, gegeben. Dieses Signal wird gleichzeitig noch auf Kanal A eines Oszilloskops gegeben.
+Auf der Schiene wird dann aus verschieden langen Teilstücken
+ein Rohr zusammengesetzt an dessen Ende ein Mikrofon
+angeschlossen wird. Das Signal des Mikrofons wird mithilfe des Controllers
+sowohl an den Computer, als auch an Kanal B des Osziloskops weitergegeben.
+Am Computer kann das Signal dann wieder von der Soundkarte interpretiert werden.\\
+Zunächst werden für das Rohr $8$ jeweils $\SI{75}{\milli\meter}$
+lange Teilstücke verwendet. Für diesen Aufbau wird mithilfe des
+Programms \textbf{SpectrumSLC.exe} die Amplitude in Abhängigkeit
+von der Frequenz(Spektrum) in einem Bereich von $\SI{100}{\hertz}$ bis
+$\SI{10}{\kilo\hertz}$ aufgenommen. Die Schrittweite beträgt
+$\SI{10}{\hertz}$ und die Zeit pro Schritt
+$\SI{50}{\milli\second}$.
+Weiterhin wird für ein Rohr, bestehend aus zwei
+$\SI{75}{\milli\meter}$ Teilstücken, ein Spektrum im Bereich
+von $\SI{5}{\kilo\hertz}$ bis $\SI{14}{\kilo\hertz}$.
+Die Schrittweite beträgt $\SI{5}{\hertz}$ und die Zeit pro Schritt
+$\SI{50}{\milli\second}$\footnote{Diese Schrittweite, sowie Zeit pro Schritt werden im
+Folgenden immer dann verwendet, wenn für diese Größen
+kein anderer Wert angegeben ist.}.
+
+
+
+\subsection{Simulation eines Wasserstoffatoms}
+\label{subsec:ch2}
+Um ein Wasserstoffatom zu simulieren, wird ein
+Kugelresonator, in dessen unterer Hälfte ein Lautsprcher
+und oberer Hälfte ein Mikrofon eingelassen ist.
+Der Resonator ersetzt nun im Aufbau aus Abschnitt
+\ref{subsec:ch1} das (zusammengestzte) Metallrohr.
+Die obere Hälfte des Resonators lässt sich relativ
+zur Unteren drehen. Über eine Winkelskala lässt sich
+die relative Rotation zwischen Mikrofon und
+Lautsprecher ablesen. Der am Resonator eingestellte Winkel
+muss allerdings zur weiteren Rechnung in den Winkel $\theta$,
+von dem die physikalische Veränderung ausgeht, über den Zusammenhang
+
+\begin{equation}
+  \label{eqn:de1ch2}
+  \theta = \arccos\left( \frac{\cos(\alpha) - 1}{2} \right)
+\end{equation}
+umgerechnet werden. Dies wird allerdings von dem verwendeten Programm übernommen.\\
+Zuerst wird ein Winkel von $\SI{180}{\degree}$
+eingestellt und ein Spektrum im Bereich von
+$\SI{100}{\hertz}$ bis $\SI{10}{\kilo\hertz}$
+aufgenommen. Dabei wird in $\SI{10}{\hertz}$ Schritten
+bei einer Zeit von $\SI{100}{\milli\second}$ pro Schritt
+vorgegangen. Anschließend wird dieser Vorgang mit
+Winkeln zwischen $\SI{150}{\degree}$ und $\SI{0}{\degree}$
+in jeweils $\SI{30}{\degree}$ Schritten wiederholt.\\
+Dann wird für die Winkel $\SI{0}{\degree}$,
+$\SI{20}{\degree}$ und $\SI{40}{\degree}$ jeweils
+ein Spektrum zwischen $\SI{4,9}{\kilo\hertz}$ und
+$\SI{5,0}{\kilo\hertz}$($\SI{0,2}{\hertz}$) Schritte
+und Zeit pro Schritt $\SI{100}{\milli\second}$)
+aufgenommen.\\
+Zuletzt wird noch bei $\SI{180}{\degree}$ ein Spektrum
+zwischen $\SI{2}{\kilo\hertz}$ und $\SI{7}{\kilo\hertz}$
+aufgenommen. Für jede gemessene Resonanz wird dann
+dann die Amplitude für Winkel zwischen $\SI{0}{\degree}$
+und $\SI{180}{\degree}$ gemessen und in einem Polarplot
+aufgetragen.
+
+\subsection{Simulation eines 1D Festkörpers}
+\label{subsec:ch4}
+
+\subsubsection{Simulation eines Teilchens in einem
+periodischen 1D-Potential}
+\label{subsubsec:ch4a}
+Um ein Teilchen in einem periodischen Potential
+zu simulieren, werden wieder wie in Abschnitt
+\ref{subsec:ch1} stehende Wellen in einem, aus
+mehreren Teilstücken zusammengesetzten, Rohr
+erzeugt. Allerdings werden die Teilstücke zum Teil durch
+Blenden voneinander getrennt. Die Blenden simulieren
+dass periodische Potential.
+Zunächst wird für verschieden lange Rohre, zusammengesetzt
+aus $\SI{75}{\milli\meter}$ langen Teilrohren, jeweils
+ein Spektrum zwischen $\SI{6}{\kilo\hertz}$ und
+$\SI{9}{\kilo\hertz}$ aufgenommen. Dies wird für eine Anzahl
+von Teilrohren von $1$ bis $8$ durchgeführt.\\
+Weiterhin wird ein Rohr aus $12$ jeweils
+$\SI{50}{\milli\meter}$ langen Teilrohren zusammengesetzt
+und dazu ein Spektrum zwischen $\SI{100}{\hertz}$
+und $\SI{12}{\kilo\hertz}$ aufgenommen.
+Dann wird zwischen jeweils $2$ Teilrohre eine Blende
+mit einem Innendurchmesser von $\SI{16}{\milli\meter}$
+eingefügt und das Spektrum wird erneut aufgenommen.
+Dies wird für ein aus $10$ Teilstücken
+zusammengesetztes Rohr wiederholt.
+In dem selben Frequenzbereich wird dann noch ein
+Spektrum für ein aus$8$ jeweils $\SI{50}{\milli\meter}$
+langen Teilrohren zusammengesetztes Rohr aufgenommen.
+Dabei wird zwischen zwei Teilrohre jeweils eine
+Blende mit Innendurchmesser $\SI{16}{\milli\meter}$
+eingebracht.
+
+
+\subsubsection{Simulation einer 1D Atomkette}
+\label{subsubsec:ch4b}
+Zur Simulation kann eines Festkörpers kann auch die
+Anschauung des 1D Festköpers als eine Kette von Atomen verwendet werden.
+Dabei sind die einzelnen Atome mittels einer gewissen Kopplungsstärke
+mit einander in Beziehung gesetzt. Diese Kopllung wird mit den im
+vorherigen Abschnitt eingeführten Blenden realisiert. Der Versuchsaufbau
+gleicht also dem aus Abschnitt \ref{subsubsec:ch4b}\\
+Zunächst wird für ein $\SI{50}{\milli\meter}$ langes Rohr
+ein Spektrum zwischen $\SI{100}{\hertz}$ bis $\SI{22}{\kilo\hertz}$
+aufganommen. Dies wird für ein $\SI{75}{\milli\meter}$ langes Rohr, $2$($3$,$4$,$6$)
+$\SI{50}{\milli\meter}$ lange und mit einander über jeweils eine
+Blende(jeweils für Innendurchmesser $\SI{10}{\milli\meter}$,
+$\SI{13}{\milli\meter}$, $\SI{16}{\milli\meter}$) verbundene Rohre wiederholt.\\
+Für ein aus $12$ jeweils $\SI{50}{\milli\meter}$ langen Teilrohren, die
+alternierend über ein Blende mit Innendurchmesser $\SI{13}{\milli\meter}$ bzw.
+$\SI{16}{\milli\meter}$ gekoppelt sind, ein Spektrum im Bereich von
+$\SI{100}{\hertz}$ bis $\SI{12}{\kilo\hertz}$ aufgenommen.\\
+Nun wird die Aneinanderkettung mehrer Einheitszellen realiesiert.
+Jede Zelle besteht aus der Sequenz: $\SI{50}{\milli\meter}$ langes Teilrohr,
+Blende mit Innendurchmesser $\SI{16}{\milli\meter}$, $\SI{75}{\milli\meter}$
+langes Teilrohr, Blende mit Innendurchmesser $\SI{13}{\milli\meter}$.
+Es werden $5$ Zellen kombiniert und ein Spektrum im Bereich von
+$\SI{400}{\hertz}$ bis $\SI{12}{\kilo\hertz}$ vermessen.\\
+Zuletzt wird ein sogenannter Defekt in der Struktur des Festkörpers(bzw. der linearen Atomkette)
+simuliert. Dazu wird ein Rohr aus $11$ jeweils $\SI{50}{\milli\meter}$
+langen Teilrohren und einem Teilrohr einer anderen
+Länge\footnote{Dieses Rohr wird im Folgenden als der Defekt bezeichnet.}
+zusammengesezt. Getrennt werden zwei Teilrohre immer durch eine
+Blende mit Innendurchmesser $\SI{16}{\milli\meter}$.
+Der Defekt wird nun an verschiedenen Positionen ($1$, $11$, $7$) eingebaut und
+es wird jeweils ein Spektrum im Bereich von $\SI{100}{\hertz}$ bis $\SI{6}{\kilo\hertz}$ aufgenommen.
+Diese Messung wird jeweils für einen Defekt der Länge $\SI{25}{\milli\meter}$
+und der Länge $\SI{75}{\milli\meter}$ durchgeführt.

@@ -1,4 +1,330 @@
 \section{Theorie}
 \label{sec:Theorie}
 
-\cite{sample}
+
+\subsection{Analogie von Schallwellen in einem Rohr und einem quantenmechanischen Teilchen in einer Box}
+\label{subsec:tch1}
+
+\subsubsection{Stehende Schallwellen in einem Rohr}
+\label{subsubsec:tch11}
+Breitet sich eine Schallwelle in einem Rohr der Länge $L$ aus, so wird sie an den Rohrenden reflektiert.
+Durch Überlagerung hin- und zurücklaufender Wellen, bildet sich eine Stehende Welle aus.
+Aufgrund der festgelegten Länge des Rohrs, erfolgt eine konstruktive Interferenz nur für bestimmte Wellenlängen
+beziehungsweise Frequenzen. Diese Frequenzen $f$ werden Resonanzfrequenzen genannt und erfüllen die Bedingung
+
+
+\begin{equation}
+  \label{eqn:e1ch1}
+  f = \frac{n \cdot c}{2 \cdot L}.
+\end{equation}
+
+
+Dabei bezeichnet $n$ eine natürliche Zahl und $c$ die Schallgeschwindigkeit.\\
+Da die Ausbreitung der Schallwellen über eine Veränderung des Luftdrucks erfolgt, lässt sich für den
+Druck $p$ folgende Um die Beschreibung der Welle zu vereinfachen, lassen sich einige Randbedingungen
+Um die Beschreibung der Welle zu vereinfachen, lassen sich einige Randbedingungen
+Differentialgleichung formulieren
+
+\begin{equation}
+  \label{eqn:e2ch1}
+  \frac{\partial ^2 p}{\partial  t^2} = \frac{1}{\varkappa \cdot \rho} \Delta  p.
+\end{equation}
+$\varkappa$ bezeichnet die Kompressiblität und $\rho$ die Dichte der Luft.
+Um die Beschreibung der Welle zu vereinfachen, lassen sich einige Randbedingungen
+festlegen. Aufgrund des vorhandenseins des Rohrs ist direkt klar, dass Geschwindigkeitskomponenten
+senkrecht zur Rohrwand verschwinden müssen. Weiterhin lässt sich zeigen, dass der Druck senkrecht zum Rohr
+eine räumliche Konstante sein muss.
+Mithilfe dieser Randbedingungen lässt sich eine Beschreibung des Drucks,
+die kompatibel mit Gleichung \eqref{eqn:e2ch1} ist, durch
+
+
+\begin{equation}
+  \label{eqn:e3ch1}
+  p(x) = p_{0} \cdot \cos\left( k\cdot x - \omega \cdot t + \alpha \right)
+\end{equation}
+finden. Da aber durch Überlagerung von hin- und Rücklaufender Wellen eine stehende Welle ergibt, die es
+zu beschreiben gilt, ergibt sich für den Druck letztendlich
+
+\begin{equation}
+  \label{eqn:e4ch1}
+  p(x) = p_{0} \cdot \cos\left( k \cdot x + \alpha \right) \cdot \cos\left( \omega \cdot t \right).
+\end{equation}
+Aufgrund der Forderung, dass der Druck an den Rohrenden konstant und damit seine
+räumliche Ableitung verschwinden muss, ergeben sich die Bedingungen
+
+
+\begin{align}
+  \alpha &= 0 \\
+  k &= \frac{n \cdot \pi}{L}.
+\end{align}
+Dabei bezeichnet $k$ die Wellenzahl.
+Die Dispersionsrelation für Schallwellen lautet
+
+
+\begin{equation}
+  \label{eqn:e7ch1}
+  f(k) = \frac{c \cdot k}{2\pi}
+\end{equation}
+
+
+Während eine Welle mit einer Eigenfrequenz des Rohrs ungetrieben fortbestehen kann, ist dies für andere
+Frequenzen nicht der Fall. Daher ist dann eine etwas andere Beschreibung notwendig. Für Frequenzen
+die einer Eigenfrequenz sehr nah sind, lässt sich sich die Welle gut mit der Bewegungsgleichung
+eines getriebenen, gedämpften Oszillators
+
+
+\begin{equation}
+  \label{eqn:e1ch1b}
+  \frac{\mathrm{d}^2 p}{\mathrm{d}t^2} + 2 \cdot \gamma \frac{\mathrm{d} p}{\mathrm{d}t} + \omega_{0}^2 \cdot p = K \cdot \cos\left( \omega \cdot t \right)
+\end{equation}
+
+charakterisieren.
+Hier bezeichnet $\omega_{0}$ die Resonanzfrequenz und $\omega$ die der betrachteten Welle.
+Durch Lösen von Gleichung \eqref{eqn:e1ch1b} und der Annahme, dass nur die Amplitude der stationären Lösung
+messbar ist, ergibt sich für die frequenzabhängige messbare Amplitude einer Welle , die eine Frequenz sehr nahe
+einer Eigenfrequenz besitzt, durch
+
+
+\begin{equation}
+  \label{eqn:e2ch1b}
+  |A| = \frac{K}{\sqrt{\left( \omega_{0}^2 - \omega^2 \right)^2 + \left( 2 \gamma \omega \right)}}
+\end{equation}
+gegeben.
+Im tatsächlichen Experiment werden aber nicht nur eine sondern gleich meherer Resonanzen angeregt, sodass
+für eine realistischere Beschreibung der Amplitude eine Superposition mehrer solcher Amplituden als Ansatz gewählt werden muss.
+
+\subsubsection{Quantenmechanisches Teilchen in einer Box}
+\label{subsubsec:tch12}
+Teilchen die der Quantenmechanik folgen, werden im Allgemeinen
+durch die Schrödingergleichung
+
+
+\begin{equation}
+  \label{eqn:e8ch1}
+  i \hbar \frac{\partial ^2 \psi(r,t)}{\partial  t^2} = -\frac{\hbar^2}{2\cdot m} \Delta  \psi(r,t) + V(r) \psi(r,t)
+\end{equation}
+
+beschrieben.
+Dabei dient das Betragsquadrat der komplexen Wellenfunktion $\psi(r,t)$
+als Wahrscheinlichkeitsdichtefunktion, dafür das Teilchen an
+einem bestimmten Ort zu finden.
+Bei der Beschreibung eines freien Teilchens, dass sich in einem
+1D-Potentialtopf fortbewegt, fällt das Potential $V(r)$
+weg und Gleichung \eqref{eqn:e8ch1} wird zu
+
+
+\begin{equation}
+  \label{eqn:e9ch1}
+  i \hbar \frac{\partial ^2 \psi(r,t)}{\partial  t^2} = -\frac{\hbar^2}{2\cdot m}
+  \frac{\partial ^2}{\partial  x^2} \psi(x, t)
+\end{equation}
+
+Gleichung \eqref{eqn:e9ch1} liefert sowohl stationäre\footnote{Stationäre
+Wellenfunktionen liefern zeitunabhängige Wahrscheinlichkeitsdichten}
+als auch nicht-stationäre Lösungen. Im folgenden werden
+nun nur noch die stationären Lösungen behandelt.
+Diese werden hier durch
+
+
+\begin{equation}
+  \label{e10ch1}
+  E \psi(x,t) = - \frac{\hbar^2}{2 \cdot} \psi
+\end{equation}
+erzeugt. Mit $E$ wird die Energie des Teilchens bezeichnet.
+Über den Ansatz
+
+
+\begin{equation}
+  \label{eqn:e11ch1}
+  \psi(x) = A \cdot \sin\left( k \cdot x + \alpha \right),
+\end{equation}
+
+sowie der Forderung, dass die Wellenfunktion an den Rändern des
+Potentialtopf($x = 0$, $x = L$) verschwindet, ergibt sich
+für die Teilchenenergie
+
+
+\begin{equation}
+  \label{eqn:e12ch1}
+  E(n) = \frac{\hbar^2 \cdot k(n)^2}{2\cdot m}.
+\end{equation}
+Dabei bezeichnet $n$ eine natürliche Zahl.\\
+In der bisherigen Betrachtung der quantenmechanischen Zustände, wurde nicht berücksichtigt, dass
+nur der Grundzustand eines solchen Systems zeitlich stabil ist. Für alle übrigen Zustände gilt, dass
+sie mit einer gewissen Rate in den Grundzustand zerfallen. Dieser Zerfall wird nun durch Einbau eines Dämpfungfaktors
+in die zeitabhängigen Anteile der Wellenfunktion berücksichtigt. Die Wellenfunktion $\psi$ lässt sich nun als
+
+
+\begin{equation}
+  \label{eqn:e3ch1b}
+  \psi(x,t) = f(x) \cdot e^{-\left( \lambda + i \cdot \omega_{0} \right) \cdot t}
+\end{equation}
+schreiben. Hier bezeichnet $\omega_{0}$ die Frequenz des Grundzustands , $\lambda$ den Dämpfungsfaktor und
+$f(x)$ den Raumanteil der Wellenfunktion. Mithilfe einer Fouriertransformation lässt sich die sogenannte
+Spektralfunktion $A(\omega)$ gewinnen, deren Betragsquadrat die Wahrscheinlichkeit angibt, das betrachtete Teilchen
+mit der zur Frequenz $\omega$ gehörenden Energie zu finden.
+Für diese Wahrscheinlichkeit gilt
+
+\begin{equation}
+  \label{eqn:e4ch1b}
+  |A(\omega)| = \frac{1}{2\pi \cdot \left( \left( \omega_{0}^2 - \omega^2 \right)^2 + \lambda^2 \right)}.
+\end{equation}
+
+Aus der Breite der durch \eqref{eqn:e4ch1b} beschriebenen Kurve lässt direkt die Lebensdauer als ihr Kehrwert multipliziert mit $\hbar$ ablesen.
+Für die Breite $\Gamma$ gilt
+
+\begin{equation}
+  \label{eqn:e5ch1b}
+  \Gamma = \hbar \cdot \lambda.
+\end{equation}
+\subsubsection{Vergleich zwischen Klassik und Quantenmechanik}
+\label{subsubsec:tch13}
+Im Folgenden werden die Gemeinsamkeiten sowie die Differenzen zwischen
+dem im Abschnitt \ref{subsubsec:tch11} klassischen und im Abschnitt
+\ref{subsubsec:tch12} quantenmechanischen Fall diskutiert.\\
+Zunächst lässt sich feststellen, dass bei beiden Problemen eine
+Wellengleichung zur Lösung führt. Dabei ist das Auftreten der
+quadratischen Raumableitung identisch, die Zeitableitung hingegen stellt
+eine Differenz dar. Letzteres resultiert darin, dass sich im klassischen
+Fall eine lineare Dispersionsrelation \eqref{eqn:e7ch1}
+und im quantenmechanischen eine quadratische Dispersion \eqref{eqn:e12ch1}
+ergibt.\\
+Eine weitere Gemeinsamkeit ist, dass in beiden Fällen nur bei bestimmten Frequenzen(Diskretes Spektrum)
+die stehenden Wellen ausbilden können. Dabei wird allerdings in der Quantenmechanik ein Energiespektrum
+und bei den Schallwellen finden nur für die Frequenzen eine physikalische Betrachtung statt.
+Weiterhin besteht ein Unterschied in der physikalischen Interpretation der Wellenfunktion an sich.
+Im Fall der klassischen Schallwellen, wird die Oszillation des Luftdrucks und im quantenmechanischen
+Fall wird ein Maß für die Aufenthaltswahrscheinlichkeit eines Teilchens untersucht.\\
+Um das Analogon zur Lebensdauer eines quantenmechanischen Zustands bei Schallwellen zu finden, lassen sich
+Wellen mit Frequenzen nahe Eigenfrequenzen betrachten. In diesem Fall ergeben sich mit \eqref{eqn:e2ch1b} und \eqref{eqn:e4ch1b}
+sehr ähnliche Zusammenhänge für die frequenzabhängigen Amplituden.\\ \\
+Die Informationen zur Anfertigung dieses Theorieabschnitts wurden der Versuchsanleitung \cite{sample1}
+entnommen.
+
+
+\subsection{Analogie von Schallwellen in einem Kugelresonator und dem quantenmechanischen Wasserstoffatom}
+\label{subsec:tch2}
+
+\subsubsection{Das Wasserstoffatom}
+\label{subsubsec:tch21}
+Das Wasserstoffatom, welches sich aus einem Atomkern und einem Eleketron zusammesetzt, lässt sich aufgrund
+seiner Symmetrie mit dem Ansatz
+
+\begin{equation}
+  \label{eqn:e1ch2}
+  \psi(r,\theta,\phi) = \chi_{l}(r) \cdot Y_{l}^{m}(\theta, \phi)
+\end{equation}
+für die Wellenfunktion charakterisieren. Dabei bezeichnet $\chi$ den Radialanteil, $Y$ den Winkelanteil, $l$
+die Drehimpulsquantenzahl und $m$ die Magenetquantenzahl. Dieser Ansatz löst die Schroedingergleichung für
+das Wasserstoffatom
+
+\begin{equation}
+  \label{eqn:e2ch2}
+  E \psi(\vec r) = - \frac{\hbar^2}{2\cdot m} \Delta  \psi(\vec r) - \frac{e^2}{r} \psi(\vec r)
+\end{equation}
+wenn man diese in Polarkoordinaten schreibt, dann ergeben sich für $Y$ dei Kugelflächenfunktionen, für die gilt
+
+
+\begin{equation}
+  \label{eqn:e3ch2}
+  Y_{l}^{m}(\theta, \phi) \propto P_{l}^{m}(\cos(\theta)) \cdot e^{i\cdot m \cdot \phi}.
+\end{equation}
+Hier sind mit $P_{l}^{m}$ die Legendre-Polynome gemeint.\\
+Erfolgt eine nicht-relativistische Betrachtung, so ergeben sich für die Eigenenergien
+
+\begin{equation}
+  \label{eqn:e4ch2}
+  E_{n^{'}, l} = -\left( \frac{e^2}{\hbar c} \right)^2 \frac{m \cdot c^2}{2\left(l + 1 + n^{'} \right)}
+\end{equation}
+
+Dabei gilt
+
+
+\begin{align}
+  n &= l + n^{'} + 1\\
+  0 \leq & l \leq n - 1.
+\end{align}
+
+Durch $n$ wird die Hauptquantenzahl beschrieben.
+
+
+\subsubsection{Stehende Wellen in einem Kugelresonator}
+\label{subsubsec:tch22}
+Betrachtet man nun einen Kugelresonator, lässt sich eine Beschreibung finden, indem Gleichung
+\eqref{eqn:e2ch1} ,durch den Ansatz das die Zeitabhängigkeit durch $cos(\omega t )$ gegeben ist, zur
+Helmholtzlgleichung
+
+\begin{equation}
+  \label{eqn:e5ch2}
+  \omega^2 \cdot p(\vec r) = \Delta  p(\vec r)
+\end{equation}
+wird.\\
+Löst man \eqref{eqn:e5ch2} in Polarkoordinaten ergibt sich als Lösung
+
+\begin{equation}
+  \label{eqn:e6ch2}
+  p(r, \theta, \phi) = f(r) \cdot Y_{l}^{m}(\theta, \phi).
+\end{equation}
+Mit dem Radialanteil $f(r)$ und dem Winkelanteil, der sich als die Kugelflächenfunktionen
+herausstellt, $Y_{l}^{m}(\theta, \phi)$.\\
+
+Somit ist zu erkennen, dass sowohl im quantenmechanischen Fall des Wasserstoffatoms, als auch bei
+den klassischen Schallwellen im Kugelresonator, eine Winkelbeschreibung durch die Kugelflächenfunktionen stattfindet.
+Allerdings ergeben sich für den Radialanteil ,aufgrund der andersartigen Ableitungen nach $r$, unterschiedliche
+Funktionen. Eine weitere Differenz ist, dass die in Gleichung \eqref{eqn:e4ch2} dargestellten Energien,
+Entartung für die gleiche Hauptquantenzahl aufweisen, was im Fall der Schallwellen nicht anwendbar ist.
+Allerdings lässt sich für beide Gleichung eine Entartung für die durch $m$, der Magnetquantenzahl($-l \leq m \leq l$)
+beschriebene Symmetrie feststellen.\\ \\
+Die Informationen zur Anfertigung dieses Theorieabschnitts wurden der Versuchsanleitung \cite{sample2}
+entnommen.
+
+
+\subsection{Simulation eines 1D-Festkörpers}
+\label{subsec:tch4}
+Anders als im vorherigen Abschnitt \ref{subsec:tch2} dient in der Festkörperphysik der Wellenvektor
+$\vec k$ als Quantenzahl. So ergibt sich die Energie $E(k)$ ebenfalls in Abhängigkeit vom Wellenvektor.
+In Fall des endlichen Festkörpers, beziehungsweise des endlichen Rohrs ergibt sich eine Diskretisierung
+für $k$. Diese folgt
+
+\begin{equation}
+  \label{eqn:e1ch4}
+  k = \frac{\pi \cdot n}{L}.
+\end{equation}
+Wobei $n$ eine natürliche Zahl ist. Für den Fall eines näherungsweise unendlich ausgedehnten Körpers,
+würde sich ein kontinuierliches Spektrum ergeben.\\
+Wie schon in Abschnitt \ref{subsec:tch1} erwähnt, ergibt sich für das freie Elektron eine quadratische
+Dispersionsrelation \eqref{eqn:e12ch1}. Wird das Elektron nun in ein periodisches Potential gesetzt,
+so verändert sich seine Energiedispersion, wenn seine Wellenlänge ungefähr doppelt so groß wie die
+Periodizität des Potentials ist.\\
+Im Experiment mit den Schalwellen wird dieses periodische Potential durch Blenden, die periodisch in
+das Rohr einebaut werden, realisiert. An diesen wird die Welle dann jeweils wie an einem Potential gestreut.\\ \\
+Durch die Einführung des Potentials, ergibt sich im Spektrum eine Bandstruktur, die sich durch Lücken im jeweiligen
+Spektrum auszeichnet.
+Diese sogenannten Bandlücken treten immer dann auf, wenn die Bragg-Bedingung
+
+\begin{equation}
+  \label{eqn:e2ch4}
+  \lambda = \frac{2\cdot a}{n}
+\end{equation}
+zutrifft. Dabei bezeichnet $a$ die Gitterkonstante und $n$ eine natürliche Zahl. Damit lässt sich für die
+Gittervektoren des reziproken Gitters $G$ schreiben
+
+\begin{equation}
+  \label{eqn:e3ch4}
+  G = \frac{2\pi \cdot n}{a}.
+\end{equation}
+Wobei $n$ eine ganze Zahl darstellt.
+Wie auch im direkten Gitter, lassen sich im reziproken Gitter ebenfalls Einheitszellen betrachten. Diese
+werden im reziproken Fall als Brillouin-Zonen bezeichnet. In jeder dieser Zonen befinden sich doppelt so viele
+Resonanzen wie Einheitszellen. Mithilfe des Bloch-Theorems lässt sich die 1D-Wellenfunktion eines Teilchens
+in einem periodischen Potential als
+
+\begin{equation}
+  \label{eqn:e4ch4}
+  \psi(x) = \sum_{G} C{k-G} \cdot e^{i\left( k - G \right)\cdot x}
+\end{equation}
+formulieren. Anhand dieser Funktion lässt sich erkennen, dass immer ein Wellenvektor jeder Brillouin Zone
+beiträgt. Damit lässt sich begründen die von $k$ abhängige Energiedispersion aussschließlich in der ersten
+Brillouin-Zone darzustellen.\\ \\
+Die Informationen zur Anfertigung dieses Theorieabschnitts wurden der Versuchsanleitung \cite{sample4}
+entnommen.
