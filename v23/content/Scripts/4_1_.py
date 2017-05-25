@@ -6,7 +6,7 @@ Out=A
 for i in range(7):
     for j in range(13):
         Out[i,j]=A[i,j+1]-A[i,j]
-#np.savetxt('4_1_diff.txt', np.column_stack(Out),delimiter='&',fmt='%3d',newline='\ ')
+np.savetxt('4_1_diff.txt', np.column_stack(Out),delimiter='&',fmt='%3d',newline='\ ')
 mean0=Out[0,0:13]
 mean1=Out[1,0:10]
 mean2=Out[2,0:9]
