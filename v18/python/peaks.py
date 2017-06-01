@@ -4,9 +4,9 @@ from scipy.optimize import curve_fit
 
 WERTE=np.genfromtxt('v18_1.txt' , unpack=True)
 
-Y=np.array([825,1382,1491,2611])
+Y=np.array([825,996,1154,1382,1491,2611,2907,3231])
 
-X=np.array([295,411,443,678])
+X=np.array([244,295,344,411,443,678,778,867])
 
 A=np.array([121,244,295,344,411,443,678,688,778,867,964,1005,1085,1112,1299,1408,1457])
 print(A)
@@ -14,7 +14,7 @@ def f(x,a,b):
     return a*x+b
 
 params,covariance=curve_fit(f,X,Y)
-print(f(A,*params))
+print('Kalibrierung', f(A,*params))
 
 #Funktionen
 #Gauss
@@ -39,5 +39,6 @@ def gauss(a,s):
  
  return params2
 
-print('Parameter',gauss(825,20))
+print('Parameter',gauss(1150,20))
 
+np.savetxt('Guess.txt',f(A,*params),delimiter=' ; ',newline=' ; ',fmt='%3d')
