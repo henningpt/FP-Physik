@@ -12,12 +12,14 @@ daten1 = np.genfromtxt("v18_1.txt", unpack=True)
 daten2 = np.genfromtxt("v18_2.txt", unpack=True)
 daten3 = np.genfromtxt("v18_3.txt", unpack=True)
 daten4 = np.genfromtxt("v18_4.txt", unpack=True)
+# funktionen
+
 
 # rechnungen
 
 
 # plotten
 # a)
-plt.bar(list(range(len(daten1))), daten1, color='b')
+plt.bar(list(range(len(daten3))), daten3, color='b')
 plt.show()
 # ergebnisse
