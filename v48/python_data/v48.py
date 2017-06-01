@@ -98,8 +98,8 @@ W = slope * -sc.k / sc.elementary_charge
 maxgrenz = 29
 mingrenz = 4
 
-print("I",I)
-print("T,",T)
+print("I", I)
+print("T,", T)
 integ = integrate.simps(T[mingrenz:maxgrenz], Ik[mingrenz:maxgrenz])  # integration ueber strom
 l = integ/Ik  # / b
 print("integral: ", integ)
