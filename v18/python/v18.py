@@ -28,31 +28,26 @@ def gauss(spektrum, a, s):
     Y2 = spektrum[a - s:a + s + 1]
     # print('Y2',Y2)
     params2, covariance2 = curve_fit(g, X2, Y2,  p0=[1, a, 0, 1])
-    uparams2 = unp.uarray(params2,np.sqrt(np.diag(covariance2)))
+    uparams2 = unp.uarray(params2, np.sqrt(np.diag(covariance2)))
     # Plot Vorbereiten
     plt.rcParams['figure.figsize'] = (10, 8)
     plt.rcParams['font.size'] = 16
     plt.plot(X2, Y2, 'rx')
     plt.plot(np.linspace(np.min(X2), np.max(X2), 1000), g(np.linspace(np.min(X2), np.max(X2), 1000), *params2))
-    plt.show()
-    return(params2, uparams2)
+    # plt.show()
+    return(uparams2)
 
 
-def peakanteil(fun, params, pct):
-    def usefun(x):
-        return(params[3] * np.e**(-params[0] * (x - params[1])**2) + params[2])
-
-    def minfun(x):
-        return(pct * usefun(params[1]) - usefun(x))
-    anteilv = fs(minfun, x0=params[1]*0.999)
-    return(2*abs(params[1] - anteilv))
+def peakanteil(p1, pct):
+    return(2 * unp.sqrt(unp.log(1/pct)/p1))
 
 
 # rechnungen
 # b) analyse des photopeaks
-p2daten, p2test = gauss(daten2, 2220, 18)
-halbwert = peakanteil(g, p2daten, 0.5)
-zehntelwert = peakanteil(g, p2daten, 0.1)
+p2daten = gauss(daten2, 2220, 18)
+print("p2daten: ", p2daten)
+halbwert = peakanteil(p2daten[0], 0.5)
+zehntelwert = peakanteil(p2daten[0], 0.1)
 # peakinhalt =
 # plotten
 # spektren
@@ -79,4 +74,3 @@ print("aufgabe b): \n\n")
 print("photpeak2: \n position: ", p2daten[1])
 print("halbwert: ", halbwert)
 print("10tel-wert: ", zehntelwert)
-print("test: ", p2test)
