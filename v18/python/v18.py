@@ -2,6 +2,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 import scipy.constants as sc
 from scipy.optimize import curve_fit
+from scipy.optimize import fsolve as fs
+from scipy.optimize import minimize as mini
 # from uncertainties import unumpy as unp
 # from uncertainties import ufloat
 
@@ -34,9 +36,21 @@ def gauss(spektrum, a, s):
     plt.show()
     return(params2)
 
+
+def peakanteil(fun, params, pct):
+    def usefun(x):
+        return(params[3] * np.e**(-params[0] * (x - params[1])**2) + params[2])
+
+    def minfun(x):
+        return(pct * usefun(params[1]) - usefun(x))
+    anteilv = fs(minfun, x0=params[1]*0.9995)
+    return(anteilv)
+
+
 # rechnungen
 # analyse des photopeaks
-p2daten = (gauss(daten2, 2220, 18))
+p2daten = gauss(daten2, 2220, 18)
+halbwert = peakanteil(g, p2daten, 0.5)
 
 # plotten
 # spektren
@@ -61,3 +75,4 @@ plt.savefig("plots/spec4.pdf")
 # ergebnisse
 print("aufgabe b): \n\n")
 print("photpeak2: \n position: ", p2daten[1])
+print("halbwert: ", halbwert)
