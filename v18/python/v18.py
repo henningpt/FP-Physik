@@ -4,8 +4,8 @@ import scipy.constants as sc
 from scipy.optimize import curve_fit
 from scipy.optimize import fsolve as fs
 from scipy.optimize import minimize as mini
-# from uncertainties import unumpy as unp
-# from uncertainties import ufloat
+from uncertainties import unumpy as unp
+from uncertainties import ufloat
 
 # daten einlesen
 # tEu = ufloat(4943, 5)
@@ -28,13 +28,14 @@ def gauss(spektrum, a, s):
     Y2 = spektrum[a - s:a + s + 1]
     # print('Y2',Y2)
     params2, covariance2 = curve_fit(g, X2, Y2,  p0=[1, a, 0, 1])
+    uparams2 = unp.uarray(params2,np.sqrt(np.diag(covariance2)))
     # Plot Vorbereiten
     plt.rcParams['figure.figsize'] = (10, 8)
     plt.rcParams['font.size'] = 16
     plt.plot(X2, Y2, 'rx')
-    plt.plot(X2, g(X2, *params2))
+    plt.plot(np.linspace(np.min(X2), np.max(X2), 1000), g(np.linspace(np.min(X2), np.max(X2), 1000), *params2))
     plt.show()
-    return(params2)
+    return(params2, uparams2)
 
 
 def peakanteil(fun, params, pct):
@@ -43,15 +44,16 @@ def peakanteil(fun, params, pct):
 
     def minfun(x):
         return(pct * usefun(params[1]) - usefun(x))
-    anteilv = fs(minfun, x0=params[1]*0.9995)
-    return(anteilv)
+    anteilv = fs(minfun, x0=params[1]*0.999)
+    return(2*abs(params[1] - anteilv))
 
 
 # rechnungen
-# analyse des photopeaks
-p2daten = gauss(daten2, 2220, 18)
+# b) analyse des photopeaks
+p2daten, p2test = gauss(daten2, 2220, 18)
 halbwert = peakanteil(g, p2daten, 0.5)
-
+zehntelwert = peakanteil(g, p2daten, 0.1)
+# peakinhalt =
 # plotten
 # spektren
 '''
@@ -76,3 +78,5 @@ plt.savefig("plots/spec4.pdf")
 print("aufgabe b): \n\n")
 print("photpeak2: \n position: ", p2daten[1])
 print("halbwert: ", halbwert)
+print("10tel-wert: ", zehntelwert)
+print("test: ", p2test)
