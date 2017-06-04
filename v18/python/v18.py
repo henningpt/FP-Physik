@@ -10,7 +10,8 @@ from uncertainties import ufloat
 # daten einlesen
 # tEu = ufloat(4943, 5)
 # tdiff = 6084
-
+Ebild = 2.9 * sc.e
+epsilon = 1 / (sc.m_e * sc.c**2)
 daten1 = np.genfromtxt("v18_1.txt", unpack=True)
 daten2 = np.genfromtxt("v18_2.txt", unpack=True)
 daten3 = np.genfromtxt("v18_3.txt", unpack=True)
@@ -42,13 +43,50 @@ def peakanteil(p1, pct):
     return(2 * unp.sqrt(unp.log(1/pct)/p1))
 
 
+def peakinhalt(p):
+    return(p[3] * unp.sqrt(np.pi / p[0]))
+
+
+def halbwerttheorie(Eel, Eg):
+    return(2.35 * unp.sqrt(0.1 * Eel * Eg))
+
+
+def zehntelwerttheorie(halbwert):
+    return(1.823 * halbwert)
+
+
+def comptkante(Eg):
+    return(Eg * 2 * Eg * epsilon / (1 + 2 * Eg * epsilon))
+
+
+def rueckstreu(Eg):
+    return(Eg / (1 + Eg * epsilon * 2))
+
+
+def kontinuum(E, dsig):
+    klammer = 2 + (E/(unp.nominal_values(p2daten[1]) - E))**2 * (1 / (unp.nominal_values(p2daten[1]) * epsilon)**2 + (unp.nominal_values(p2daten[1]) - E) / unp.nominal_values(p2daten[1]) - 2 * (unp.nominal_values(p2daten[1]) - E)/(unp.nominal_values(p2daten[1]) * unp.nominal_values(p2daten[1]) * epsilon))
+    vorfakt = np.pi * sc.e**2 / (4 * np.pi * sc.epsilon_0 * sc.c**2 * sc.m_e)**2
+    return(dsig * vorfakt * klammer)
+
+
 # rechnungen
 # b) analyse des photopeaks
 p2daten = gauss(daten2, 2220, 18)
-print("p2daten: ", p2daten)
 halbwert = peakanteil(p2daten[0], 0.5)
 zehntelwert = peakanteil(p2daten[0], 0.1)
-# peakinhalt =
+halbwertth = halbwerttheorie(Ebild, p2daten[1])
+zehntelwertth = zehntelwerttheorie(halbwertth)
+p2inhalt = peakinhalt(p2daten)
+comptonkante = comptkante(p2daten[1])
+ruekstreupos = rueckstreu(p2daten[1])
+
+minfit = 1000
+maxfit = 2000
+comptparams, comptcovariance = curve_fit(kontinuum, np.linspace(minfit, maxfit, maxfit - minfit), daten2[minfit:maxfit])
+
+# b) analyse des compton-kontinuums
+# rstreupeak =
+
 # plotten
 # spektren
 '''
@@ -68,9 +106,16 @@ plt.figure(4)
 plt.bar(list(range(len(daten4))), daten4, color='r')
 plt.savefig("plots/spec4.pdf")
 '''
+# plt.figure(2)
+# plt.bar(list(range(len(daten2))), daten2, color='r')
+# plt.show()
 
 # ergebnisse
 print("aufgabe b): \n\n")
-print("photpeak2: \n position: ", p2daten[1])
-print("halbwert: ", halbwert)
-print("10tel-wert: ", zehntelwert)
+print("photpeak2: \nposition: ", p2daten[1])
+print("\nhalbwert: ", halbwert)
+print("\n10tel-wert: ", zehntelwert)
+print("\nhablwert theorie: ", halbwertth)
+print("\nzehntelwert theorie: ", zehntelwertth)
+print("\npeakinhalt: ", p2inhalt)
+print("\nzehntel/halbwert: ", zehntelwert/halbwert)
