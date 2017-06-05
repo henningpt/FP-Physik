@@ -80,10 +80,10 @@ p2inhalt = peakinhalt(p2daten)
 comptonkante = comptkante(p2daten[1])
 ruekstreupos = rueckstreu(p2daten[1])
 
-minfit = 1000
-maxfit = 2000
+minfit = 500
+maxfit = 1570
 comptparams, comptcovariance = curve_fit(kontinuum, np.linspace(minfit, maxfit, maxfit - minfit), daten2[minfit:maxfit])
-
+ucomptparams = unp.uarray(comptparams, np.sqrt(np.diag(comptcovariance)))
 # b) analyse des compton-kontinuums
 # rstreupeak =
 
@@ -106,9 +106,10 @@ plt.figure(4)
 plt.bar(list(range(len(daten4))), daten4, color='r')
 plt.savefig("plots/spec4.pdf")
 '''
-# plt.figure(2)
-# plt.bar(list(range(len(daten2))), daten2, color='r')
-# plt.show()
+plt.figure(2)
+plt.bar(list(range(2300)), daten2[:2300], color='r')
+plt.plot(list(range(1600)), kontinuum(list(range(1600)), comptparams))
+plt.show()
 
 # ergebnisse
 print("aufgabe b): \n\n")
