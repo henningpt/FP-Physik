@@ -80,7 +80,7 @@ p2inhalt = peakinhalt(p2daten)
 comptonkante = comptkante(p2daten[1])
 ruekstreupos = rueckstreu(p2daten[1])
 
-minfit = 500
+minfit = 800
 maxfit = 1570
 comptparams, comptcovariance = curve_fit(kontinuum, np.linspace(minfit, maxfit, maxfit - minfit), daten2[minfit:maxfit])
 ucomptparams = unp.uarray(comptparams, np.sqrt(np.diag(comptcovariance)))
@@ -120,3 +120,5 @@ print("\nhablwert theorie: ", halbwertth)
 print("\nzehntelwert theorie: ", zehntelwertth)
 print("\npeakinhalt: ", p2inhalt)
 print("\nzehntel/halbwert: ", zehntelwert/halbwert)
+print("\n\ncompton-kontinuum: \ncomptonkante: ", comptonkante)
+print("\nrueckstreupeak: ", ruekstreupos)
