@@ -31,9 +31,10 @@ def f(x,a,b):
     return a*x+b
 
 params,covariance=curve_fit(f,X,Y)
-print(params)
-print('Kalibrierung', f(A,*params))
 
+#Kalibrierungsparameter
+kal=unp.uarray(params,np.sqrt(np.diag(covariance)))
+print('Kalibrierungswerte :',kal)
 #Funktionen
 #Gauss
 def gauss(a,s):
@@ -83,14 +84,21 @@ for i in range(len(Y)):
     Y_err[i] = np.sqrt(np.diag(D[i]))[1]
 y=unp.uarray(Y,Y_err)
 #Berechne Inhalte der Peaks mit der Integralformel fuer gauss
-
 I=np.zeros(len(Y))
-a=unp.uarray(np.zeros(len(Y)),np.zeros(len(Y)))
+a=np.zeros(len(Y))
+a_err=np.zeros(len(Y))
+amp=np.zeros(len(Y))
+amp_err=np.zeros(len(Y))
 for i in range(len(Y)):
-    a[i]=[C[i][0],np.sqrt(np.diag(D[i]))[0]]
-for i in range(len(Y)):
-    I[i]=C[i][3]*math.sqrt(np.pi)/math.sqrt(C[i][0])
-print(I)
+    a[i]=C[i][0]
+    a_err[i]=np.sqrt(np.diag(D[i]))[0]
+    amp[i]=C[i][3]
+    amp_err[i]=np.sqrt(np.diag(D[i]))[3]
+uamp=unp.uarray(amp,amp_err)
+
+ua=unp.uarray(a,a_err)
+
+I=uamp*unp.sqrt(np.pi)/unp.sqrt(a)
 
 #Berechne die Effizienz
 omega=0.2
@@ -98,6 +106,6 @@ Aktivitaet=1800
 W=np.array([28.6,7.6,0.4,26.5,2.2,3.1,2.0,0.9,12.9,4.2,14.6,0.6,10.2,13.6,1.6,21.0,0.5])
 Q=4*np.pi/omega/Aktivitaet*I/W
 
-print('Effizienz ',Q)
+#print('Effizienz ',Q)
 
 np.savetxt('Guess.txt',f(A,*params),delimiter=' ; ',newline=' ; ',fmt='%3d')
