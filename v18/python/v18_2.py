@@ -1,7 +1,7 @@
 import numpy as np
 
 #Messwerte einlesen
-Y=np.genfromtxt('v18_2.txt' , unpack=True)
+Y=np.genfromtxt('v18_3.txt' , unpack=True)
 
 X=np.arange(0,len(Y))
 

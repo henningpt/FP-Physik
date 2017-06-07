@@ -32,6 +32,17 @@ def f(x,a,b):
 
 params,covariance=curve_fit(f,X,Y)
 
+import matplotlib.pyplot as plt
+plt.rcParams['figure.figsize'] = (10, 8)
+plt.rcParams['font.size'] = 16
+
+plt.plot(np.linspace(100,1500,100),f(np.linspace(100,1500,100),*params),label='Fitfunktion')
+plt.plot(X,Y,'rx',label='Messergebnisse')
+plt.ylabel('Kanalnummer')
+plt.xlabel('Energie in eV')
+plt.legend()
+#plt.show()
+
 #Kalibrierungsparameter
 kal=unp.uarray(params,np.sqrt(np.diag(covariance)))
 print('Kalibrierungswerte :',kal)
@@ -83,6 +94,7 @@ Y_err=np.zeros(len(Y))
 for i in range(len(Y)):
     Y_err[i] = np.sqrt(np.diag(D[i]))[1]
 y=unp.uarray(Y,Y_err)
+
 #Berechne Inhalte der Peaks mit der Integralformel fuer gauss
 I=np.zeros(len(Y))
 a=np.zeros(len(Y))
@@ -99,13 +111,40 @@ uamp=unp.uarray(amp,amp_err)
 ua=unp.uarray(a,a_err)
 
 I=uamp*unp.sqrt(np.pi)/unp.sqrt(a)
+Zaehlrate=I/7764
 
 #Berechne die Effizienz
-omega=0.2
-Aktivitaet=1800
-W=np.array([28.6,7.6,0.4,26.5,2.2,3.1,2.0,0.9,12.9,4.2,14.6,0.6,10.2,13.6,1.6,21.0,0.5])
-Q=4*np.pi/omega/Aktivitaet*I/W
 
-#print('Effizienz ',Q)
+omega=0.2
+
+t=unp.uarray( 6084 ,1)
+
+Aktivitaet=unp.uarray(4130,60)*unp.exp(-unp.log(2)/(unp.uarray(4943,5)*86400)*t)
+
+W=np.array([28.6,7.6,0.4,26.5,2.2,3.1,2.0,0.9,12.9,4.2,14.6,0.6,10.2,13.6,1.6,21.0,0.5])/100
+
+Q=4*np.pi/omega/Aktivitaet*Zaehlrate/W
+
+print('Effizienz ',Q)
 
 np.savetxt('Guess.txt',f(A,*params),delimiter=' ; ',newline=' ; ',fmt='%3d')
+
+#Plots
+#Potenzfunktion der Effizienz
+def eff(x,p1,p2):
+    return p1*np.power(x,p2)
+
+Y_umgerechnet=y/params[0]-params[1]/params[0]
+
+params3,covariance3 = curve_fit(eff,unp.nominal_values(Y_umgerechnet),unp.nominal_values(Q))
+import matplotlib.pyplot as plt
+plt.rcParams['figure.figsize'] = (10, 8)
+plt.rcParams['font.size'] = 16
+
+#plt.plot(X,unp.nominal_values(Q),'rx')
+plt.plot(np.linspace(100,1500,100),eff(np.linspace(100,1500,100),*params3),label='Fitfunktion')
+plt.errorbar(unp.nominal_values(Y_umgerechnet),unp.nominal_values(Q),xerr=unp.std_devs(Y_umgerechnet),yerr=unp.std_devs(Q),fmt='r.',label='Messergebnisse')
+plt.ylabel('Effizienz')
+plt.xlabel('Energie in eV')
+plt.legend()
+#plt.show()
