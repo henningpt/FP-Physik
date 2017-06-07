@@ -33,6 +33,7 @@ def f(x,a,b):
 params,covariance=curve_fit(f,X,Y)
 
 import matplotlib.pyplot as plt
+'''
 plt.rcParams['figure.figsize'] = (10, 8)
 plt.rcParams['font.size'] = 16
 
@@ -42,7 +43,7 @@ plt.ylabel('Kanalnummer')
 plt.xlabel('Energie in eV')
 plt.legend()
 #plt.show()
-
+'''
 #Kalibrierungsparameter
 kal=unp.uarray(params,np.sqrt(np.diag(covariance)))
 print('Kalibrierungswerte :',kal)
@@ -119,7 +120,7 @@ omega=0.2
 
 t=unp.uarray( 6084 ,1)
 
-Aktivitaet=unp.uarray(4130,60)*unp.exp(-unp.log(2)/(unp.uarray(4943,5)*86400)*t)
+Aktivitaet=unp.uarray(4130,60)*unp.exp(-unp.log(2)/(unp.uarray(4943,5))*t)
 
 W=np.array([28.6,7.6,0.4,26.5,2.2,3.1,2.0,0.9,12.9,4.2,14.6,0.6,10.2,13.6,1.6,21.0,0.5])/100
 
@@ -137,6 +138,10 @@ def eff(x,p1,p2):
 Y_umgerechnet=y/params[0]-params[1]/params[0]
 
 params3,covariance3 = curve_fit(eff,unp.nominal_values(Y_umgerechnet),unp.nominal_values(Q))
+
+print('Effizienzfunktion a*x^b mit:')
+print('a,b = ',unp.uarray(params3,np.sqrt(np.diag(covariance3))))
+
 import matplotlib.pyplot as plt
 plt.rcParams['figure.figsize'] = (10, 8)
 plt.rcParams['font.size'] = 16
@@ -147,4 +152,5 @@ plt.errorbar(unp.nominal_values(Y_umgerechnet),unp.nominal_values(Q),xerr=unp.st
 plt.ylabel('Effizienz')
 plt.xlabel('Energie in eV')
 plt.legend()
-#plt.show()
+plt.show()
+
