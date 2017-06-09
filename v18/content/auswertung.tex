@@ -1,5 +1,28 @@
 \section{Auswertung}
 \label{sec:Auswertung}
+\subsection{Vermessung von Spektrallinien}
+\label{subsec:a0}
+Es besteht die Möglichkeit allein durch Abzählen der Kanäle und der entsprechenden Zählergebnisse die Höhe, die Lage und den Inhalt einer Spektrallinie anzugeben.
+Die Ergebnisse dieser Methode können jedoch nicht immer eindeutig angegeben werden, sodass eine unabhängige Auswertung unmöglich wird.
+Hier wird daher eine andere Methode gewählt.
+Zunächst wird die Lage einer Spektrallinie, wie oben auch, auf den Kanal mit dem höchsten Zählergebnis in einer hinreichend großen Umgebung geschätzt.
+Um den so abgelesenen Kanal herum wird über die jeweils 20 oberhalb und unterhalb liegenden Kanäle eine Gauß-Funktion
+\begin{align}
+g(k)=c_1\exp\left(-c_2(k-c_3)^2\right)+c_4
+\end{align}
+an die Messdaten gefittet.
+Dabei entspricht $c_1$ der Höhe der Spektrallinie und $c_3$ ihrer Lage.
+Hier ist sofort ein Vorteil dieser Methode zu erkennen, denn die Lage einer Spektrallinie kann nun präziser als die Auflösung der Kanalskala angegeben werden.
+Die Formel
+\begin{align}
+\int_\infty^\infty c_1\exp\left(-c_2(k-c_3)^2\right) dk = c_1 \sqrt{\frac{\pi}{c_2}}
+\end{align}
+zeigt, dass $c_1$ und $c_2$ zusammen ein Maß für den Inhalt einer Spektrallinie sind.
+Der Parameter $c_4$ dient dazu Störeffekte wie das Compton-Kontinuum oder die Untergrundstrahlung aus den folgenden Rechnungen zu eliminieren.
+Er wird deshalb im Folgenden nicht weiter berücksichtigt.
+Diese und jede weitere Regressionsrechnung in dieser Auswertung wird mithilfe der Funktion \textit{curve\_ fit} aus dem Python Paket \textit{scipy.optimize} durchgeführt.
+Fehlerrechnungen werden ebenfalls von Python übernommen. 
+Dazu wird das Paket \textit{uncertainties} verwendet.
 
 \subsection{Kallibration und Bestimmung der Effizienz}
 \label{subsec:a1}
@@ -11,22 +34,7 @@ ist eine Kalibrierung der Energieskala notwendig. Dazu wird das linienreiche Spe
  \caption{Rohdaten der Vermessung des Europium 152 Spektrums.}
  \label{fig:spektrum_eu}
  \end{figure} 
-Um die Lage der Spektrallinien zu bestimmen wird zunächst ein Kanal, der als Position für eine Spektrallinie in Frage kommt, aus den Messdaten ausgelesen. 
-Um diesen vorläufigen Kanal herum wird über die jeweils 20 oberhalb und unterhalb liegenden Kanäle eine Gauß-Funktion
-\begin{align}
-g(k)=c_1\exp\left(-c_2(k-c_3)^2\right)+c_4
-\end{align}
-an die Messdaten gefittet.
-Dabei entspricht $c_1$ der Höhe der Spektrallinie und $c_3$ ihrer Lage.
-Die Formel
-\begin{align}
-\int_\infty^\infty c_1\exp\left(-c_2(k-c_3)^2\right) dk = c_1 \sqrt{\frac{\pi}{c_2}}
-\end{align}
-zeigt, dass $c_2$ ein Maß für den Inhalt einer Spektrallinie ist.
-Der Parameter $c_4$ dient dazu Störeffekte wie das Compton-Kontinuum oder die Untergrundstrahlung aus den folgenden Rechnungen zu eliminieren.
-Er wird deshalb bei den folgenden Rechnungen nicht weiter berücksichtigt.
-Diese und jede weitere Regressionsrechnung in dieser Auswertung wird mithilfe der Funktion \textit{curve\_ fit} aus dem Python Paket \textit{scipy.optimize} durchgeführt.
-Die in Tabelle \ref{tab:atab1} angegebenen Kanäle werden in Abbildung \ref{fig:Kalibrierung} gegen die Literaturwerte des Eu-Spektrums aufgetragen. 
+Die in Tabelle \ref{tab:atab1} angegebenen Lagen der Spektrallinien werden nach dem in Abschnitt \ref{subsec:a0} beschriebenen Verfahren bestimmt.
 \begin{table}
 \centering
 \caption{Literaturwerte und gemessene Kanäle eines Europium 152 Gammaspektrums \cite{sample}.}
@@ -39,6 +47,7 @@ Kanal $k$ &Energie $E_\gamma$ in eV & Emissionswahrscheinlichkeit $W$ in \% \\
 \end{tabular}
 \label{tab:atab1}
 \end{table}
+In Abbildung \ref{fig:Kalibrierung} werden die entsprechenden Kanäle gegen die Literaturwerte des Eu-Spektrums aufgetragen. 
 Über eine lineare Ausgleichsrechnung wird die Umrechnungsvorschrift
 \begin{align*}
 k(E) = s \cdot E + b \text{, mit}\\
@@ -110,8 +119,10 @@ d&=\SI{-0.87+-0.08}{}\text{ .}
 
 
 
-\subsection{Aktivitätsbestimmung von }
+\subsection{Aktivitätsbestimmung von Barium 133}
 \label{subsec:a3}
+In Abbildung \ref{fig:Spektrum_Barium} ist das Spektrum einer Barium 133 Probe dargestellt.
+
 
 \subsection{Untersuchung von Zerfallsketten in }
 \label{subsec:a4}
