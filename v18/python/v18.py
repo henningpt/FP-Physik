@@ -31,11 +31,13 @@ def gauss(spektrum, a, s):
     params2, covariance2 = curve_fit(g, X2, Y2,  p0=[1, a, 0, 1])
     uparams2 = unp.uarray(params2, np.sqrt(np.diag(covariance2)))
     # Plot Vorbereiten
+    '''
     plt.rcParams['figure.figsize'] = (10, 8)
     plt.rcParams['font.size'] = 16
     plt.plot(X2, Y2, 'rx')
     plt.plot(np.linspace(np.min(X2), np.max(X2), 1000), g(np.linspace(np.min(X2), np.max(X2), 1000), *params2))
     # plt.show()
+    '''
     return(uparams2)
 
 
@@ -71,6 +73,7 @@ def kontinuum(E, dsig):
 
 # rechnungen
 # b) analyse des photopeaks
+'''
 p2daten = gauss(daten2, 2220, 18)
 halbwert = peakanteil(p2daten[0], 0.5)
 zehntelwert = peakanteil(p2daten[0], 0.1)
@@ -86,32 +89,49 @@ comptparams, comptcovariance = curve_fit(kontinuum, np.linspace(minfit, maxfit, 
 ucomptparams = unp.uarray(comptparams, np.sqrt(np.diag(comptcovariance)))
 # b) analyse des compton-kontinuums
 # rstreupeak =
-
+'''
 # plotten
 # spektren
-'''
+
 plt.figure(1)
-plt.bar(list(range(len(daten1))), daten1, color='r')
+plt.bar(list(range(len(daten1))), daten1, color='b')
+plt.xlabel('Kanaele')
+plt.ylabel('Zaehlergebnis')
+plt.xlim((0,5000))
+plt.ylim((0,400))
 plt.savefig("plots/spec1.pdf")
 
 plt.figure(2)
-plt.bar(list(range(len(daten2))), daten2, color='r')
+plt.bar(list(range(len(daten2))), daten2, color='b')
+plt.xlabel('Kanaele')
+plt.ylabel('Zaehlergebnis')
+plt.xlim((0,2500))
+plt.ylim((0,200))
 plt.savefig("plots/spec2.pdf")
 
 plt.figure(3)
-plt.bar(list(range(len(daten3))), daten3, color='r')
+plt.bar(list(range(len(daten3))), daten3, color='b')
+plt.xlabel('Kanaele')
+plt.ylabel('Zaehlergebnis')
+plt.xlim((0,1500))
+plt.ylim((0,500))
 plt.savefig("plots/spec3.pdf")
 
 plt.figure(4)
-plt.bar(list(range(len(daten4))), daten4, color='r')
+plt.bar(list(range(len(daten4))), daten4, color='b')
+plt.xlabel('Kanaele')
+plt.ylabel('Zaehlergebnis')
+plt.xlim((0,5000))
+plt.ylim((0,1000))
 plt.savefig("plots/spec4.pdf")
-'''
-plt.figure(2)
-plt.bar(list(range(2300)), daten2[:2300], color='r')
-plt.plot(list(range(1600)), kontinuum(list(range(1600)), comptparams))
-plt.show()
+
+#plt.figure(2)
+#plt.bar(list(range(2300)), daten2[:2300], color='r')
+#plt.plot(list(range(1600)), kontinuum(list(range(1600)), comptparams))
+#plt.show()
 
 # ergebnisse
+'''
 print("aufgabe b): \n\n")
 print("photpeak2: \nposition: ", p2daten[1])
 print("\nhalbwert: ", halbwert)
@@ -122,3 +142,5 @@ print("\npeakinhalt: ", p2inhalt)
 print("\nzehntel/halbwert: ", zehntelwert/halbwert)
 print("\n\ncompton-kontinuum: \ncomptonkante: ", comptonkante)
 print("\nrueckstreupeak: ", ruekstreupos)
+'''
+print('Fertig')

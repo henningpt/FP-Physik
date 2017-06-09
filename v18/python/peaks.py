@@ -33,7 +33,7 @@ def f(x,a,b):
 params,covariance=curve_fit(f,X,Y)
 
 import matplotlib.pyplot as plt
-
+'''
 plt.rcParams['figure.figsize'] = (10, 8)
 plt.rcParams['font.size'] = 16
 
@@ -43,6 +43,7 @@ plt.ylabel('Kanalnummer')
 plt.xlabel('Energie in eV')
 plt.legend()
 plt.savefig("plots/kalibrierung.pdf")
+'''
 #Kalibrierungsparameter
 kal=unp.uarray(params,np.sqrt(np.diag(covariance)))
 print('Kalibrierungswerte :',kal)
@@ -136,7 +137,7 @@ def eff(x,p1,p2):
 
 Y_umgerechnet=y/params[0]-params[1]/params[0]
 
-params3,covariance3 = curve_fit(eff,unp.nominal_values(Y_umgerechnet),unp.nominal_values(Q))
+params3,covariance3 = curve_fit(eff,unp.nominal_values(Y_umgerechnet)[1:],unp.nominal_values(Q)[1:])
 
 print('Effizienzfunktion a*x^b mit:')
 print('a,b = ',unp.uarray(params3,np.sqrt(np.diag(covariance3))))
@@ -144,13 +145,14 @@ print('a,b = ',unp.uarray(params3,np.sqrt(np.diag(covariance3))))
 import matplotlib.pyplot as plt
 plt.rcParams['figure.figsize'] = (10, 8)
 plt.rcParams['font.size'] = 16
-'''
+
 #plt.plot(X,unp.nominal_values(Q),'rx')
-plt.plot(np.linspace(100,1500,100),eff(np.linspace(100,1500,100),*params3),label='Fitfunktion')
-plt.errorbar(unp.nominal_values(Y_umgerechnet),unp.nominal_values(Q),xerr=unp.std_devs(Y_umgerechnet),yerr=unp.std_devs(Q),fmt='r.',label='Messergebnisse')
+plt.plot(np.linspace(200,1500,100),eff(np.linspace(100,1500,100),*params3),label='Regression')
+plt.errorbar(unp.nominal_values(Y_umgerechnet)[1:],unp.nominal_values(Q)[1:],xerr=unp.std_devs(Y_umgerechnet)[1:],yerr=unp.std_devs(Q)[1:],fmt='r.',label='Messergebnisse')
 plt.ylabel('Effizienz')
 plt.xlabel('Energie in eV')
 plt.legend()
-#plt.show()
-'''
-np.savetxt('europium.txt',np.array([Y,X,W*100]).T,delimiter=' & ',newline=' ;newline; ',fmt="%.2f")
+plt.savefig("plots/effizienz.pdf")
+
+#np.savetxt('europium.txt',np.array([Y,X,W*100]).T,delimiter=' & ',newline=' ;newline; ',fmt="%.2f")
+#np.savetxt('effizienz.txt',np.array([X,unp.nominal_values(I),unp.std_devs(I),unp.nominal_values(Q)*100,unp.std_devs(Q)*100]).T,delimiter=' & ',newline=' ;newline; ',fmt="%.2f")

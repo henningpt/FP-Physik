@@ -45,8 +45,7 @@ def f(x,a,b):
 params,covariance=curve_fit(f,X,Y)
 
 #Effizienzparameter
-
-effizienz=unp.uarray(np.array([31.07577203074526,-0.870935361519483]), np.array([14.26531009329247, 0.0832446778873622]))
+effizienz=unp.uarray(np.array([87.74270262508495,-1.0388562638153271]), np.array([85.16084310017622, 0.1630103442858]))
 
 # funktionen
 def g(x, p1, p2, p3, p4):
