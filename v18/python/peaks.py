@@ -58,29 +58,24 @@ def gauss(a,s):
     return p4*np.e**(-p1*(x-p2)**2) + p3
 
  params2,covariance2 = curve_fit(g,X2,Y2, p0=[1,a,0,1])
- 
-
- #Plot Vorbereiten
- import matplotlib.pyplot as plt
- #plt.rcParams['figure.figsize'] = (10, 8)
- #plt.rcParams['font.size'] = 16
- 
- #plt.plot(X2,Y2,'rx')
- #plt.plot(X2,g(X2,*params2))
- #plt.show() 
  return params2, covariance2
+ '''#Plot Vorbereiten
+ import matplotlib.pyplot as plt
+ plt.rcParams['figure.figsize'] = (10, 8)
+ plt.rcParams['font.size'] = 16
+ 
+ plt.plot(X2,Y2,'rx')
+ plt.plot(np.linspace(a-s,a+s,500),g(np.linspace(a-s,a+s,500),*params2))
+ plt.show() 
+ '''
+ 
 
 #Abgelesene Y Werte mit Gauss fitten und in Y eintragen
 C=[]
-for i in range(len(Y)):
-    c,d=gauss(Y[i],20)
-    C=C+[c]
-    Y[i]=C[i][1] 
-#Fuer bessere Werte nochmal
-C=[]
 D=[]
+s_g=[20,20,30,20,30,20,30,30,20,30,20,30,20,20,30,20,60]
 for i in range(len(Y)):
-    c,d=gauss(Y[i],20)
+    c,d=gauss(Y[i],s_g[i])
     C=C+[c]
     D=D+[d]
     Y[i]=C[i][1] 
@@ -130,15 +125,20 @@ print('Effizienz ',Q)
 print('Aktivitaet',Aktivitaet)
 np.savetxt('Guess.txt',f(A,*params),delimiter=' ; ',newline=' ; ',fmt='%3d')
 
-#Plots
+
+
+
 #Potenzfunktion der Effizienz
 def eff(x,p1,p2):
     return p1*np.power(x,p2)
 
 Y_umgerechnet=y/params[0]-params[1]/params[0]
+#Lasse schlechte werte raus
+Y_umgerechnet=np.delete(Y_umgerechnet,[0,6])
+Q=np.delete(Q,[0,6])
+params3,covariance3 = curve_fit(eff,unp.nominal_values(Y_umgerechnet),unp.nominal_values(Q))
 
-params3,covariance3 = curve_fit(eff,unp.nominal_values(Y_umgerechnet)[1:],unp.nominal_values(Q)[1:])
-
+    
 print('Effizienzfunktion a*x^b mit:')
 print('a,b = ',unp.uarray(params3,np.sqrt(np.diag(covariance3))))
 
@@ -147,12 +147,13 @@ plt.rcParams['figure.figsize'] = (10, 8)
 plt.rcParams['font.size'] = 16
 
 #plt.plot(X,unp.nominal_values(Q),'rx')
-plt.plot(np.linspace(200,1500,100),eff(np.linspace(100,1500,100),*params3),label='Regression')
-plt.errorbar(unp.nominal_values(Y_umgerechnet)[1:],unp.nominal_values(Q)[1:],xerr=unp.std_devs(Y_umgerechnet)[1:],yerr=unp.std_devs(Q)[1:],fmt='r.',label='Messergebnisse')
+plt.plot(np.linspace(200,1500,100),eff(np.linspace(200,1500,100),*params3),label='Regression')
+plt.errorbar(unp.nominal_values(Y_umgerechnet),unp.nominal_values(Q),xerr=unp.std_devs(Y_umgerechnet),yerr=unp.std_devs(Q),fmt='r.',label='Messergebnisse')
 plt.ylabel('Effizienz')
 plt.xlabel('Energie in eV')
 plt.legend()
 plt.savefig("plots/effizienz.pdf")
-
+#plt.show()
 #np.savetxt('europium.txt',np.array([Y,X,W*100]).T,delimiter=' & ',newline=' ;newline; ',fmt="%.2f")
 #np.savetxt('effizienz.txt',np.array([X,unp.nominal_values(I),unp.std_devs(I),unp.nominal_values(Q)*100,unp.std_devs(Q)*100]).T,delimiter=' & ',newline=' ;newline; ',fmt="%.2f")
+print(Y_umgerechnet[6])

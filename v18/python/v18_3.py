@@ -45,8 +45,8 @@ def f(x,a,b):
 params,covariance=curve_fit(f,X,Y)
 
 #Effizienzparameter
-effizienz=unp.uarray(np.array([87.74270262508495,-1.0388562638153271]), np.array([85.16084310017622, 0.1630103442858]))
-
+effizienz=unp.uarray(np.array([84.18399795734446,-1.028776078711911]), np.array([36.654658037116405, 0.07332701822586613]))
+#36.654658037116405,0.07332701822586613
 # funktionen
 def g(x, p1, p2, p3, p4):
     return p4 * np.e**(-p1 * (x - p2)**2) + p3
@@ -102,7 +102,6 @@ def kontinuum(E, dsig):
 def intensitaet(peak_inhalt,peak_lage):
     return peak_inhalt/3238/(effizienz[0]*np.power(peak_lage,effizienz[1]))
 
-
 # rechnungen
 # b) analyse des photopeaks
 '''
@@ -138,6 +137,7 @@ for i in range(len(d_guess)):
     d_peak_breite[i] = gauss(daten3, d_guess[i],s[i])[0]
     d_peak_lage[i] = gauss(daten3, d_guess[i],s[i])[1]
     d_peak_hoehe[i] = gauss(daten3, d_guess[i],s[i])[3]
+print('(d) Lage',d_peak_lage)
 print('(d) Peakbreite :',d_peak_breite)
 print('(d) Peakhoehe :',d_peak_hoehe)
 #Berechne die Peakinhalte 
@@ -183,11 +183,10 @@ plt.figure(4)
 plt.bar(list(range(len(daten4))), daten4, color='r')
 plt.savefig("plots/spec4.pdf")
 '''
-plt.figure(3)
-plt.bar(list(range(2300)), daten3[:2300], color='r')
+#plt.figure(3)
+#plt.bar(list(range(2300)), daten3[:2300], color='r')
 #plt.plot(list(range(1600)), kontinuum(list(range(1600)), comptparams))
-plt.show()
-
+#
 # ergebnisse
 '''
 print("aufgabe b): \n\n")
@@ -199,3 +198,8 @@ print("\nzehntelwert theorie: ", zehntelwertth)
 print("\npeakinhalt: ", p2inhalt)
 print("\nzehntel/halbwert: ", zehntelwert/halbwert)
 '''
+
+np.savetxt('aktivitaet.txt',np.array([unp.nominal_values(d_peak_lage),unp.std_devs(d_peak_lage),unp.nominal_values(d_peak_int),unp.std_devs(d_peak_int),wkeit*100,unp.nominal_values(Aktivitaet),unp.std_devs(Aktivitaet)]).T,delimiter=' & ',newline=' ;newline; ',fmt=['%.2f',' %+.2f ',' %.2f ',' %+.2f ',' %.2f ',' %2d ',' %+2d'])
+A=np.mean(unp.nominal_values(Aktivitaet[2:]))
+A_std=np.std(unp.nominal_values(Aktivitaet[2:]))
+print('Aktivitaet Mittelwert',unp.uarray(A,A_std))
