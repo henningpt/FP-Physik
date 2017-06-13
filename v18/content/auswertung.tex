@@ -40,7 +40,7 @@ Die in Tabelle \ref{tab:atab1} angegebenen Lagen der Spektrallinien werden nach 
 \caption{Literaturwerte und gemessene Kanäle eines Europium 152 Gammaspektrums \cite{sample}.}
 \begin{tabular}{c c c}
 \hline \\
-Kanal $k$ &Energie $E_\gamma$ in eV & Emissionswahrscheinlichkeit $W$ in \% \\
+Kanal $k$ &Energie $E_\gamma$ in keV & Emissionswahrscheinlichkeit $W$ in \% \\
 \hline \\
 414.12 & 121.78 & 28.60 \\ 825.86 & 244.70 & 7.60 \\ 997.32 & 295.94 & 0.40 \\ 1158.71 & 344.30 & 26.50 \\ 1382.31 & 411.12 & 2.20 \\ 1491.59 & 443.96 & 3.10 \\ 2273.21 & 678.00 & 2.00 \\ 2310.43 & 688.67 & 0.90 \\ 2612.36 & 778.90 & 12.90 \\ 2908.55 & 867.37 & 4.20 \\ 3231.22 & 964.08 & 14.60 \\ 3368.59 & 1005.30 & 0.60 \\ 3639.40 & 1085.90 & 10.20 \\ 3726.07 & 1112.10 & 13.60 \\ 4353.21 & 1299.10 & 1.60 \\ 4716.58 & 1408.00 & 21.00 \\ 4888.94 & 1457.60 & 0.50 \\ 
 \hline
@@ -54,7 +54,7 @@ k(E) &= s \cdot E + b \text{, mit}\\
   s &= \SI{3.346+-0.001}{\per\electronvolt}\\
   b &= \SI{ 5.9+-0.8}{}
 \end{align*}
-zwischen Kanalnummern und Energien in eV bestimmt.
+zwischen Kanalnummern und Energien in keV bestimmt.
 \begin{figure}
 \centering
 \includegraphics[width=0.8\textwidth]{python/plots/kalibrierung.pdf}
@@ -138,7 +138,7 @@ Die Ergebnisse dieser Rechnung finden sich ebenfalls in Tabelle \ref{tab:a_d_1}.
 \caption{Für die Berechnung der Aktivität wichtige Daten je Spektrallinie \cite{sample}.}
 \begin{tabular}{c c c c}
 \hline \\
-Lage in eV & Intensität in s$^{-1}$&  Emissionswahrscheinlichkeit in \%& Aktivität in $\SI{}{\becquerel}$\\
+Lage in keV & Intensität in s$^{-1}$&  Emissionswahrscheinlichkeit in \%& Aktivität in $\SI{}{\becquerel}$\\
 \hline \\
 184.93 $\pm$0.15  &  0.04  $\pm$0.02  &  2.20  &  102  $\pm$57 \\ 278.34 $\pm$0.02  &  2.93  $\pm$1.59  &  34.06  &  540  $\pm$293 \\ 543.81 $\pm$0.32  &  0.14  $\pm$0.10  &  0.65  &  1365  $\pm$919 \\ 753.17 $\pm$0.15  &  0.08  $\pm$0.05  &  0.45  &  1101  $\pm$678 \\ 931.69 $\pm$0.02  &  1.54  $\pm$0.92  &  7.20  &  1341  $\pm$804 \\ 1020.80 $\pm$0.03  &  3.96  $\pm$2.40  &  18.30  &  1360  $\pm$822 \\ 1198.10 $\pm$0.01  &  13.29  $\pm$8.14  &  62.10  &  1344  $\pm$823 \\ 1291.30 $\pm$0.05  &  1.96  $\pm$1.21  &  8.90  &  1382  $\pm$853 \\ 
 \hline
