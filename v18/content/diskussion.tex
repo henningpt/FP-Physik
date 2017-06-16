@@ -4,16 +4,37 @@
 Die Kalibrierung des Detektors konnte wie aus Abbildung \ref{fig:Kalibrierung} hervorgeht mit hoher Genauigkeit durchgeführt werden.
 Damit hat sich auch das in Abschnitt \ref{subsec:a0} beschriebene Verfahren zur Ermittlung der Lagen der Spektrallinien bewährt.
 Für die Festlegung der Effizienz in Abhängigkeit der Energie wird darüber hinaus der Inhalt der Peaks benötigt.
-Vor allem bei Spektrallinien mit geringer Emissionswahrscheinlichkeit hat \textit{curve\_fit} Probleme mit der Regression. 
+Vor allem bei Spektrallinien mit geringer Emissionswahrscheinlichkeit hat \textit{curve\_fit} Probleme mit der Regression.
 Das liegt daran, dass sich solche Peaks kaum vom Untergrund absetzen.
 Es wurde versucht diesem Problem durch Variation des Kanalbereichs, über dem die Regression durchgeführt wird, entgegen zu treten.
 Teilweise lassen sich so bessere Ergebnisse erzielen, teilweise ist eine Verbesserung nicht möglich.
 Vor allem für solche Spektrallinien mit geringerer Emissionswahrscheinlichkeit ist das in Abschnitt \ref{subsec:a0} beschriebene Verfahren nicht ausgereift genug, um die Inhalte der Peaks präzise zu bestimmen.
-Insgesamt führt dies zu stark fehlerbehafteten Parametern der Regression.
-
+Insgesamt führt dies zu stark fehlerbehafteten Parametern der Regression.\\ \\
+% b)
+Bei der Untersuchung der Detektoreigenschaften konnten mit geringen Unsicherheiten die Lage des Photopeaks,
+sowie dessen Halb- und Zehntelwertsbreite bestimmt werden. Das Verhältnis der Teilwertsbreiten entspricht
+dem einer Gaussfunktion, was die Wahl der Fit-Funktion bestätigt. Die realative Abweichung der Halbwertsbreite
+zum Vergleichswert beträgt $\SI{29}{\percent}$. Da es sich bei dem Vergleichswert um eine ungefähre Formel
+handelt ist diese Abweichung vertretbar. Bei der Analyse des Compton-Kontinuums konnte eine sehr
+geringe Abweichung der abgelesenen Werte von den aus der Gammaenergie berechneten Werte
+ür Rückstreupeak und Comptonkante festgestellt werden. Hingegen stimmt das Verhältnis der bestimmten Inhalte von
+Kontinuum und Photopeak kaum mit dem anhand der Absorptionswahrscheinlichkeiten bestimmten Verhältnis überein.
+Dies ist zum einen dadurch zu erklären, dass der Inhalt des Compton-Kontinuums nur sehr ungenau
+bestimmt werden kann, da der Fit auf durch Untergrund und Rückstreupeak beeinflussten Daten erfolgte. Andererseits,
+ist davon auszugehen, dass zum Photopeak auch Photonen, die vorher dem Comptoneffekt unterlagen beitragen, was das
+Ergebnis maßgeblich verfälschen könnte.\\ \\
 %(d) Aktivitätsbestimmung von Barium 133
 Tabelle \ref{tab:a_d_1} zeigt, dass die berechneten Aktivitäten der Probe starke Unsicherheiten aufweisen.
 Der wesentliche Grund dafür sind die großen Unsicherheiten bei der Effizienzmessung, die sich in diese Ergebnisse fortpflanzen.
-Ein genauer Wert für die Aktivität kann daher nicht angegeben werden. 
+Ein genauer Wert für die Aktivität kann daher nicht angegeben werden.
 Die Messung liefert lediglich einen Orientierungswert.
-Auch mit einer präziseren Effizienzmessung würden die gesammelten Messwerte teils stark voneinander abweichen.
+Auch mit einer präziseren Effizienzmessung würden die gesammelten Messwerte teils stark voneinander abweichen.\\ \\
+% e)
+Bei der Untersucung des unbekannten Strahlers auf in der Natur häufig vorkommende Zerfallsketten, konnte
+ein Teil der Uran 238 Zerfallskette identifieziert werden. Allerdings konnten nicht für jedes gefundene
+Nuklid alle in der Versuchsanleitung angegebenen Spektrallinien gefunden werden.(siehe Abbildung \ref{tab:nuklide})
+Dabei hat sicherlich das Stören des Untergrunds bei der Suche nach den Linien eine Rolle gespielt.
+Weiterhin liegen manche Linien auch außerhalb des beobachteten Bereichs, sodass diese nicht gefunden werden konnten.
+Eine weiteres Problem bestand auch darin, dass für manche im Spektrum "gefundene" Linien kein genauer
+Wert über den Gaussfit gefunden werden konnte da der Untergrund den Fit unmöglich machte. Diese Linien wurden
+nicht in die Weitere Analyse aufgenommen.

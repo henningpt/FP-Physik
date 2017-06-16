@@ -2,46 +2,111 @@
 \label{sec:Theorie}
 
 
-\subsection{Gamme-Strahlung in Materie}
+\subsection{Gamma-Strahlung in Materie}
 \label{subsec:t1}
 
 In dem hier thematisierten Versuch wird von einer Probe ausgesandte Gamma-Strahlung untersucht.
 Diese Strahlung kann auf verschiedene Weise mit den Elektronen sowie Atomkernen im Detektor
-interagieren.
-Dabei sind vor allem der Photoeffekt, der Comptoneffekt und die Elektron-Positron-
-Paarbildung relevant.
+interagieren.\\
 Jeder Wechselwirkung lässt sich ein sogenannter Wirkungsquerschnitt
 $\sigma$ zuordnen. Dieser ist ein Maß für die Wahrscheinlichkeit,
-dass der jeweilige Prozess auftritt. Weiterhin lässt sich damit \\ \\
+dass der jeweilige Prozess auftritt. Weiter lässt sich damit der sogenannte Extinktionskoeffizient $\mu$ definieren.
+Für diesen gilt
+
+\begin{equation}
+  \label{eqn:extinktion}
+  \mu = \sigma \cdot n .
+\end{equation}
+In Abbildung \ref{fig:extinktion} ist die Energieabhängigkeit des Extinktionskoeffizienten für wichtige
+Prozesse gezeigt.
+Die Wahrscheinlichkeit für den jeweiligen Prozess, lässt sich dann mithilfe des Extinktionskoeffizenten als
+
+\begin{equation}
+  \label{eqn:wkeit}
+  w = 1 - e^{-\mu \cdot D}
+\end{equation}
+bestimmen. Dabei bezeichnet $D$ die Dicke des Absorbers.\\ \\
+Bei bei der Interaktion von Gamma-Strahlung mit Elektronen und Atomkernen sind vor allem
+der Photoeffekt, der Comptoneffekt und die Paarbildung relevante
+Prozesse. Auf diese wird im Folgenden näher eingegangen.\\ \\
 Beim Photoeffekt gibt das Photon seine Energie vollständig an ein Hüllenelektron ab, was bei
 einer Photonenergie oberhalb der Bindungsenergie des Elektrons dafür sorgt, dass das Elektron
 aus seinem Energiezustand entfernt werden kann. Überschüssige Energie bleibt als kinetische
 Energie des ausgelösten Elektrons erhalten. Die Unterbesetzung der Schale, der das ausgelöste
 Elektron enstammte, wird ausgeglichen, indem ein Elektron aus einer energetisch höheren Schale
 die unvollständige Schale auffüllt. Dabei gibt das nachrückende Elektron seine Energie wieder
-in Form von Röntgenstrahlung ab. \\ \\
-Der Comptoneffekt beschreibt die inelastische Streuung hochenergetischer Photonen mit einem
-ruhenden Elektron.
-Dabei wird ein vom Streuwinkel abhängiger Energieanteil an das Elektron übertragen.
-Der maximale Energieübertrag findet bei der Rückstreuung also einem Streuwinkel
-von $\SI{180}{\degree}$ statt und es wird die Energie
+in Form von Röntgenstrahlung ab. Für den dem Photoeffekt zugeordneten Wirkungsquerschnitt $\sigma_\text{ph}$ gilt
 
 \begin{equation}
-  \label{eqn:e1t1}
-  E_\text{l,max} = E_{\gamma} \cdot \frac{2\varepsilon}{1 + 2\varepsilon}
+  \label{eqn:phquerschnitt}
+  \sigma_\text{ph} \propto z^{\alpha} \cdot E^{\delta}.
+\end{equation}
+Dabei bezeichnet $z$ die Kernladungszahl, $\alpha$ und $\delta$ Paramter, die sich je nach konkretem Anwendungsfall
+ändern und $E$ die Energie. Bei Energien unterhalb von $\SI{5}{\mega\electronvolt}$ liegt $\alpha$ zwischen den Zahlen
+$4$ und $5$ und $\delta$ nimmt einen Wert von ca. $-3.5$ an.\\ \\
+Der Comptoneffekt beschreibt die inelastische Streuung hochenergetischer Photonen mit einem
+ruhenden Elektron.\\
+Dabei wird ein vom Streuwinkel $\psi_{\gamma}$ abhängiger Energieanteil an das Elektron übertragen.
+Der maximale Energieübertrag findet bei der Rückstreuung also einem Streuwinkel
+von $\SI{180}{\degree}$ statt. Es wird die Energie
+
+\begin{equation}
+  \label{eqn:comptonuebertrag}
+  E_\text{l} = E_{\gamma} \cdot \frac{\varepsilon \left( 1 - \cos\left( \psi_{\gamma} \right) \right)}{1
+  + \varepsilon \left( 1 - \cos\left( \psi_{\gamma} \right) \right)}
 \end{equation}
 übertragen. Dabei bezeichnet $\varepsilon$ den Anteil der ursprünglichen
-Photonenergie $E_{\gamma}$ an der Ruheenergie des Elektrons.
+Photonenergie $E_{\gamma}$ an der Ruheenergie des Elektrons. Der maximale Energieübertrag $E_\text{l,max}$ ist durch
+
+\begin{equation}
+  \label{eqn:ckante}
+  E_\text{l,max} = E_\gamma \cdot \frac{2\varepsilon}{1 + 2\varepsilon}
+\end{equation}
+gegeben. Bei der Gammaspektroskopie wird dieser Wert als Compton-Kante bezeichnet.\\
+Für den Wirkungsquerschnitt $\sigma_\text{compton}$ ergibt sich
+
+\begin{equation}
+  \label{eqn:comptonquerschnitt}
+  \sigma_\text{compton} = \frac{3}{4} \cdot \sigma_\text{Th}
+  \cdot \left( \frac{1 + \varepsilon}{\varepsilon^2}
+  \cdot \left( \frac{2 + 2\varepsilon}{1 + 2\varepsilon} - \varepsilon^{-1} \ln\left( 1 + 2\varepsilon \right) \right)
+  + \frac{1}{2\varepsilon} \ln\left( 1 + 2\varepsilon \right) - \frac{1 + 3\varepsilon}{(1 + 2\varepsilon)^2}  \right) .
+\end{equation}
+Wird $\varepsilon$ beliebig klein, so ergibt sich als Wirkungsquerschnitt der Wirkungsquerschnitt nach Thomson
+$\sigma_\text{Th}$. Für diesen lässt sich der Streuprozess als elastisch charakterisieren.\\
+Es lässt sich zeigen, dass $\sigma_\text{compton}$ sich folgendermaßen mit der Energie ändert
+
+\begin{equation}
+  \label{eqn:dsig}
+  \frac{\mathrm{d}\sigma_\text{compton}}{\mathrm{d}E} = \frac{3}{8} \sigma_\text{Th}
+  \cdot \frac{1}{m_{0} c^2 \varepsilon^2} \cdot \left(  2 + \left( \frac{E}{h\nu - E} \right)^2
+  \cdot \left( \frac{1}{\varepsilon^2} + \frac{h\nu - E}{h\nu} - \frac{2}{\varepsilon}
+  \cdot \left( \frac{h\nu - E}{h\nu} \right) \right) \right) .
+\end{equation}
+\\ \\
+Bei der Elektronen-Paarbildung wird aus der Energie eines Photons ein Elektron und ein Positron erzeugt.\\
+Damit dies möglich ist, muss die Energie des Photons mindestens doppelt so groß wie die Ruhemasse eines Elektrons
+sein. Weiterhin muss der Prozess in Beisein eines Atomkerns oder Elektrons stattfinden. Aufgrund des vergleichweise
+hohen Schwellenwerts für das Stattfinden dieses Prozesses, ist dieser offensichtlich erst bei sehr großen Energien
+von Bedeutung.
+
+\FloatBarrier
+\begin{figure}
+  \includegraphics[width=\textwidth]{content/skizzen/extinktion.PNG}
+  \caption{Energieabhängigkeit der Extinktionskoeffizienten wichtiger Prozesse bei der Wechselwirkung von Gamma-Strahlung mit Materie.}
+  \label{fig:extinktion}
+\end{figure}
+\FloatBarrier
 
 \subsection{Wirkungsweise}
 \label{subsec:Wirkungsweise}
 Das wichtigste Element des Germaniumdetektors ist eine Halbleiterdiode.
-Die durch p- bzw. n-Dotierung entstehenden Ladungsträger diffudieren und rekombinieren an der Grenzfläche zwischen den beiden Bereichen der Diode. 
+Die durch p- bzw. n-Dotierung entstehenden Ladungsträger diffudieren und rekombinieren an der Grenzfläche zwischen den beiden Bereichen der Diode.
 Dadurch entsteht um die Grenzfläche herum eine Ladungsarme Zone.
 Diese Zone ist für die Messung von $\gamma$-Quanten der entscheidende Bereich der Diode.
 Erzeugt ein $\gamma$-Quant innerhalb der Diode ein freies Elektron, zum Beispiel indem mithilfe des Photoeffekts ein Elektron aus dem Valenz- in das Leitungsband gehoben wird, so hebt dieses freie Elektron durch Abgabe seiner kinetischen Energie weitere Elektronen in das Leitungsband.
 Entsteht so ein Elektronenschauer in dem positiv oder negativ geladenen Bereich der Diode, wird er durch Rekombination mit den jeweiligen Ladungsträgern des Bereichs eliminiert, und ist damit nicht messbar.
-Falls der Elektronenschauer in der Ladungsarmen Zone entsteht, gelingt es durch ein hinreichend großes elektrisches Feld, die freien Elektronen von den zurückgelassenen positiv geladenen Atomrümpfen zu trennen. 
+Falls der Elektronenschauer in der Ladungsarmen Zone entsteht, gelingt es durch ein hinreichend großes elektrisches Feld, die freien Elektronen von den zurückgelassenen positiv geladenen Atomrümpfen zu trennen.
 Es entsteht ein Strom $\frac{dQ}{dt}$, welcher nun gemessen werden kann.
 Die Gesamtladung $Q$ ist dabei proportional zur Energie des $\gamma$-Quants, welches den Elektronenschauer verursacht hat, da sie ihrerseits proportional zur Anzahl der Elektronen des Schauers ist.
 Ein Ziel bei der Konstruktion eines Germaniumdetektors ist es also, eine möglichst breite Ladungsarme Zone zu erreichen.
@@ -50,11 +115,11 @@ Da ein starkes elektrisches Feld den Einfluss thermischer Ströme auf die Messun
 
 Halbleiter Detektoren können durch zwei Eigenschaften charakterisiert werden.
 Dies sind zum einen das energetische Auflösungsvermögen und zum anderen die Effizienz.
-Das energetische Auflösungsvermögen wird größtenteils von der Halbwertsbreite eines Peaks des Spektrums beschrieben. 
+Das energetische Auflösungsvermögen wird größtenteils von der Halbwertsbreite eines Peaks des Spektrums beschrieben.
 Diese wird unter anderem in Abschnitt \ref{subsec:a2} untersucht.
 Sie ist ein Maß die Unterscheidbarkeit nah aneinander liegender Spektrallinien.
 Weitere Faktoren sind zum Beispiel der thermische Strom, Inhomogenitäten des elektrischen Feldes oder das Verstärkerrauschen.
-Jeder dieser Faktoren kann durch geeignete Gegenmaßnahmen verringert werden. 
+Jeder dieser Faktoren kann durch geeignete Gegenmaßnahmen verringert werden.
 Etwa durch Kühlung der Apparatur, hohe Spannungen und Vergrößerung des Detektors.
 Die Effizienz ist ein Maß für die Abhängigkeit der Nachweiswahrscheinlichkeit von der Energie.
 Um eine möglichst hohe Effizienz zu erzielen muss die gesamte Energie eines einfallenden Teilchens im Detektor absorbiert werden.
@@ -71,7 +136,7 @@ Um den Strom in eine Spannung umzuwandeln wird er im Vorverstärker mittels eine
 \label{fig:t:1}
 \end{figure}
 \cite{sample}
-Damit sich die Spannungen verschiedener Signale nicht addieren muss der Kondensator des Vorverstärkers nach der Detektion eines Signals entladen werden. 
+Damit sich die Spannungen verschiedener Signale nicht addieren muss der Kondensator des Vorverstärkers nach der Detektion eines Signals entladen werden.
 Dafür sorgt eine rauscharme optoelektronische Rückkopplung.
 Die Spannungssignale müssen nun ihrer Höhe nach geordnet abgespeichert werden.
 Ein in Abbildung \ref{fig:t:2} schematisch dargestellter Wilkinson-Analog-Digital-Converter (ADC) ordnet jedem Spannungssignal eine Zahl zu, welche die Höhe des Signals repräsentiert.
@@ -81,7 +146,7 @@ Ein in Abbildung \ref{fig:t:2} schematisch dargestellter Wilkinson-Analog-Digita
 \caption{Aufbau eines Wilkinson-Analog-Digital-Converters \cite{sample}.}
 \label{fig:t:2}
 \end{figure}
-Dazu wird ein Kondensator mit dem vom Vorverstärker kommenden Signal geladen und mit einem konstanten Strom entladen. 
+Dazu wird ein Kondensator mit dem vom Vorverstärker kommenden Signal geladen und mit einem konstanten Strom entladen.
 Eine Zeitmesseinheit zählt die Zeit bis der Kondensator vollständig entladen ist.
 Dieses digitale Signal wird von einem Vielkanalanalysator in einem dem Zählergebnis zugeordneten Kanal gespeichert.
 Die Anzahl der Signale, die in einem bestimmten Kanal gespeichert werden, entspricht also der Häufigkeit des Auftretens eines Signals mit dieser Energie.
@@ -93,3 +158,40 @@ Ein Schaubild der gesamten Schaltung ist in Abbildung \ref{fig:t:3} dargestellt.
 \label{fig:t:3}
 \end{figure}
 Das Ergebnis kann zum Beispiel in einem Balkendiagramm gezeichnet werden und entspricht dann dem $\gamma$-Spektrum der radioaktiven Probe.
+
+
+\subsection{Das zu messende Spektrum eines Gammastrahlers}
+\label{subsec:spektrum}
+
+Nimmt man mit einem (Germanium-)Detektor das Spektrum eines Gammastrahlers, der Gamma-Quanten einer Energie abstrahlt,
+so ergibt sich im Idealfall ein Spektrum wie in Abbildung \ref{fig:idealspektrum}. In einem solchen Spektrum lassen
+sich das Compton-Kontinuum, das mit dem sogenannten Rückstreupeak überlagert ist und an der Compton-Kante endet, und der Photo-Peak identifizieren.
+Der Rückstreupeak kommt dadurch zustande, dass nicht alle Photonen direkt im Detektor Wechselwirken, sondern zum Teil
+erst in der Abschirmung oder anderen nahegelegenen Medien  gemäß des Compton-Effekts gestreut werden. Liegt dabei
+ein sehr großer Streuwinkel vor, so tragen sie zum Rückstreupeak bei. Die Lage des Rückstreupeaks lässt sich durch
+die Energie rückwärtsgestreuter(Compton-Effekt) Photonen
+
+\begin{equation}
+  \label{eqn:rstreupos}
+  E_{\gamma^\text{'}} = \frac{E_{\gamma}}{1 + 2\varepsilon}
+\end{equation}
+approximieren.\\ \\
+
+\FloatBarrier
+\begin{figure}
+  \includegraphics[width=\textwidth]{content/skizzen/idspektrum.PNG}
+  \caption{Zu messendes Spektrum eines 1-Linien Gamma-Strahlers}
+  \label{fig:idealspektrum}
+\end{figure}
+\FloatBarrier
+Ein wichtiger Zusammenhang bei der Untersuchung der Spektrallinien eines Gamma-Strahlers ist der für
+das Zählergebnis
+
+\begin{equation}
+  \label{eqn:effizienz}
+  Z = \frac{\Omega}{4\cdot \pi} \cdot A \cdot w \cdot Q .
+\end{equation}
+Dabei bezeichnet $\Omega$ den Raumwinkekl der mit dem Detektor beobachtet werden kann, $w$ die
+Emmissionswahrscheinlichkeit für eine ausgewählte Linien des betrachteten Strahlers und $Q$ die
+Effizienz des verwendeten Detektors. Die Effizienz gibt an, wie wahrscheinlich es ist ein Messergebnis für eine ausgewählte
+Energie zu erhalten.
