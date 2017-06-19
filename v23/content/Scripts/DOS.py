@@ -66,9 +66,9 @@ k=k* math.pi /0.6
 R=np.zeros(len(Y[0,:]))
         
 for i in range(len(Y[0,:])-1):
-    R[i]=Y[0,i+1]-Y[0,i]   
+    R[i]=1/(Y[0,i+1]-Y[0,i])
 
-print([R,Y])
+#print([R,Y])
 
 # prepare plot
 
@@ -81,7 +81,7 @@ test=np.zeros(41)
 
 plt.plot(Y[0,:], R ,'bx')
 
-plt.ylabel('Dichte der Resonanzen')
+plt.ylabel('Dichte der Resonanzen in s')
 plt.xlabel('Resonanzfrequenzen in Hz')
 plt.legend(loc="best")
 #plt.show()
