@@ -70,8 +70,8 @@ def efct(T, a, b):
 A = kreisf(2.5*10**(-3))
 
 
-Iu = I[38:47]
-Tu = T[38:47]
+Iu = I[28:33]
+Tu = I[28:33]
 
 uparams, ucov = curve_fit(lin, Tu, Iu)
 uerrors = np.sqrt(np.diag(ucov))
@@ -79,9 +79,9 @@ uinterc = unp.uarray(uparams[0], uerrors[0])
 uslope = unp.uarray(uparams[1], uerrors[1])
 
 Ik = np.zeros(len(I))
-Ik[25:] = I[25:] - lin(T[25:], *uparams)
-Ik[0:25] = I[0:25]
-Ik = nonegatives(Ik)
+Ik[0:32] = I[0:32] - lin(T[0:32], *uparams)
+Ik[32:] = I[32:]
+# Ik = nonegatives(Ik)
 
 Ic = I[:16]
 jc = Ic/A  # stromdichte
@@ -98,7 +98,7 @@ W = slope * -sc.k / sc.elementary_charge
 maxgrenz = 29
 mingrenz = 4
 
-print("I", I)
+print("Ik", Ik)
 print("T,", T)
 integ = integrate.simps(T[mingrenz:maxgrenz], Ik[mingrenz:maxgrenz])  # integration ueber strom
 l = integ/Ik  # / b
@@ -131,7 +131,7 @@ plt.ylabel(r'$\ln(j \cdot \mathrm{m^2} \ / \ \mathrm{A}) $')
 # plt.plot(1/T, np.log(I) - ground, 'gx')
 plt.plot(1/x_plot, lin(1/x_plot, *params), 'b', label=r'$\mathrm{linearer} \ \mathrm{Fit}$')
 plt.legend(loc='best')
-plt.savefig('plots/lin1.pdf')
+plt.savefig("plots/lin1.pdf")
 
 plt.figure(1)
 ux_plot = np.linspace(np.min(Tu), np.max(Tu), 1000)
