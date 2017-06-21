@@ -4,29 +4,32 @@ from scipy.stats import linregress
 import matplotlib.pyplot as plt
 import scipy.constants as sc
 import uncertainties.unumpy as unp
-from uncertainties import ufloat
 import scipy.integrate as integrate
+from uncertainties import ufloat
+
 
 # daten laden
-# 10^-11 , 0.1
+# 10^-11 , 3
+I1, T1 = np.genfromtxt("2v48m1.txt", unpack=True)
 
-I1, T1 = np.genfromtxt("v48m1.txt", unpack=True)
 # 10^-11 , 0.3
-I2, T2 = np.genfromtxt("v48m12.txt", unpack=True)
+I2, T2 = np.genfromtxt("2v48m12.txt", unpack=True)
+
 # 10^-11 , 1.0
-I3, T3 = np.genfromtxt("v48m13.txt", unpack=True)
+I3, T3 = np.genfromtxt("2v48m13.txt", unpack=True)
+
 # 10^-10, 0.3
-I4, T4 = np.genfromtxt("v48m14.txt", unpack=True)
+I4, T4 = np.genfromtxt("2v48m14.txt", unpack=True)
 
-I5, T5 = np.genfromtxt("v48m15.txt", unpack=True)
+# 10^-11 1.0
+I5, T5 = np.genfromtxt("2v48m15.txt", unpack=True)
+
 # groessen definieren
-
-I1 *= 0.1 * 10**(-11)
+I1 *= 3 * 10**(-11)
 I2 *= 0.3 * 10**(-11)
 I3 *= 1.0 * 10**(-11)
 I4 *= 0.3 * 10**(-10)
-I5 *= 0.3 * 10**(-10)
-
+I5 *= 1.0 * 10**(-11)
 
 # haenge daten aneinander
 I12 = np.append(I1, I2)
@@ -40,7 +43,15 @@ T14 = np.append(T12, T34)
 T = np.append(T14, T5)
 T = T + 273.15
 
-b = abs(T[0] - T[len(T) - 1]) / (len(T) - 1) / 60
+# sortiere arrays
+Isort = np.zeros(len(I))
+Thelp = np.argsort(T)
+for i in range(0, len(I)):
+    Isort[i] = I[Thelp[i]]
+
+Tsort = np.sort(T)
+
+b = 1.3 / 60
 # funktionen
 
 
@@ -52,7 +63,7 @@ def nonegatives(arr):
     l = len(arr)
     for i in range(0, l):
         if (arr[i] < 0):
-            arr[i] = I[0]
+            arr[i] = 0.1 * 10**(-12)
     return(arr)
 
 
@@ -69,26 +80,37 @@ def efct(T, a, b):
 
 
 # rechnung
-A = kreisf(2.5*10**(-3))
+A = kreisf(1.5*10**(-3))
+
+
+Tinv = 1/Tsort
+# Ic = np.delete(Isort[:20], 5)
+# Tc = np.delete(Tsort[:20], 5)
+
+Torg = Tsort
+Iorg = Isort
+
+Tsort = np.delete(Tsort, [34, 35, 36])
+Isort = np.delete(Isort, [34, 35, 36])
 
 # untergrundfit + abziehen
-Iu = np.append(I[9:11], I[28:32])
-Tu = np.append(T[9:11], T[28:32])
+Iu = np.append(Isort[9:10], Isort[68:76])
+Tu = np.append(Tsort[9:10], Tsort[68:76])
 
 params_u, covariance_u = curve_fit(lin, Tu, Iu)
 eparams_u = unp.uarray(params_u, np.sqrt(np.diag(covariance_u)))
 slope_u = eparams_u[1]
 interc_u = eparams_u[0]
 
-Ik = I - lin(T, *params_u)
-Ik2 = Ik[I >= Ik]
-Tk2 = T[I >= Ik]
+Ik = Isort - lin(Tsort, *params_u)
+Ik2 = Ik[Isort >= Ik]
+Tk2 = Tsort[Isort >= Ik]
 Ir = Ik2[Ik2 >= 0]
 Tr = Tk2[Ik2 >= 0]
 
 # Anfangsfit
-lin_fits = 4
-lin_fite = 11
+lin_fits = 11
+lin_fite = 28
 Ic = Ir[lin_fits:lin_fite]
 jc = Ic/A  # stromdichte
 Tc = Tr[lin_fits:lin_fite]
@@ -102,11 +124,13 @@ W = -slope_lin * sc.k / sc.elementary_charge
 # plotten
 # werte auswahl etc.
 plt.figure(1)  # T, I 1
-plt.plot(T, I, 'rx', label=r'$\mathrm{unkorr.} \ \mathrm{Werte}$')
-plt.plot(T, lin(T, *params_u), label=r'$\mathrm{Untergrund-Fit}$')
-plt.plot(T, Ik, 'gx',  label=r'$\mathrm{korr.} \ \mathrm{Werte}$')
+plt.plot(Torg, Iorg, 'yx', label=r'$\mathrm{herausgenommene} \ \mathrm{Messwerte}$')
+plt.plot(Tsort, Isort, 'rx', label=r'$\mathrm{unkorr.} \ \mathrm{Werte}$')
+plt.plot(Tsort, lin(Tsort, *params_u), label=r'$\mathrm{Untergrund-Fit}$')
+plt.plot(Tsort, Ik, 'gx',  label=r'$\mathrm{korr.} \ \mathrm{Werte}$')
 plt.plot(Tr, Ir, 'x', color=(1.0, 0.0, 1.0),
          label=r'$\mathrm{pos.korr.} \ \mathrm{Werte}$')
+
 
 # plt.plot(Tc, Ic, 'gx', label=r'$\mathrm{Werte} \ \mathrm{fuer} \ \mathrm{Anfangskurve}$')
 plt.xlabel(r'$T / \mathrm{K}$')

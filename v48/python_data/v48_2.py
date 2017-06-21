@@ -83,8 +83,8 @@ A = kreisf(1.5*10**(-3))
 
 
 Tinv = 1/Tsort
-#Ic = np.delete(Isort[:20], 5)
-#Tc = np.delete(Tsort[:20], 5)
+# Ic = np.delete(Isort[:20], 5)
+# Tc = np.delete(Tsort[:20], 5)
 
 Torg = Tsort
 Iorg = Isort
