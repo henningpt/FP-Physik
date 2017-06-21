@@ -7,7 +7,7 @@ U_unc = 2  # fehler auf spannung +-2
 um_0, U_0 = np.genfromtxt("m_0.txt", unpack=True)
 um_1, U_1 = np.genfromtxt("m_1.txt", unpack=True)
 um_2, U_2 = np.genfromtxt("m_2.txt", unpack=True)
-# um_0, U_3 = np.genfromtxt("m_0.txt", unpack=True)
+um_3, U_3 = np.genfromtxt("m_3.txt", unpack=True)
 # um_0, U_4 = np.genfromtxt("m_0.txt", unpack=True)
 # um_0, U_5 = np.genfromtxt("m_0.txt", unpack=True)
 # um_0, U_6 = np.genfromtxt("m_0.txt", unpack=True)
@@ -21,7 +21,7 @@ def umrechnen(umdreh):
 s_0 = umrechnen(um_0)
 s_1 = umrechnen(um_1)
 s_2 = umrechnen(um_2)
-# s_3 = umrechnen(um_3)
+s_3 = umrechnen(um_3)
 # s_4 = umrechnen(um_4)
 # s_5 = umrechnen(um_5)
 # s_6 = umrechnen(um_6)
@@ -35,9 +35,11 @@ def plot_SU(s, U, nummer):
     plt.plot(s, U, 'bx')
     plt.xlabel(r'$ s \ / \ \mathrm{m} $')
     plt.ylabel(r'$ U \ / \ \mathrm{V} $')
-    plt.savefig("plots/plot_" + nstr)
-
+    #plt.savefig("plots/plot_" + nstr)
+    plt.show()
 # plotten
 plot_SU(s_0, U_0, 0)
 plot_SU(s_1, U_1, 1)
 plot_SU(s_2, U_2, 2)
+plot_SU(s_3, U_3, 3)
+
