@@ -33,17 +33,17 @@ def f(x,a,b):
 params,covariance=curve_fit(f,X,Y)
 
 import matplotlib.pyplot as plt
-'''
+
 plt.rcParams['figure.figsize'] = (10, 8)
 plt.rcParams['font.size'] = 16
 
 plt.plot(np.linspace(100,1500,100),f(np.linspace(100,1500,100),*params),label='Lineare Regression')
 plt.plot(X,Y,'rx',label='Messwerte')
 plt.ylabel('Kanalnummer')
-plt.xlabel('Energie in eV')
+plt.xlabel('Energie in keV')
 plt.legend()
 plt.savefig("plots/kalibrierung.pdf")
-'''
+
 #Kalibrierungsparameter
 kal=unp.uarray(params,np.sqrt(np.diag(covariance)))
 print('Kalibrierungswerte :',kal)
@@ -141,7 +141,7 @@ params3,covariance3 = curve_fit(eff,unp.nominal_values(Y_umgerechnet),unp.nomina
     
 print('Effizienzfunktion a*x^b mit:')
 print('a,b = ',unp.uarray(params3,np.sqrt(np.diag(covariance3))))
-
+'''
 import matplotlib.pyplot as plt
 plt.rcParams['figure.figsize'] = (10, 8)
 plt.rcParams['font.size'] = 16
@@ -150,10 +150,11 @@ plt.rcParams['font.size'] = 16
 plt.plot(np.linspace(200,1500,100),eff(np.linspace(200,1500,100),*params3),label='Regression')
 plt.errorbar(unp.nominal_values(Y_umgerechnet),unp.nominal_values(Q),xerr=unp.std_devs(Y_umgerechnet),yerr=unp.std_devs(Q),fmt='r.',label='Messergebnisse')
 plt.ylabel('Effizienz')
-plt.xlabel('Energie in eV')
+plt.xlabel('Energie in keV')
 plt.legend()
 plt.savefig("plots/effizienz.pdf")
 #plt.show()
 #np.savetxt('europium.txt',np.array([Y,X,W*100]).T,delimiter=' & ',newline=' ;newline; ',fmt="%.2f")
 #np.savetxt('effizienz.txt',np.array([X,unp.nominal_values(I),unp.std_devs(I),unp.nominal_values(Q)*100,unp.std_devs(Q)*100]).T,delimiter=' & ',newline=' ;newline; ',fmt="%.2f")
 print(Y_umgerechnet[6])
+'''
