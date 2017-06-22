@@ -120,6 +120,19 @@ interc_lin = ufloat(params_lin[0], errors_lin[0])
 slope_lin = ufloat(params_lin[1], errors_lin[1])
 W = -slope_lin * sc.k / sc.elementary_charge
 
+# integration
+intg_s = 3
+intg_e = 23
+integ = np.zeros(len(Ir[intg_s:intg_e]))
+for i, val in enumerate(Ir[intg_s:intg_e]):
+    integ_a = intg_s + i
+    integ[i] = integrate.simps(Ir[integ_a:intg_e], Tr[integ_a:intg_e]) / val
+
+integ = np.delete(integ, len(integ) - 1)
+ln_integ = np.log(integ)
+
+params_int, covariance_int = curve_fit(1/Tr[intg_s:intg_e-1], ln_integ)
+
 
 # plotten
 # werte auswahl etc.
@@ -151,4 +164,4 @@ plt.show()
 # ausgabe
 #lin fit ergebnis W
 print("Aktivierungsenergie W: ", W)
-print("Ir: ", Ir)
+# print("Ir: ", Ir)

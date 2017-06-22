@@ -125,6 +125,6 @@ plt.show()
 
 
 # ausgabe
-#lin fit ergebnis W
+# lin fit ergebnis W
 print("Aktivierungsenergie W: ", W)
 print("Ir: ", Ir)

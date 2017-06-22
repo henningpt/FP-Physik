@@ -5,8 +5,10 @@ arr2 = np.array([0, 1, 2, 3])
 arr1_p = arr1[arr1 > 0]
 arr2_p = arr2[arr1 > 0]
 
+arr1_cut = np.delete(arr1, len(arr1) - 1)
 
 print("arr1: ", arr1)
 print("arr2: ", arr2)
 print("arr1_p: ", arr1_p)
 print("arr2_p: ", arr2_p)
+print("arr1_cut: ", arr1_cut)

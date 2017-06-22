@@ -1,4 +1,4 @@
-import numpy as np
+48import numpy as np
 from scipy.optimize import curve_fit
 from scipy.stats import linregress
 import matplotlib.pyplot as plt
@@ -64,7 +64,7 @@ def tau0(Tmax, W, b):
 
 
 def efct(T, a, b):
-    return(a * np.e**(T * b))
+    return(a * np.e**(T * b
 
 # rechnung
 A = kreisf(2.5*10**(-3))
