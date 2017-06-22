@@ -68,6 +68,16 @@ def efct(T, a, b):
     return(a * np.e**(T * b))
 
 
+def heizrate(T, zeit):
+    summe = 0
+    vorgaen = 0
+    for i, val in enumerate(T):
+        if (i > 0):
+            summe += (abs(val - vorgaen) / zeit)
+            vorgaen = val
+    return(summe / len(T))
+
+
 # rechnung
 A = kreisf(2.5*10**(-3))
 
@@ -99,6 +109,30 @@ slope_lin = ufloat(params_lin[1], errors_lin[1])
 W = -slope_lin * sc.k / sc.elementary_charge
 
 
+# integration
+intg_s = 4
+intg_e = len(Ir) - 1
+integ = np.zeros(len(Ir[intg_s:intg_e]))
+for i, val in enumerate(Ir[intg_s:intg_e]):
+    integ_a = intg_s + i
+    integ[i] = integrate.simps(Ir[integ_a:intg_e], Tr[integ_a:intg_e]) / val
+
+integ = np.delete(integ, len(integ) - 1)
+ln_integ = np.log(integ)
+
+params_int, covariance_int = curve_fit(lin, 1/Tr[intg_s:intg_e-1], ln_integ)
+uparams_int = unp.uarray(params_int, np.sqrt(np.diag(covariance_int)))
+slope_int = uparams_int[1]
+interc_int = uparams_int[0]
+
+W2 = slope_int * sc.k / sc.elementary_charge
+
+# tau
+bnew = heizrate(Tr, 60)
+Tm = Tr[np.argmax(Ir)]
+t0 = tau0(Tm, W2 * sc.e,  bnew)
+
+
 # plotten
 # werte auswahl etc.
 plt.figure(1)  # T, I 1
@@ -113,6 +147,8 @@ plt.xlabel(r'$T / \mathrm{K}$')
 plt.ylabel(r'$I / \mathrm{A}$')
 plt.legend(loc='best')
 plt.show()
+
+
 # anfangsplot
 plt.figure(2)
 x_plot = np.linspace(np.min(Tc), np.max(Tc), 1000)
@@ -123,8 +159,20 @@ plt.ylabel(r'$\ln(j \cdot \mathrm{m^2} \ / \ \mathrm{A}) $')
 plt.legend(loc='best')
 plt.show()
 
+# plot lin fit integration
+plt.figure(3)
+x_plot = np.linspace(Tr[intg_s], Tr[intg_e - 1], 1000)
+plt.plot(1/Tr[intg_s:intg_e-1], np.log(integ), 'rx', label=r'$\mathrm{umgerechnete} \ \mathrm{Messwerte}$')
+plt.plot(1/x_plot, lin(1/x_plot, *params_int), 'b', label=r'$\mathrm{linearer} \ \mathrm{Fit}$')
+plt.xlabel(r'$\frac{1}{T} \ / \ \frac{1}{\mathrm{K}}$')
+plt.ylabel(r'$\ln\frac{\mathrm{integral}}{I(T)}$')
+plt.legend(loc='best')
+plt.show()
+
 
 # ausgabe
 # lin fit ergebnis W
 print("Aktivierungsenergie W: ", W)
-print("Ir: ", Ir)
+print("Aktivierungsenergie W2: ", W2)
+print("tau0: ", t0)
+print("\nTr: ", Tr)
