@@ -136,7 +136,7 @@ intg_e = 64
 integ = np.zeros(len(Ir[intg_s:intg_e]))
 for i, val in enumerate(Ir[intg_s:intg_e]):
     integ_a = intg_s + i
-    integ[i] = integrate.simps(Ir[integ_a:intg_e], Tr[integ_a:intg_e]) / val
+    integ[i] = integrate.trapz(Ir[integ_a:intg_e], Tr[integ_a:intg_e]) / val
 
 integ = np.delete(integ, len(integ) - 1)
 ln_integ = np.log(integ)
@@ -189,6 +189,7 @@ plt.show()
 plt.figure(3)
 x_plot = np.linspace(Tr[intg_s], Tr[intg_e - 1], 1000)
 plt.plot(1/Tr[intg_s:intg_e-1], np.log(integ), 'rx', label=r'$\mathrm{umgerechnete} \ \mathrm{Messwerte}$')
+# plt.plot(1/Tr[intg_s:intg_e-1], integ, 'rx', label=r'$\mathrm{umgerechnete} \ \mathrm{Messwerte}$')
 plt.plot(1/x_plot, lin(1/x_plot, *params_int), 'b', label=r'$\mathrm{linearer} \ \mathrm{Fit}$')
 plt.xlabel(r'$\frac{1}{T} \ / \ \frac{1}{\mathrm{K}}$')
 plt.ylabel(r'$\ln\frac{\mathrm{integral}}{I(T)}$')
@@ -202,4 +203,4 @@ print("Aktivierungsenergie W methode1: ", W)
 print("\nAktivierungsenergie W methode2: ", W2)
 print("tau0: ", t0)
 # print("Ir: ", Ir)
-print("\nTr: ", Tr - 273.15)
+# print("\nTr: ", Tr - 273.15)

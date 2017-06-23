@@ -82,8 +82,8 @@ def heizrate(T, zeit):
 A = kreisf(2.5*10**(-3))
 
 # untergrundfit + abziehen
-Iu = np.append(I[9:11], I[28:32])
-Tu = np.append(T[9:11], T[28:32])
+Iu = np.append(I[9:11], I[28:34])
+Tu = np.append(T[9:11], T[28:34])
 
 params_u, covariance_u = curve_fit(lin, Tu, Iu)
 eparams_u = unp.uarray(params_u, np.sqrt(np.diag(covariance_u)))
@@ -97,10 +97,10 @@ Ir = Ik2[Ik2 >= 0]
 Tr = Tk2[Ik2 >= 0]
 
 # Anfangsfit
-lin_fits = 4
-lin_fite = 11
+lin_fits = 3
+lin_fite = 8
 Ic = Ir[lin_fits:lin_fite]
-jc = Ic/A  # stromdichte
+jc = Ir/A  # stromdichte
 Tc = Tr[lin_fits:lin_fite]
 params_lin, cov_lin = curve_fit(lin, 1/Tc, np.log(Ic))
 errors_lin = np.sqrt(np.diag(cov_lin))
@@ -115,7 +115,7 @@ intg_e = len(Ir) - 1
 integ = np.zeros(len(Ir[intg_s:intg_e]))
 for i, val in enumerate(Ir[intg_s:intg_e]):
     integ_a = intg_s + i
-    integ[i] = integrate.simps(Ir[integ_a:intg_e], Tr[integ_a:intg_e]) / val
+    integ[i] = integrate.trapz(Ir[integ_a:intg_e], Tr[integ_a:intg_e]) / val
 
 integ = np.delete(integ, len(integ) - 1)
 ln_integ = np.log(integ)
@@ -175,4 +175,4 @@ plt.show()
 print("Aktivierungsenergie W: ", W)
 print("Aktivierungsenergie W2: ", W2)
 print("tau0: ", t0)
-print("\nTr: ", Tr)
+# print("\nTr: ", Tr)
