@@ -1,8 +1,54 @@
 \section{Theorie}
 \label{sec:Theorie}
-Der Stern-Gerlach-Versuch dient dazu nachzuweisen, dass bei Elektronen genau 2
-Einstellmöglichkeiten für ihren Eigendrehimpuls, den Spin $ m_\text{s} $, existieren. 
-Dabei werden die Werte $m_\text{s}$
-
-
-\cite{sample}
+Der Stern-Gerlach-Versuch dient dazu nachzuweisen,
+dass bei Elektronen genau 2 Einstellmöglichkeiten für ihren
+Eigendrehimpuls, den Spin $ m_\text{s} $, existieren.
+Dabei werden die Werte $ m_\text{s} = \pm \frac{1}{2} $
+angenommen.\\ Um diese Gegebenheit zu zeigen, wird im Experiment ein
+Strahl von Kaliumatomen durch ein räumlich inhomogenes Magnetfeld
+geschickt. Dabei kommt es zu einer Aufspaltung des Kaliumstrahls
+in zwei Teile. Diese Aufspaltung kommt dadurch zustande, dass auf die
+Atome eine magnetische Kraft $F$ wirkt, die, je nach Orientierung des
+Spins des Elektrons auf der äußeren Schale, entweder eine Ablenkung in
+Magnetfeldrichtung oder in entegengesetzter Richtung bewirkt.
+Eine solche Kraft wirkt immer dann auf ein Atom, wenn es ein magnetisches
+Moment $\mu$ besitzt. Dieses setzt sich gemäß
+\begin{equation}
+  \label{eqn:mag_moment}
+  \mu = \mu_{I} + \mu_{L} + \mu_{S}
+\end{equation}
+zusammen. Dabei bezeichnen die Indizes jeweils die ursächlichen
+Drehimpulse. Durch $I$ wird der Kernspin beschrieben, durch $L$ der
+Bahndrehimpuls und durch $S$ der Spin. In dem hier beschriebenen
+Anwendungsfall kann das aus dem Kernspin resultierende Moment $\mu_{I}$
+als vernachlässigbar klein gegenüber den übrigen angenommen werden.
+Da innerhalb einer "Elektronenschale" die Drehimpulsquantezahlen $l$
+und $s$ symmetrisch besetzt werden, tragen nur die Drehimpulse aus
+unvollständig besetzten Schalen effektiv bei. Im Fall des Kaliums
+befindet sich die in der einzigen unbesezten Schale, der Äußeren, nur
+ein Elektron, dessen Bahndrehimpuls $L$ gleich $0$ ist. Das magnetische
+Moment des Kaliumatoms ist also nahezu ausschließlich
+durch den Spin des äußeren Elektrons festgelegt. Dadurch reduziert sich
+Zusammenhang \eqref{eqn:mag_moment} auf \\ \\
+\begin{equation}
+  \label{eqn:spin_moment}
+  \symbf{\mu_{S}} = \frac{-e}{2 m} \cdot g_{S} \cdot \symbf{S}.
+\end{equation}
+Dabei bezeichnet $\symbf{S}$ den Spin und $g_{S}$ das zugehörige
+gyromagnetische Verhältnis, welches für Elektronen im Allgemeinen
+einen Wert von ungefähr $2$ annimmt.\\ \\
+Definiert man die Richtung des Magnetfelds entlang der z-Achse eines
+3-dimensionalen Koordinatensystem, so ergibt sich die in dieser Richtung
+relevanten Komponente des magnetischen Momenents
+\begin{equation}
+  \label{eqn:z_moment}
+\mu_{s_\text{z}} = -g_{S} \cdot m_\text{s} \cdot \mu_\text{B}.
+\end{equation}
+Dabei bezeichnet $\mu_\text{B}$ die Natur-Konstante die als das Bohr'sche
+Magneton bezeichnet wird.
+Mithilfe von Gleichung \eqref{eqn:z_moment} lässt sich die Kraft bestimmen,
+mit der die Kaliumatome in z-Richtung abgelenkt werden. Es ergibt sich\\ \\
+\begin{equation}
+  \label{eqn:z_kraft}
+  F_\text{z} = - m_{s_{z}} \mu_\text{B} \cdot \partial_{z}B .
+\end{equation}
