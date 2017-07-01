@@ -31,6 +31,8 @@ I3 *= 1.0 * 10**(-11)
 I4 *= 0.3 * 10**(-10)
 I5 *= 1.0 * 10**(-11)
 
+
+Tstart = 210.0
 # haenge daten aneinander
 I12 = np.append(I1, I2)
 I34 = np.append(I3, I4)
@@ -52,6 +54,11 @@ for i in range(0, len(I)):
 Tsort = np.sort(T)
 
 b = 1.3 / 60
+
+W_lit = 0.66
+t_lit = 4 * 10**(-14)
+
+
 # funktionen
 
 
@@ -71,9 +78,9 @@ def lin(Tinv, intercept, slope):
     return(intercept + Tinv * slope)
 
 
-def tau0(Tmax, W, b):
-    return(sc.k * Tmax**2 * np.e**(-W / (sc.k * Tmax)) / (W * b))
-
+def tau0(T_0, Tmax, W, b):
+    return(sc.k * Tmax**2 * (np.e**(-W / (sc.k * Tmax)) -
+           np.e**(-W / (sc.k * T_0))) / (W * b))
 
 def efct(T, a, b):
     return(a * np.e**(T * b))
@@ -130,6 +137,9 @@ interc_lin = ufloat(params_lin[0], errors_lin[0])
 slope_lin = ufloat(params_lin[1], errors_lin[1])
 W = -slope_lin * sc.k / sc.elementary_charge
 
+deltaW1 = abs(W - W_lit) / W_lit
+
+
 # integration
 intg_s = 8
 intg_e = 64
@@ -148,14 +158,19 @@ interc_int = uparams_int[0]
 
 W2 = slope_int * sc.k / sc.elementary_charge
 
+deltaW2 = abs(W2 - W_lit) / W_lit
+
+
 # tau
 bnew1 = heizrate(Tr[:15], 60)
 bnew2 = heizrate(Tr[16:59], 30)
 bnew3 = heizrate(Tr[60:], 60)
 bnew = (bnew1 * len(Tr[:15]) + bnew2 * len(Tr[16:59]) + bnew3 * len(Tr[60:])) / len(Tr)
-print("bnew: ", bnew)
+# print("bnew: ", bnew)
 Tm = Tr[np.argmax(Ir)]
-t0 = tau0(Tm, W2 * sc.e,  bnew)
+t0 = tau0(Tstart, Tm, W2 * sc.e,  bnew)
+
+delta_t = abs(t0 - t_lit) / t_lit
 
 
 # plotten
@@ -164,8 +179,8 @@ plt.figure(1)  # T, I 1
 plt.plot(Torg, Iorg, 'yx', label=r'$\mathrm{herausgenommene} \ \mathrm{Messwerte}$')
 plt.plot(Tsort, Isort, 'rx', label=r'$\mathrm{unkorr.} \ \mathrm{Werte}$')
 plt.plot(Tsort, lin(Tsort, *params_u), label=r'$\mathrm{Untergrund-Fit}$')
-plt.plot(Tsort, Ik, 'gx',  label=r'$\mathrm{korr.} \ \mathrm{Werte}$')
-plt.plot(Tr, Ir, 'x', color=(1.0, 0.0, 1.0),
+plt.plot(Tsort, Ik, 'x', color=(1.0, 0.0, 1.0),  label=r'$\mathrm{korr.} \ \mathrm{Werte}$')
+plt.plot(Tr, Ir,'gx',
          label=r'$\mathrm{pos.korr.} \ \mathrm{Werte}$')
 
 
@@ -173,7 +188,7 @@ plt.plot(Tr, Ir, 'x', color=(1.0, 0.0, 1.0),
 plt.xlabel(r'$T / \mathrm{K}$')
 plt.ylabel(r'$I / \mathrm{A}$')
 plt.legend(loc='best')
-plt.show()
+plt.savefig("plots/ti2.pdf")
 
 # anfangsplot
 plt.figure(2)
@@ -181,9 +196,9 @@ x_plot = np.linspace(np.min(Tc), np.max(Tc), 1000)
 plt.plot(1/Tc, np.log(Ic), 'rx', label=r'$\mathrm{umgerechnete} \ \mathrm{Messwerte}$')
 plt.plot(1/x_plot, lin(1/x_plot, *params_lin), 'b', label=r'$\mathrm{linearer} \ \mathrm{Fit}$')
 plt.xlabel(r'$\frac{1}{T} \ / \ \frac{1}{\mathrm{K}}$')
-plt.ylabel(r'$\ln(j \cdot \mathrm{m^2} \ / \ \mathrm{A}) $')
+plt.ylabel(r'$\ln(I / \ \mathrm{A}) $')
 plt.legend(loc='best')
-plt.show()
+plt.savefig("plots/lin2.pdf")
 
 # plot lin fit integration
 plt.figure(3)
@@ -194,13 +209,39 @@ plt.plot(1/x_plot, lin(1/x_plot, *params_int), 'b', label=r'$\mathrm{linearer} \
 plt.xlabel(r'$\frac{1}{T} \ / \ \frac{1}{\mathrm{K}}$')
 plt.ylabel(r'$\ln\frac{\mathrm{integral}}{I(T)}$')
 plt.legend(loc='best')
-plt.show()
+plt.savefig("plots/lnlin2.pdf")
 
 
 # ausgabe
-#lin fit ergebnis W
-print("Aktivierungsenergie W methode1: ", W)
+# lin fit ergebnis W
+print("\n\nAktivierungsenergie W methode1: ", W)
 print("\nAktivierungsenergie W methode2: ", W2)
-print("tau0: ", t0)
+print("\n\ntau0: ", t0)
+print("\nb: ", bnew)
+
+print("\n\n Abweichung W1 : ", deltaW1)
+print("\n Abweichung W2 : ", deltaW2)
+print("\n Abweichung t0 : ", delta_t)
+
+
+# paramter der Fits
+print("\n\nslope untergrund : ", slope_u)
+print("\ninterc untergrund : ", interc_u)
+
+print("\n\nslope anfang : ", slope_lin)
+print("\ninterc anfang : ", interc_lin)
+
+print("\n\nslope integral : ", slope_int)
+print("\ninterc integral : ", interc_int)
+
+np.savetxt('werte_untergrund2.txt',np.column_stack([Iu, Tu]), header="I untergrund, T untergrund")
+
+# werte fuer anfangsfit und integration abspeichern
+np.savetxt('werte_anfang2.txt', np.column_stack([Ic, Tc]),
+           header="I anfang, T anfang")
+
+np.savetxt('werte_integration2.txt', np.column_stack([Ir[intg_s:intg_e],
+                                                      Tr[intg_s:intg_e]]),
+           header="I anfang, T anfang")
 # print("Ir: ", Ir)
 # print("\nTr: ", Tr - 273.15)

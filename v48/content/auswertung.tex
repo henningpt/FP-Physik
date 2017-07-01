@@ -20,34 +20,51 @@ die Aktivierungsenergie $W$\footnote{In Elektronenvolt} mit Hilfe eines linearen
   \label{eqn:W}
   W = -s \cdot k_\text{B} / e
 \end{equation}
-bestimmen lässt. Dabei bezeichnet $s$ die Steigung Fit-Funktion, $k_\text{B}$ die Boltzmann-Konstante und $e$ die Elementarladung.
-
+bestimmen lässt. Dabei bezeichnet $s$ die Steigung der Fit-Funktion, $k_\text{B}$ die Boltzmann-Konstante und $e$ die Elementarladung.\\ \\
 Anhand der in \ref{tab:linfit1} beziehungweise \ref{tab:linfit2} Wertepaare ergeben sich über einen unter \textbf{Python 3}
 durchgeführten linearen Fit, der mit der Funktion \textbf{curveFit} aus
 dem Paket \textbf{scipy} durchgeführt wurde, die Energien
 \\
 \begin{align*}
-  W_{1} &= \SI{0.262+-0.030}{\electronvolt} \\
-  W_{2} &= \SI{0.248+-0.017}{\electronvolt}.
+  W_{1} &= \SI{1.66+-0.09}{\electronvolt} \\
+  W_{2} &= \SI{0.870+-0.011}{\electronvolt}.
 \end{align*}
 Dabei wurden die Fit-Parameter
 \\
 \begin{align*}
-  s_{1} &= \SI{-3040+-350}{}\\
-  s_{2} &= \SI{-2870+-200}{}\\
-  b_{1} &= \SI{-0.8+-1.5}{}\\
-  b_{2} &= \SI{-0.3+-0.9}{}
+  s_{1} &= \SI{-19300+-1000}{\kelvin}\\
+  s_{2} &= \SI{-10100+-130}{\kelvin}\\
+  b_{1} &= \SI{53+-4}{}\\
+  b_{2} &= \SI{16.6+-0.5}{}
 \end{align*}
 berechnet.
 Die Fehler wurden anhand der von \textbf{curveFit} berechneten Kovarianzmatrix bestimmt. Alle Fehlerfortpflanzungen in diesem Versuchsprotokoll
-werden mit dem Paket \textbf{uncertainties}\cite{uncertainties} durchgeführt.
+werden mit dem Paket \textbf{uncertainties}\cite{uncertainties} durchgeführt.\\ \\
+Die jeweiligen relativen Abweichungen der bestimmten Aktivierungsenergien vom Literaturwert \cite{literaturwert}\\ \\
+\begin{align*}
+  W_\text{literatur} = \SI{0.66}{\electronvolt}
+\end{align*}
+betragen
+\begin{align*}
+  \delta W_{1} &= \frac{\lvert W_{1} - W_\text{literatur} \rvert}{W_\text{literatur}} &= \SI{152+-13}{\percent}\\
+  \delta W_{2} &= \frac{\lvert W_{2} - W_\text{literatur} \rvert}{W_\text{literatur}} &= \SI{31.9+-1.7}{\percent} .
+\end{align*}
+Graphische Darstellungen der linearen Fits\footnote{Fits zur Bestimmung der Aktivierungsenergien.} durch die dafür verwendeten Messwerte
+sind in Abbildungen \ref{fig:lin1} und \ref{fig:lin2} gegeben.\\ \\
 
 Die Aufgenommenen Depolarisationskurven sind in Abbildungen \ref{fig:TI1} und \ref{fig:TI2} gezeigt. Da sich zusätzlich zum ersten Maximum noch weitere anschließen und die
-Kurve nicht wie im theoretischen Idealfall auf $0$ abfällt, wurde zur Vereinfachung der Auswertung, wie in \ref{fig:TI1} und \ref{fig:TI2} dargestellt jeweils eine lineare Korrekturfunktion
-im problematischen Bereich abgezogen. Dabei wurden weiterhin die Werte die anschließend unterhalb von $0$ lagen nach oben korrigiert.
-Graphische Darstellungen der linearen Fits\footnote{Fits zur Bestimmung der Aktivierungsenergien.} durch die dafür verwendeten Messwerte
-sind in Abbildungen \ref{fig:lin1} und \ref{fig:lin2} gegeben.
-
+Kurve nicht wie im theoretischen Idealfall auf $0$ abfällt, wurde zur Korrektur der gemessenen Werte, wie in \ref{fig:TI1} und \ref{fig:TI2} dargestellt,
+jeweils eine lineare Korrektur-unktion von den Meswerten abgezogen.
+Dabei wurden weiterhin die Werte die anschließend unterhalb von $0$ lagen für weitere Berechnungen ausgeschlossen.\\
+Für die Fit-Paramter der linearen Korrekturfunktionen werden die Werte
+\begin{align*}
+  s_\text{korrektur 1} &= \SI{1.778+-0.018}{\pico\ampere\per\kelvin}\\
+  s_\text{korrektur 2} &= \SI{0.395+-0.009}{\pico\ampere\per\kelvin}\\
+  b_\text{korrektur 1} &= \SI{-0.405+-0.005}{\nano\ampere}\\
+  b_\text{korrektur 2} &= \SI{-0.763+-0.025}{\nano\ampere}
+\end{align*}
+ermittelt.\\ \\
+Die für den Fit jeweils verwendeten Messwerte sind in Tabelle \ref{tab:korrekturfit} angegeben.
 \begin{figure}
   \centering
   \includegraphics[width=\textwidth]{python_data/plots/ti1.pdf}
@@ -65,42 +82,35 @@ sind in Abbildungen \ref{fig:lin1} und \ref{fig:lin2} gegeben.
 \begin{figure}
   \centering
   \includegraphics[width=\textwidth]{python_data/plots/lin1.pdf}
-  \caption{Logarithmierte Stromdichte aufgetragen gegen reziproke Temperatur(Anfangskurve Heizrate1) zur Bestimmung der Aktivierungsenergie.}
+  \caption{Logarithmierte Stromstärke aufgetragen gegen reziproke Temperatur(Anfangskurve Heizrate1) zur Bestimmung der Aktivierungsenergie.}
   \label{fig:lin1}
 \end{figure}
 
 \begin{figure}
   \centering
   \includegraphics[width=\textwidth]{python_data/plots/lin2.pdf}
-  \caption{Logarithmierte Stromdichte aufgetragen gegen reziproke Temperatur(Anfangskurve Heizrate2) zur Bestimmung der Aktivierungsenergie.}
+  \caption{Logarithmierte Stromstärke aufgetragen gegen reziproke Temperatur(Anfangskurve Heizrate2) zur Bestimmung der Aktivierungsenergie.}
   \label{fig:lin2}
 \end{figure}
 
 \FloatBarrier
 \begin{table}
   \centering
-  \caption{Verwendete Messwerte für die Anfangskurve der ersten Messung zur Bestimmung der Aktivierungsenergie.}
-  \label{tab:linfit1}
-    \begin{tabular}{c c}
+  \caption{Jeweils für den Fit der Korrekturunktion verwendete Messwerte(Indizes an I und T geben die Nummer der Messung an).}
+  \label{tab:korrekturfit}
+    \begin{tabular}{c c c c}
       \toprule
-      $I \text{ in } \si{\pico\ampere}$ & $ T \text{ in } \si{\kelvin} $ \\
+      $I_{1} \text{ in } \si{\pico\ampere}$ & $ T_{1} \text{ in } \si{\kelvin} $ & $I_{2} \text{ in } \si{\pico\ampere}$ & $ T_{2} \text{ in } \si{\kelvin} $ \\
       \midrule
-       7.90 & 211.35\\
-       7.80 & 214.85\\
-       8.10 & 218.05\\
-       8.70 & 220.75\\
-       9.30 & 223.65\\
-       9.90 & 226.45\\
-      11.40 & 229.55\\
-      12.00 & 232.15\\
-      14.40 & 234.75\\
-      15.30 & 237.15\\
-      20.70 & 239.65\\
-      26.70 & 242.25\\
-      35.00 & 244.55\\
-      47.00 & 247.15\\
-      64.00 & 249.75\\
-      85.00 & 251.85\\
+      20.70 & 239.65 & 13.8 & 228.45\\
+      26.70 & 242.25 & 34.0 & 278.65\\
+      102.0 & 284.75 & 35.0 & 279.85\\
+      105.0 & 286.95 & 35.0 & 281.15\\
+            &        & 35.0 & 282.35\\
+            &        & 36.0 & 283.45\\
+            &        & 36.0 & 284.85\\
+            &        & 36.0 & 286.15\\
+            &        & 37.0 & 287.45\\
       \bottomrule
     \end{tabular}
 \end{table}
@@ -108,45 +118,47 @@ sind in Abbildungen \ref{fig:lin1} und \ref{fig:lin2} gegeben.
 
 \begin{table}
   \centering
-  \caption{Verwendete Messwerte für die Anfangskurve der zweiten Messung zur Bestimmung der Aktivierungsenergie.}
+  \caption{Korrigierte Messwerte für die Anfangskurve der ersten Messung zur Bestimmung der Aktivierungsenergie.}
+  \label{tab:linfit1}
+    \begin{tabular}{c c}
+      \toprule
+      $I \text{ in } \si{\pico\ampere}$ & $ T \text{ in } \si{\kelvin} $ \\
+      \midrule
+        4,91 & 244,55\\
+       12,29 & 247,15\\
+       24,67 & 249,75\\
+       41,93 & 251,85\\
+      106,02 & 254,05\\
+      \bottomrule
+    \end{tabular}
+\end{table}
+
+
+\begin{table}
+  \centering
+  \caption{Korrigierte Messwerte für die Anfangskurve der zweiten Messung zur Bestimmung der Aktivierungsenergie.}
   \label{tab:linfit2}
   \begin{tabular}{c c}
     \toprule
     $I \text{ in } \si{\pico\ampere}$ & $ T \text{ in } \si{\kelvin} $ \\
     \midrule
-    10.50 & 213.15\\
-    10.80 & 214.15\\
-    10.20 & 215.85\\
-     9.60 & 217.65\\
-     8.40 & 219.35\\
-    22.20 & 222.55\\
-    16.50 & 223.95\\
-    16.50 & 225.55\\
-    14.40 & 226.95\\
-    13.80 & 228.45\\
-    13.50 & 230.05\\
-    13.50 & 231.15\\
-    13.80 & 232.45\\
-    24.00 & 233.75\\
-    20.00 & 235.15\\
-    23.00 & 236.45\\
-    26.00 & 237.75\\
-    25.00 & 239.15\\
-    28.00 & 240.55\\
-    31.00 & 241.75\\
-    35.00 & 243.15\\
-    38.00 & 244.35\\
-    41.00 & 244.95\\
-    45.00 & 245.55\\
-    47.00 & 246.35\\
-    49.00 & 246.85\\
-    53.00 & 247.55\\
-    56.00 & 248.15\\
-    60.00 & 248.75\\
-    65.00 & 249.45\\
-    70.00 & 250.15\\
-    74.00 & 250.75\\
-    79.00 & 251.45\\
+     6,84 & 239,15\\
+     9,28 & 240,55\\
+    11,81 & 241,75\\
+    15,26 & 243,15\\
+    17,78 & 244,35\\
+    20,55 & 244,95\\
+    23,31 & 245,55\\
+    25,99 & 246,35\\
+    27,80 & 246,85\\
+    31,52 & 247,55\\
+    34,28 & 248,15\\
+    38,04 & 248,75\\
+    42,77 & 249,45\\
+    47,49 & 250,15\\
+    51,25 & 250,75\\
+    55,98 & 251,45\\
+    61,70 & 252,15\\
     \bottomrule
   \end{tabular}
 \end{table}
@@ -158,7 +170,7 @@ sind in Abbildungen \ref{fig:lin1} und \ref{fig:lin2} gegeben.
 \label{subsec:method2}
 
 Um die Aktvierungsenergien genauer zu bestimmen zu können, wird im Folgenden jeweils der gesamte Verlauf, der in der Theorie vorhergesagten Depolarisationskurve,
-verwendet. Dazu wird Zusammenhang \eqref{eq:t:15} verwendet. Die Integrationen wurden unter \textbf{Python 3} mit der Simpson-Integration aus dem Paket \textbf{scipy.integrate} durchgeführt.
+verwendet. Dazu wird Zusammenhang \eqref{eq:t:15} verwendet. Die Integrationen wurden unter \textbf{Python 3} mit der Trapez-Integration aus dem Paket \textbf{scipy.integrate} durchgeführt.
 Durch einen Anschließenden linearen Fit der reziproken Temperatur aufgetragen gegen die rechte Seite von Gleichung \eqref{eq:t:15} lässt sich die
 Aktivierungsenergie\footnote{In der Einheit Elektronenvolt.} durch
 \\
@@ -170,27 +182,32 @@ bestimmen.
 
 
 Es ergeben sich
-\\
 \begin{align*}
-  W_{1} &= \SI{0.22+-0.05}{\electronvolt} \\
-  W_{2} &= \SI{0.205+-0.35}{\electronvolt}.
+  W_{1} &= \SI{0.88+-0.06}{\electronvolt} \\
+  W_{2} &= \SI{0.741+-0.017}{\electronvolt}.
 \end{align*}
-Dabei wurden die Fit-Parameter
-\\
+Dabei wurden die Fit-Parameter\\
 \begin{align*}
-  s_{1} &= \SI{2600+-600}{}  \\
-  s_{2} &= \SI{2400+-400}{}  \\
-  b_{1} &= \SI{-7.8+-2.5}{}  \\
-  b_{2} &= \SI{-4.8+-1.6}{}
+  s_{1} &= \SI{10200+-700}{\kelvin}  \\
+  s_{2} &= \SI{8600+-190}{\kelvin}  \\
+  b_{1} &= \SI{-36.3+-2.8}{}  \\
+  b_{2} &= \SI{-30.9+-0.8}{}
 \end{align*}
-berechnet.
+berechnet.\\ \\
+Die jeweiligen relativen Abweichungen der bestimmten Aktivierungsenergien vom Literaturwert \cite{literaturwert}
+\begin{align*}
+  W_\text{literatur} = \SI{0.66}{\electronvolt}
+\end{align*}
+betragen
+\begin{align*}
+  \delta W_{1} &= \frac{\lvert W_{1} - W_\text{literatur} \rvert}{W_\text{literatur}} &= \SI{34+-10}{\percent}\\
+  \delta W_{2} &= \frac{\lvert W_{2} - W_\text{literatur} \rvert}{W_\text{literatur}} &= \SI{12.3+-2.5}{\percent} .
+\end{align*}
 
 
-Bei der Integration wurde nur nach möglichkeit soweit integriert, bis die Strom-Temperatur-Kurve auf einen Wert nahe des Werts zu Beginn der Integration abfällt, dies war vor allem für
-die Werte der zweiten Messung nur bedingt realisierbar.
+Bei der Integration wurde nur nach Möglichkeit soweit integriert, bis die Strom-Temperatur-Kurve auf einen Wert möglichst nahe an $0$ abfällt,
 Die linearen Fits sowie die jeweils dazu gehörenden umgerechneten Messwerte sind in den Abbildungen \ref{fig:lin1l} und \ref{fig:lin2l} graphisch dargestellt.
-Die jeweils verwendeten Messwerte sind in den Tabellen \ref{tab:lnlinfit1} und \ref{tab:lnlinfit2} zu finden.
-\\
+Die jeweils verwendeten Messwerte sind in den Tabellen \ref{tab:lnlinfit1} und \ref{tab:lnlinfit2} zu finden.\\
 
 \begin{figure}
   \centering
@@ -210,117 +227,138 @@ Die jeweils verwendeten Messwerte sind in den Tabellen \ref{tab:lnlinfit1} und \
 
 \begin{table}
   \centering
-  \caption{Verwendete Messwerte für die Gesamtkurve der ersten Messung zur Bestimmung der Aktivierungsenergie.}
+  \caption{Korrigierte Messwerte für die Gesamtkurve der ersten Messung zur Bestimmung der Aktivierungsenergie.}
   \label{tab:lnlinfit1}
   \begin{tabular}{c c}
     \toprule
     $I \text{ in } \si{\pico\ampere}$ & $ T \text{ in } \si{\kelvin} $ \\
     \midrule
-      9.30 & 223.65\\
-      9.90 & 226.45\\
-     11.40 & 229.55\\
-     12.00 & 232.15\\
-     14.40 & 234.75\\
-     15.23 & 237.15\\
-     20.70 & 239.65\\
-     26.70 & 242.25\\
-     35.00 & 244.55\\
-     47.00 & 247.15\\
-     64.00 & 249.75\\
-     85.00 & 251.85\\
-    152.99 & 254.05\\
-    186.00 & 256.55\\
-    224.99 & 259.15\\
-    257.99 & 262.05\\
-    269.99 & 264.65\\
-    252.00 & 267.65\\
-    207.00 & 270.15\\
-    158.99 & 272.45\\
-    122.99 & 275.15\\
-     44.34 & 277.45\\
-     35.39 & 279.85\\
-     32.19 & 282.45\\
-     29.37 & 284.75\\
-    \bottomrule
-  \end{tabular}
-\end{table}
-
-\begin{table}
-  \centering
-  \caption{Verwendete Messwerte für die Gesamtkurve der zweiten Messung zur Bestimmung der Aktivierungsenergie.}
-  \label{tab:lnlinfit2}
-  \begin{tabular}{c c}
-    \toprule
-    $I \text{ in } \si{\pico\ampere}$ & $ T \text{ in } \si{\kelvin} $ \\
-    \midrule
-     28.00 & 267.25\\
-     31.00 & 268.05\\
-     35.00 & 268.85\\
-     38.00 & 269.45\\
-     41.00 & 213.15\\
-     45.00 & 214.15\\
-     47.00 & 215.85\\
-     49.00 & 217.65\\
-     53.00 & 219.35\\
-     56.00 & 222.55\\
-     60.00 & 223.95\\
-     65.00 & 225.55\\
-     70.00 & 226.95\\
-     75.00 & 228.45\\
-     79.00 & 230.05\\
-     85.00 & 231.15\\
-    102.00 & 232.45\\
-    109.00 & 233.75\\
-    114.00 & 347.75\\
-    117.00 & 349.05\\
-    120.00 & 350.35\\
-    120.00 & 351.85\\
-    120.00 & 353.35\\
-    120.00 & 354.85\\
-    120.00 & 356.45\\
-    117.00 & 358.25\\
-    114.00 & 359.45\\
-    111.00 & 360.75\\
-    105.00 & 235.15\\
-    102.00 & 236.45\\
-     93.00 & 237.75\\
-     87.00 & 239.15\\
-     81.00 & 240.55\\
-     75.00 & 241.75\\
-     69.00 & 243.15\\
-     63.00 & 244.35\\
-     60.00 & 244.95\\
+      4,91 & 244,55\\
+     12,29 & 247,15\\
+     24,67 & 249,75\\
+     41,93 & 251,85\\
+    106,02 & 254,05\\
+    134,58 & 256,55\\
+    168,96 & 259,15\\
+    196,80 & 262,05\\
+    204,18 & 264,65\\
+    180,85 & 267,65\\
+    131,40 & 270,15\\
+     79,31 & 272,45\\
+     38,51 & 275,15\\
+     19,42 & 277,45\\
+      9,15 & 279,85\\
+      4,53 & 282,45\\
+      0,45 & 284,75\\
     \bottomrule
   \end{tabular}
 \end{table}
 \FloatBarrier
 
-\subsection{Bestimmung der Relaxationszeit anhand der lage des Maximums der Depolarisationskurve}
+
+
+\begin{longtable}{c c}
+\caption{Verwendete Messwerte für die Gesamtkurve der zweiten Messung zur Bestimmung der Aktivierungsenergie.}
+\label{tab:lnlinfit2}\\
+\hline
+$I \text{ in } \si{\pico\ampere}$ & $ T \text{ in } \si{\kelvin} $ \\
+\hline
+\endhead
+3,42 & 235,15\\
+5,90 & 236,45\\
+8,39 & 237,75\\
+6,84 & 239,15\\
+9,28 & 240,55\\
+11,81 & 241,75\\
+15,26 & 243,15\\
+17,78 & 244,35\\
+20,55 & 244,95\\
+23,31 & 245,55\\
+25,99 & 246,35\\
+27,80 & 246,85\\
+31,52 & 247,55\\
+34,28 & 248,15\\
+38,04 & 248,75\\
+42,77 & 249,45\\
+47,49 & 250,15\\
+77,75 & 254,55\\
+51,25 & 250,75\\
+55,98 & 251,45\\
+61,70 & 252,15\\
+83,44 & 255,35\\
+89,24 & 255,85\\
+91,76 & 257,05\\
+94,53 & 257,65\\
+94,33 & 258,15\\
+94,05 & 258,85\\
+93,77 & 259,55\\
+93,50 & 260,25\\
+90,26 & 260,85\\
+86,95 & 261,65\\
+83,71 & 262,25\\
+77,47 & 262,85\\
+74,16 & 263,65\\
+64,88 & 264,35\\
+58,53 & 265,25\\
+52,33 & 265,75\\
+46,01 & 266,55\\
+39,73 & 267,25\\
+33,42 & 268,05\\
+30,10 & 268,85\\
+23,87 & 269,45\\
+17,51 & 270,35\\
+14,31 & 270,85\\
+11,08 & 271.45\\
+8,83 & 272,05\\
+6,56 & 272,75\\
+4,32 & 273,35\\
+3,08 & 273,95\\
+2,81 & 274,65\\
+1,58 & 275,25\\
+1,25 & 276,05\\
+1,02 & 276,65\\
+0,74 & 277,35\\
+0,23 & 278,65\\
+0,76 & 279,85\\
+\hline
+\end{longtable}
+
+
+\subsection{Bestimmung der Relaxationszeit anhand der Position des Maximums der Depolarisationskurve}
 \label{subsec:zeit}
 Um die Relaxationszeit zu bestimmen wird jeweils die Temperatur $T_\text{max}$ bestimmt, bei der die Depolarisationskurve ihr Maximum annimmt.
 Daraus kann dann unter Verwendung des Zusammenhangs \eqref{eq:t:16} und Kenntnis der Aktivierungsenergie, $\tau_{0}$ bestimmt werden.
+Für $T_0$ wurde ein Wert von $\SI{210}{\kelvin}$  verwendet.
 Es ergeben sich die Werte
 \\
 \begin{align*}
-  \tau_{01} &= \SI{0.16+-0.25}{\micro\second}\\
-  \tau_{02} &= \SI{2.6+-1.9}{\micro\second}.
+  \tau_{1} &= \SI{0.5+-1.3}{\femto\second}\\
+  \tau_{2} &= \SI{90+-70}{\femto\second}.
 \end{align*}
 
 Für die Berechnung der vorausgegangenen Größen wurden die durchschnittlichen
 Heizraten
 \\
 \begin{align*}
-  b_{1} = \SI{0.04}{\kelvin\per\second}\\
-  b_{2} = \SI{0.02}{\kelvin\per\second}
+  b_{1} &= \SI{0.23}{\kelvin\per\second}\\
+  b_{2} &= \SI{0.27}{\kelvin\per\second}
 \end{align*}
 
 sowie die Temperaturen $T^\text{max}$ bei denen der maximale Depolarisationsstrom gemessen wurde
 \\
 \begin{align*}
-  T^\text{max}_{1} = \SI{264.65}{\kelvin}
-  T^\text{max}_{2} = \SI{257.65}{\kelvin}
+  T^\text{max}_{1} &= \SI{264.65}{\kelvin}\\
+  T^\text{max}_{2} &= \SI{257.65}{\kelvin}
 \end{align*}
-verwendet.
-
+verwendet.\\
 Direkt auffällig ist, dass die Fehler der Relaxationszeiten eine ähnliche
-Größe haben wie die berechneten Zeiten an sich.
+Größe haben wie die berechneten Zeiten an sich.\\ \\
+Die jeweiligen relativen Abweichungen der bestimmten Relationszeiten vom Literaturwert \cite{literaturwert}
+\begin{align*}
+  \tau_{0}^\text{literatur} = \SI{0.66}{\electronvolt}
+\end{align*}
+betragen
+\begin{align*}
+  \delta \tau_{1} &= \frac{\lvert \tau_{1} - \tau_{0}^\text{literatur} \rvert}{\tau_{0}^\text{literatur}} &= \SI{98.8+-3.3}{\percent}\\
+  \delta \tau_{2} &= \frac{\lvert \tau_{2} - \tau_{0}^\text{literatur} \rvert}{\tau_{0}^\text{literatur}} &= \SI{130.+-180}{\percent} .
+\end{align*}
