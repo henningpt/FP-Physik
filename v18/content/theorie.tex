@@ -1,11 +1,17 @@
 \section{Theorie}
 \label{sec:Theorie}
 
+\subsection{Einleitung}
+\label{subsec:Einleitung}
+
+Die im folgenden dargestellte Untersuchung eines Reinst-Germanium-Detektors hat im wesentlichen zwei Ziele. 
+Zum einen sollen charakteristische Eigenschaften des Detektors, wie die Effizienz und das Energieauflösungsvermögen bestimmt werden.
+Zum anderen soll der Germanium-Detektor eingesetzt werden, um die Aktivität einer Probe eines unbekannten Materials zu bestimmen und, um Glieder der Zerfallsreihe einer weiteren Probe zu identifizieren.
+Der hier verwendete Detektor ist als Instrument der Gamma-Spektroskopie für den Nachweis von bei Kernzerfällen entstehenden Photonen, welche auch Gamma-Quanten genannt werden, entwickelt worden. 
+Im Gegensatz zu den übrigen Kapiteln wird in Kapitel \ref{subsec:t1} von Photonen statt von Gamma-Quanten gesprochen, um die allgemeine Gültigkeit der dort getätigten Aussagen nicht zu Beschränken.
 
 \subsection{Gamma-Strahlung in Materie}
 \label{subsec:t1}
-
-In dem hier thematisierten Versuch wird von einer Probe ausgesandte Gamma-Strahlung untersucht.
 Diese Strahlung kann auf verschiedene Weise mit den Elektronen sowie Atomkernen im Detektor
 interagieren.\\
 Jeder Wechselwirkung lässt sich ein sogenannter Wirkungsquerschnitt
@@ -98,44 +104,56 @@ von Bedeutung.
 \end{figure}
 \FloatBarrier
 
-\subsection{Wirkungsweise}
+\subsection{Reinst-Germanium-Detektoren}
 \label{subsec:Wirkungsweise}
-Das wichtigste Element des Germaniumdetektors ist eine Halbleiterdiode.
-Die durch p- bzw. n-Dotierung entstehenden Ladungsträger diffudieren und rekombinieren an der Grenzfläche zwischen den beiden Bereichen der Diode.
-Dadurch entsteht um die Grenzfläche herum eine Ladungsarme Zone.
-Diese Zone ist für die Messung von $\gamma$-Quanten der entscheidende Bereich der Diode.
-Erzeugt ein $\gamma$-Quant innerhalb der Diode ein freies Elektron, zum Beispiel indem mithilfe des Photoeffekts ein Elektron aus dem Valenz- in das Leitungsband gehoben wird, so hebt dieses freie Elektron durch Abgabe seiner kinetischen Energie weitere Elektronen in das Leitungsband.
+Das wichtigste Element des Germanium-Detektors ist eine Halbleiterdiode.
+Die durch p- bzw. n-Dotierung entstehenden Ladungsträger diffundieren und rekombinieren an der Grenzfläche zwischen den beiden Bereichen der Diode.
+Dadurch entsteht um die Grenzfläche herum eine ladungsarme Zone.
+Diese Zone ist für die Messung von Gamma-Quanten der entscheidende Bereich der Diode.
+Erzeugt ein $Gamma$-Quant innerhalb der Diode ein freies Elektron, zum Beispiel indem mithilfe des Photoeffekts ein Elektron aus dem Valenz- in das Leitungsband gehoben wird, so hebt dieses freie Elektron durch Abgabe seiner kinetischen Energie weitere Elektronen in das Leitungsband.
 Entsteht so ein Elektronenschauer in dem positiv oder negativ geladenen Bereich der Diode, wird er durch Rekombination mit den jeweiligen Ladungsträgern des Bereichs eliminiert, und ist damit nicht messbar.
-Falls der Elektronenschauer in der Ladungsarmen Zone entsteht, gelingt es durch ein hinreichend großes elektrisches Feld, die freien Elektronen von den zurückgelassenen positiv geladenen Atomrümpfen zu trennen.
-Es entsteht ein Strom $\frac{dQ}{dt}$, welcher nun gemessen werden kann.
-Die Gesamtladung $Q$ ist dabei proportional zur Energie des $\gamma$-Quants, welches den Elektronenschauer verursacht hat, da sie ihrerseits proportional zur Anzahl der Elektronen des Schauers ist.
-Ein Ziel bei der Konstruktion eines Germaniumdetektors ist es also, eine möglichst breite Ladungsarme Zone zu erreichen.
+Falls der Elektronenschauer in der ladungsarmen Zone entsteht, gelingt es durch ein hinreichend großes elektrisches Feld, die freien Elektronen von den zurückgelassenen positiv geladenen Atomrümpfen zu trennen, und es entsteht ein Strom $\frac{dQ}{dt}$.
+Die Gesamtladung $Q$ ist dabei proportional zur Energie des $Gamma$-Quants, welches den Elektronenschauer verursacht hat, da sie ihrerseits proportional zur Anzahl der Elektronen des Schauers ist.
+Ein Ziel bei der Konstruktion eines Germanium-Detektors ist es also, eine möglichst breite ladungsarme Zone zu erreichen.
 Dies ist zum Beispiel durch ein starkes elektrisches Feld und eine unsymmetische Dotierung möglich.
-Da ein starkes elektrisches Feld den Einfluss thermischer Ströme auf die Messung vergrößert, wird die Diode in der Regel auf niedrige Temperaturen gekühlt, sodass dieser Einfluss verringert wird.
+Aufgrund der thermischen Bewegungen von Elektronen im Material entsteht ein Rauschen, welches die Messung negativ beeinflusst.
+Ein starkes elektrisches Feld zeichnet eine Bewegungsrichtung für die thermische Bewegung der Elektronen aus, was zu einem stärkeren Rauschen führt. 
+Um diesen Einfluss zu verringern werden Germanium-Detektoren in der Regel auf $\SI{77}{\kelvin}$ gekühlt.
 
-Halbleiter Detektoren können durch zwei Eigenschaften charakterisiert werden.
-Dies sind zum einen das energetische Auflösungsvermögen und zum anderen die Effizienz.
-Das energetische Auflösungsvermögen wird größtenteils von der Halbwertsbreite eines Peaks des Spektrums beschrieben.
-Diese wird unter anderem in Abschnitt \ref{subsec:a2} untersucht.
-Sie ist ein Maß die Unterscheidbarkeit nah aneinander liegender Spektrallinien.
-Weitere Faktoren sind zum Beispiel der thermische Strom, Inhomogenitäten des elektrischen Feldes oder das Verstärkerrauschen.
+Wichtige Kenngrößen eines Germanium-Detektors sind das energetische Auflösungsvermögen und die Effizienz.
+Das energetische Auflösungsvermögen wird größtenteils von der Halbwertsbreite $\Delta E_{\frac{1}{2}}$ eines Peaks des Spektrums beschrieben. 
+Wie Abbildung \ref{fig:halbwertsbreite} zeigt, können zwei benachbarte Spektrallinien hinreichend gut unterschieden werden, wenn der Abstand zwischen ihnen mindestens der Halbwertsbreite entspricht.
+Die Halbwertsbreite wird von der Anzahl $n$ der nach Einfall eines Gamma-Quants freigesetzten Elektron-Loch-Paare bestimmt.
+Da typischer Weise $n\gg 1$ beobachtet wird, kann die Verteilungsfunktion durch eine Gauß-Verteilung angenähert werden.
+Ist $\sigma_E$ die Standardabweichung der Gauß-Verteilung, so gilt für die Halbwertsbreite
+\begin{align}
+\Delta E_{\frac{1}{2}} = \sqrt{8 \text{ln} ~2} \sigma_E \approx 2,35 \cdot \sqrt{0,1 \cdot E_{\gamma} E_{\text{EL}} \text{ ,}
+\label{eq:t:halbwertsbreite}
+\end{align}
+wobei $E_{\gamma}$ die Energie des einfallenden Gamma-Quants, $E_{\text{EL}}$ die Bindungsenergie eines Elektron-Loch-Paars und $0,1$ der sogenannte Fano-Faktor ist.
+Weitere Faktoren sind unter anderem der Leckstrom, Inhomogenitäten des elektrischen Feldes oder das Verstärkerrauschen.
 Jeder dieser Faktoren kann durch geeignete Gegenmaßnahmen verringert werden.
 Etwa durch Kühlung der Apparatur, hohe Spannungen und Vergrößerung des Detektors.
-Die Effizienz ist ein Maß für die Abhängigkeit der Nachweiswahrscheinlichkeit von der Energie.
-Um eine möglichst hohe Effizienz zu erzielen muss die gesamte Energie eines einfallenden Teilchens im Detektor absorbiert werden.
+Das energetische Auflösungsvermögen hängt mittels
+\begin{align}
+H_\text{ges}^2 = \delta E_{\frac{1}{2}}^2 + H_\text{R}^2 + H_\text{I}^2 + H_\Text{E}^2
+\end{align}
+von den Halbwertsbreiten ab, welche durch den Leckstrom ($H_\text{R}$), die Feldinhomogenität ($H_\Text{I}$) und das Verstärkerrauschen ($H_\Text{E}$) enstehen.
+Die Effizienz beschreibt die Abhängigkeit der Vollenergie-Nachweiswahrscheinlichkeit eines Detektors von der Energie der einfallenden Gamma-Quanten.
+Für den Nachweis der Gesamtenergie eines Gamma-Quants im Detektor kommt von den in Kapitel \ref{subsec:t1} behandelten Phänomenen nur der Photoeffekt in Frage.
+Gleichung \eqref{eqn:phquerschnitt} ist anzusehen, dass die Effizienz bei zunehmender Energie $E_{\gamma}$ der Gamma-Quanten stark abfällt.
 
-\subsection{Elektronische Beschaltung eines Germanium Detektors}
-\label{subsec:Elektronische Beschaltung eines Germanium Detektors}
+\subsection{Elektronische Beschaltung eines Germanium-Detektors}
+\label{subsec:Elektronische Beschaltung eines Germanium-Detektors}
 Der Detektor erzeugt für ein einfallendes Teilchen eine Ladungsänderung $\frac{dQ}{dt}$, welche als Strom gemessen werden kann.
 Ziel der elektronischen Beschaltung des Detektors ist es nun diesen Strom in einen Spannungsimpuls proportional zur Energie $E_\gamma$ des Teilchens zu erzeugen und diesen geeignet zu speichern.
-Um den Strom in eine Spannung umzuwandeln wird er im Vorverstärker mittels einer Integrationsstufe integriert (vgl. Abbildung \ref{fig:t:1}.
+Um den Strom in eine Spannung umzuwandeln wird er im Vorverstärker mittels einer Integrationsstufe integriert (vgl. Abbildung \ref{fig:t:1}).
 \begin{figure}
 \centering
 \includegraphics[width=0.8\textwidth]{content/skizzen/aufbau2.jpg}
-\caption{Schaltbild des Vorverstärkers.}
+\caption{Schaltbild des Vorverstärkers \cite{sample}.}
 \label{fig:t:1}
 \end{figure}
-\cite{sample}
 Damit sich die Spannungen verschiedener Signale nicht addieren muss der Kondensator des Vorverstärkers nach der Detektion eines Signals entladen werden.
 Dafür sorgt eine rauscharme optoelektronische Rückkopplung.
 Die Spannungssignale müssen nun ihrer Höhe nach geordnet abgespeichert werden.
@@ -154,16 +172,16 @@ Ein Schaubild der gesamten Schaltung ist in Abbildung \ref{fig:t:3} dargestellt.
 \begin{figure}
 \centering
 \includegraphics[width=0.8\textwidth]{content/skizzen/aufbau4.jpg}
-\caption{Elektronische Beschaltung eines Germanium Detektors \cite{sample}.}
+\caption{Elektronische Beschaltung eines Germanium-Detektors \cite{sample}.}
 \label{fig:t:3}
 \end{figure}
-Das Ergebnis kann zum Beispiel in einem Balkendiagramm gezeichnet werden und entspricht dann dem $\gamma$-Spektrum der radioaktiven Probe.
+Das Ergebnis kann zum Beispiel in einem Balkendiagramm gezeichnet werden und entspricht dann dem $Gamma$-Spektrum der radioaktiven Probe.
 
 
 \subsection{Das zu messende Spektrum eines Gammastrahlers}
 \label{subsec:spektrum}
 
-Nimmt man mit einem (Germanium-)Detektor das Spektrum eines Gammastrahlers, der Gamma-Quanten einer Energie abstrahlt,
+Nimmt man mit einem Germanium-Detektor das Spektrum eines Gammastrahlers, der Gamma-Quanten einer Energie abstrahlt,
 so ergibt sich im Idealfall ein Spektrum wie in Abbildung \ref{fig:idealspektrum}. In einem solchen Spektrum lassen
 sich das Compton-Kontinuum, das mit dem sogenannten Rückstreupeak überlagert ist und an der Compton-Kante endet, und der Photo-Peak identifizieren.
 Der Rückstreupeak kommt dadurch zustande, dass nicht alle Photonen direkt im Detektor Wechselwirken, sondern zum Teil
@@ -180,7 +198,7 @@ approximieren.\\ \\
 \FloatBarrier
 \begin{figure}
   \includegraphics[width=\textwidth]{content/skizzen/idspektrum.PNG}
-  \caption{Zu messendes Spektrum eines 1-Linien Gamma-Strahlers}
+  \caption{Zu messendes Spektrum eines monochromatischen Gamma-Strahlers \cite{sample}.}
   \label{fig:idealspektrum}
 \end{figure}
 \FloatBarrier
@@ -195,3 +213,5 @@ Dabei bezeichnet $\Omega$ den Raumwinkekl der mit dem Detektor beobachtet werden
 Emmissionswahrscheinlichkeit für eine ausgewählte Linien des betrachteten Strahlers und $Q$ die
 Effizienz des verwendeten Detektors. Die Effizienz gibt an, wie wahrscheinlich es ist ein Messergebnis für eine ausgewählte
 Energie zu erhalten.
+
+\cite{sample}

@@ -25,20 +25,20 @@ Diese und jede weitere Regressionsrechnung in dieser Auswertung wird mithilfe de
 Fehlerrechnungen werden ebenfalls von Python übernommen.
 Dazu wird das Paket \textit{uncertainties} verwendet.
 
-\subsection{Kallibration und Bestimmung der Effizienz}
+\subsection{Kalibrierung und Bestimmung der Effizienz}
 \label{subsec:a1}
 Um das Energiespektrum für unbekannte Strahler sinnvoll interpretieren zu können,
-ist eine Kalibrierung der Energieskala notwendig. Dazu wird das linienreiche Spektrum eines Europium 152 Strahlers betrachtet, welches in Abbildung \ref{fig:spektrum_eu} dargestellt ist.
+ist eine Kalibrierung der Energieskala notwendig. Dazu wird das linienreiche Spektrum eines Europium-152 Strahlers betrachtet, welches in Abbildung \ref{fig:spektrum_eu} dargestellt ist.
 \begin{figure}
  \centering
  \includegraphics[width=0.8\textwidth]{python/plots/spec1.pdf}
- \caption{Rohdaten der Vermessung des Europium 152 Spektrums.}
+ \caption{Rohdaten der Vermessung des Europium-152 Spektrums.}
  \label{fig:spektrum_eu}
  \end{figure}
-Die in Tabelle \ref{tab:atab1} angegebenen Lagen der Spektrallinien werden nach dem in Abschnitt \ref{subsec:a0} beschriebenen Verfahren bestimmt.
+Die in Tabelle \ref{tab:atab1} angegebenen Kanäle der Spektrallinien werden nach dem in Abschnitt \ref{subsec:a0} beschriebenen Verfahren bestimmt.
 \begin{table}
 \centering
-\caption{Literaturwerte und gemessene Kanäle eines Europium 152 Gammaspektrums \cite{sample}.}
+\caption{Literaturwerte und gemessene Kanäle eines Europium-152 Gammaspektrums \cite{sample}.}
 \begin{tabular}{c c c}
 \hline \\
 Kanal $k$ &Energie $E_\gamma$ in keV & Emissionswahrscheinlichkeit $W$ in \% \\
@@ -48,7 +48,7 @@ Kanal $k$ &Energie $E_\gamma$ in keV & Emissionswahrscheinlichkeit $W$ in \% \\
 \end{tabular}
 \label{tab:atab1}
 \end{table}
-In Abbildung \ref{fig:Kalibrierung} werden die entsprechenden Kanäle gegen die Literaturwerte des Eu-Spektrums aufgetragen.
+In Abbildung \ref{fig:Kalibrierung} werden die entsprechenden Kanäle gegen die Literaturwerte des Europium-152 Spektrums aufgetragen.
 Über eine lineare Ausgleichsrechnung wird die Umrechnungsvorschrift
 \begin{align*}
 k(E) &= s \cdot E + b \text{, mit}\\
@@ -62,18 +62,18 @@ zwischen Kanalnummern und Energien in keV bestimmt.
 \caption{Lineare Regression der Messwerte aus Tabelle \ref{tab:atab1}}
 \label{fig:Kalibrierung}
 \end{figure}
-Mit Gleichung \eqref{eqn:effizienz} soll die Effizienz der Spektrallinien berechnet werden.
-Um die dazu nötige Aktivität des Europiums zum Zeitpunkt der Messung zu bestimmen, wird das exponentielle Zerfallsgesetz
+Mit Gleichung \eqref{eqn:effizienz} soll die Effizienz des Detektors bestimmt werden.
+Um die dazu nötige Aktivität des Europium-152 zum Zeitpunkt der Messung zu bestimmen, wird das exponentielle Zerfallsgesetz
 \begin{align}
 A_\text{Messung}=A_0\exp\left(\frac{\log(2)}{T_{\frac{1}{2}}}\Delta t\right)
 \end{align}
 verwendet.
-Die Aktivität $A_0$ am 01.10.2000 betrug $\SI{130+-60}{\becquerel}$ und die Halbwertszeit von Europium beträgt $\SI{4943+-5}{\day}$ \cite{sample}.
-Das angegebene Datum liefert eine zeitliche Differenz von $\Delta t=\SI{6084}{\day}$, sodass sich eine Aktivität von
+Die Aktivität $A_0$ am 01.10.2000 betrug $\SI{4130+-60}{\becquerel}$ und die Halbwertszeit von Europium-152 beträgt $\SI{4943+-5}{\day}$ \cite{sample}.
+Die Anzahl der Tage zwischen dem 01.10.2000 und dem Tag der Durchführung beträgt $\Delta t=\SI{6084}{\day}$.
+Daraus ergibt sich eine Aktivität von
 \begin{align*}
-A_\text{Messung}=\SI{1760+-26}{\becquerel}
+A_\text{Messung}=\SI{1760+-26}{\becquerel} \text{ .}
 \end{align*}
-ergibt.
 Leider wurde der Abstand $d$ zwischen Probe und Detektor nicht gemessen.
 Der Wert von $d=\SI{8.8+-0.3}{\centi\meter}$ wird deshalb dem Protokoll einer befreundeten Gruppe entnommen \cite{abstand}.
 Der Radius der Probe beträgt $r=\SI{2.25}{\centi\meter}$ \cite{sample}.
