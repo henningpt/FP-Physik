@@ -19,7 +19,7 @@ daten4 = np.genfromtxt("v18_4.txt", unpack=True)
 
 #Kalibrierung
 
-Y=np.array([414.085320642,
+X=np.array([414.085320642,
 825.610503916,
 996.656026607,
 1158.50557442,
@@ -37,7 +37,7 @@ Y=np.array([414.085320642,
 4716.3497603,
 4888.96958224])
 
-X=np.array([121.78,244.70,295.94, 344.30, 411.12, 443.96, 678.00, 688.67, 778.90, 867.37, 964.08,1005.30,1085.90,1112.10,1299.10,1408.00,1457.60])
+Y=np.array([121.78,244.70,295.94, 344.30, 411.12, 443.96, 678.00, 688.67, 778.90, 867.37, 964.08,1005.30,1085.90,1112.10,1299.10,1408.00,1457.60])
 
 def f(x,a,b):
     return a*x+b
@@ -45,14 +45,15 @@ def f(x,a,b):
 params,covariance=curve_fit(f,X,Y)
 
 #Effizienzparameter
-effizienz=unp.uarray(np.array([84.18399795734446,-1.028776078711911]), np.array([36.654658037116405, 0.07332701822586613]))
-#36.654658037116405,0.07332701822586613
+effizienz=unp.uarray(np.array([149.65186663497605,-1.1102069849679677]), np.array([100.89678188585408, 0.11382673341973333]))
+#[149.65186663497605+/-100.89678188585408
+# -1.1102069849679677+/-0.11382673341973333]
 # funktionen
 def g(x, p1, p2, p3, p4):
     return p4 * np.e**(-p1 * (x - p2)**2) + p3
 
 def umrechnen(kanal):
-    return kanal/params[0]-params[1]/params[0]
+    return f(kanal,*params)
 
 def gauss(spektrum, a, s):
     X2 = np.linspace(a - s, a + s, 2 * s + 1)
@@ -62,11 +63,13 @@ def gauss(spektrum, a, s):
     params2, covariance2 = curve_fit(g, X2, Y2,  p0=[1, a, 0, 1])
     uparams2 = unp.uarray(params2, np.sqrt(np.diag(covariance2)))
     # Plot Vorbereiten
+    '''
     plt.rcParams['figure.figsize'] = (10, 8)
     plt.rcParams['font.size'] = 16
     plt.plot(X2, Y2, 'rx')
     plt.plot(np.linspace(np.min(X2), np.max(X2), 1000), g(np.linspace(np.min(X2), np.max(X2), 1000), *params2))
     # plt.show()
+    '''
     return(uparams2)
 
 
@@ -155,34 +158,69 @@ d_lage_ev=umrechnen(d_peak_lage)
 d_peak_int=intensitaet(d_inhalte,d_lage_ev)
 print('Intensitaeten :',d_peak_int)
 
+#Effizienz
+Eff=effizienz[0]*np.power(d_lage_ev,effizienz[1])
+
 #Aktivitaetsbestimmung
 wkeit=np.array([2.2,34.06,0.65,0.45,7.2,18.3,62.1,8.9])/100
 
-omega=0.2
+abstand=0.088+0.015
+radius=0.025
+omega=2*np.pi*(1-abstand/unp.sqrt(abstand**2+radius**2))
 
 Aktivitaet=4*np.pi/omega*d_peak_int/wkeit
 
 print('Aktivitaet :',Aktivitaet)
 
 # plotten
+print(umrechnen(np.array([0,500,1000,1500,2000,2500])))
+print(umrechnen(np.array([0,500,1000,1500])))
+print(umrechnen(np.array([0,1000,2000,3000,4000,5000])))
 # spektren
+import matplotlib.pyplot as plt
+import matplotlib.ticker as ticker
+plt.rcParams['figure.figsize'] = (10, 8)
+plt.rcParams['font.size'] = 16
 '''
 plt.figure(1)
-plt.bar(list(range(len(daten1))), daten1, color='r')
+plt.bar(list(range(len(daten1))), daten1, color='b')
+plt.yscale('log')
+plt.xlabel('Kanaele')
+plt.ylabel('Zaehlergebnis')
+plt.xlim((0,5000))
+plt.ylim(bottom=1)
 plt.savefig("plots/spec1.pdf")
-
-plt.figure(2)
-plt.bar(list(range(len(daten2))), daten2, color='r')
+'''
+fig=plt.figure(2)
+plt.bar(list(range(len(daten2))), daten2, color='b')
+plt.yscale('log')
+plt.xlabel('Energie / keV')
+plt.ylabel('Zaehlergebnis')
+plt.xlim((0,2500))
+plt.ylim(bottom=1)
+plt.xticks([0,500,1000,1500,2000,2500],([0,150,300,450,600]))
 plt.savefig("plots/spec2.pdf")
 
-plt.figure(3)
-plt.bar(list(range(len(daten3))), daten3, color='r')
+fig=plt.figure(3)
+plt.bar(list(range(len(daten3))), daten3, color='b')
+plt.yscale('log')
+plt.xlabel('Energie in keV')
+plt.ylabel('Zaehlergebnis')
+plt.xlim((0,1500))
+plt.ylim(bottom=1)
+plt.xticks([0,500,1000,1500],([0,150,300,450]))
 plt.savefig("plots/spec3.pdf")
 
-plt.figure(4)
-plt.bar(list(range(len(daten4))), daten4, color='r')
+fig=plt.figure(4)
+plt.bar(list(range(len(daten4))), daten4, color='b')
+plt.yscale('log')
+plt.xlabel('Energie in keV')
+plt.ylabel('Zaehlergebnis')
+plt.xlim((0,5000))
+plt.ylim(bottom=1)
+plt.xticks([0,1000,2000,3000,4000,5000],([0,300,600,900,1200,1500]))
 plt.savefig("plots/spec4.pdf")
-'''
+
 #plt.figure(3)
 #plt.bar(list(range(2300)), daten3[:2300], color='r')
 #plt.plot(list(range(1600)), kontinuum(list(range(1600)), comptparams))
@@ -199,7 +237,9 @@ print("\npeakinhalt: ", p2inhalt)
 print("\nzehntel/halbwert: ", zehntelwert/halbwert)
 '''
 
-np.savetxt('aktivitaet.txt',np.array([unp.nominal_values(d_peak_lage),unp.std_devs(d_peak_lage),unp.nominal_values(d_peak_int),unp.std_devs(d_peak_int),wkeit*100,unp.nominal_values(Aktivitaet),unp.std_devs(Aktivitaet)]).T,delimiter=' & ',newline=' ;newline; ',fmt=['%.2f',' %+.2f ',' %.2f ',' %+.2f ',' %.2f ',' %2d ',' %+2d'])
-A=np.mean(unp.nominal_values(Aktivitaet[2:]))
-A_std=np.std(unp.nominal_values(Aktivitaet[2:]))
+np.savetxt('aktivitaet.txt',np.array([unp.nominal_values(d_lage_ev),unp.std_devs(d_lage_ev),unp.nominal_values(d_inhalte),unp.std_devs(d_inhalte),wkeit*100,unp.nominal_values(Aktivitaet),unp.std_devs(Aktivitaet)]).T,delimiter=' & ',newline=' ;newline; ',fmt=['%.2f',' %+.2f ',' %2d ',' %+2d',' %.2f ',' %2d ',' %+2d'])
+A=np.mean(unp.nominal_values(Aktivitaet))
+A_std=np.std(unp.nominal_values(Aktivitaet))
 print('Aktivitaet Mittelwert',unp.uarray(A,A_std))
+
+print('done.')

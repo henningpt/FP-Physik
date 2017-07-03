@@ -24,7 +24,7 @@ Er wird deshalb im Folgenden nicht weiter berücksichtigt.
 Diese und jede weitere Regressionsrechnung in dieser Auswertung wird mithilfe der Funktion \textit{curve\_ fit} aus dem Python Paket \textit{scipy.optimize} durchgeführt.
 Fehlerrechnungen werden ebenfalls von Python übernommen.
 Dazu wird das Paket \textit{uncertainties} verwendet.
-
+\FloatBarrier
 \subsection{Kalibrierung und Bestimmung der Effizienz}
 \label{subsec:a1}
 Um das Energiespektrum für unbekannte Strahler sinnvoll interpretieren zu können,
@@ -38,28 +38,44 @@ ist eine Kalibrierung der Energieskala notwendig. Dazu wird das linienreiche Spe
 Die in Tabelle \ref{tab:atab1} angegebenen Kanäle der Spektrallinien werden nach dem in Abschnitt \ref{subsec:a0} beschriebenen Verfahren bestimmt.
 \begin{table}
 \centering
-\caption{Literaturwerte und gemessene Kanäle eines Europium-152 Gammaspektrums \cite{sample}.}
-\begin{tabular}{c c c}
+\caption{Gemessene Kanäle $k$, zugehörige Energieliteraturwerte $E_{\text{lit}}$ und durch die Kalibrierung aus den Kanälen bestimmten Energien $E_{\gamma}$ eines Europium-152 Gammaspektrums, sowie Literaturwerte für die Emissionswahrscheinlichkeit $W$ der Spektrallinien, die nach Kap.~\ref{subsec:a0} berechneten Inhalte $I$ der Peaks und die daraus berechnete Effizienz $Q$ \cite{sample}.}
+\begin{tabular}{c c c c c c}
 \hline \\
-Kanal $k$ &Energie $E_\gamma$ in keV & Emissionswahrscheinlichkeit $W$ in \% \\
+$k$ &$E_{\gamma}$ / keV & $E_{\text{lit}}$ / keV &  $W$ / \% & $I$ & $Q$ / \% \\
 \hline \\
-414.12 & 121.78 & 28.60 \\ 825.86 & 244.70 & 7.60 \\ 997.32 & 295.94 & 0.40 \\ 1158.71 & 344.30 & 26.50 \\ 1382.31 & 411.12 & 2.20 \\ 1491.59 & 443.96 & 3.10 \\ 2273.21 & 678.00 & 2.00 \\ 2310.43 & 688.67 & 0.90 \\ 2612.36 & 778.90 & 12.90 \\ 2908.55 & 867.37 & 4.20 \\ 3231.22 & 964.08 & 14.60 \\ 3368.59 & 1005.30 & 0.60 \\ 3639.40 & 1085.90 & 10.20 \\ 3726.07 & 1112.10 & 13.60 \\ 4353.21 & 1299.10 & 1.60 \\ 4716.58 & 1408.00 & 21.00 \\ 4888.94 & 1457.60 & 0.50 \\
+414,10 $\pm$ 0,01 & 121,97 $\pm$ 0,01 & 121,78 & 28,60 & 28310$\pm$90 & 45,5$\pm$0,6 \\
+825,73 $\pm$ 0,02 & 244,97 $\pm$ 0,01 & 244,70 & 7,60 & 4770$\pm$40 & 28,80$\pm$0,5 \\  
+996,99 $\pm$ 0,23 & 296,15 $\pm$ 0,07 & 295,94 & 0,40 & 230$\pm$30 & 27,0$\pm$3,0 \\ 
+1158,61 $\pm$ 0,01 & 344,44 $\pm$ 0,01 & 344,30 & 26,50 & 11700$\pm$70 & 20,3$\pm$0,3 \\
+1381,69 $\pm$ 0,06 & 411,10 $\pm$ 0,02 & 411,12 & 2,20 & 740$\pm$20 & 15,4$\pm$0,5 \\
+1492,22 $\pm$ 0,05 & 444,13 $\pm$ 0,01 & 443,96 & 3,10 & 1010$\pm$20 & 15,0$\pm$0,4 \\ 
+2275,02 $\pm$ 0,82 & 678,05 $\pm$ 0,25 & 678,00 & 2,00 & 40$\pm$10 & 1,00$\pm$0,3 \\ 
+2310,57 $\pm$ 0.33 & 688,67 $\pm$ 0,10 & 688,67 & 0,90 & 240$\pm$20 & 12,0$\pm$1,0 \\
+2611,88 $\pm$ 0,06 & 778,71 $\pm$ 0,02 & 778,90 & 12,90 & 2320$\pm$40 & 8,3$\pm$0,2 \\ 
+2907,84 $\pm$ 0,18 & 867,15 $\pm$ 0,05 & 867,37 & 4,20 & 640$\pm$30 & 7,0$\pm$0,3 \\ 
+3232,04 $\pm$ 0,09 & 964,02 $\pm$ 0,03 & 964,08 & 14,60 & 2080$\pm$40 & 6,6$\pm$0,2 \\ 
+3368,48 $\pm$ 0,47 & 1004,79 $\pm$ 0,14 & 1005,30 & 0,60 & 90$\pm$10 & 7,0$\pm$1,0 \\ 
+3638,77 $\pm$ 0,15 & 1085,56 $\pm$ 0,04 & 1085,90 & 10,20 & 1170$\pm$40 & 5,3$\pm$0,2 \\  
+3726,06 $\pm$ 0,10 & 1111,65 $\pm$ 0,03 & 1112,10 & 13,60 & 1830$\pm$40 & 6,2$\pm$0,2 \\ 
+4353,18 $\pm$ 0,38 & 1299,04 $\pm$ 0,11 & 1299,10 & 1,60 & 160$\pm$20 & 4,6$\pm$0,5 \\
+4716,47 $\pm$ 0,16 & 1407,60 $\pm$ 0,05 & 1408,00 & 21,00 & 2290$\pm$70 & 5,0$\pm$0,2 \\ 
+4890,43 $\pm$ 0,59 & 1459,58 $\pm$ 0,18 & 1457,60 & 0,50 & 180$\pm$50 & 16,0$\pm$5,0\\
 \hline
 \end{tabular}
 \label{tab:atab1}
 \end{table}
 In Abbildung \ref{fig:Kalibrierung} werden die entsprechenden Kanäle gegen die Literaturwerte des Europium-152 Spektrums aufgetragen.
-Über eine lineare Ausgleichsrechnung wird die Umrechnungsvorschrift
+Über eine lineare Ausgleichsrechnung wird die Kalibrationsfunktion
 \begin{align*}
-k(E) &= s \cdot E + b \text{, mit}\\
-  s &= \SI{3.346+-0.001}{\per\electronvolt}\\
-  b &= \SI{ 5.9+-0.8}{}
+E(k) &= s \cdot k + b \text{, mit}\\
+  s &= \SI{0.29882+-0.00009}{}\\
+  b &= \SI{ -1.8+-0.3}{\kilo\electronvolt}
 \end{align*}
 zwischen Kanalnummern und Energien in keV bestimmt.
 \begin{figure}
 \centering
 \includegraphics[width=0.8\textwidth]{python/plots/kalibrierung.pdf}
-\caption{Lineare Regression der Messwerte aus Tabelle \ref{tab:atab1}}
+\caption{Lineare Regression der Messwerte aus Tabelle \ref{tab:atab1} für Europium-152.}
 \label{fig:Kalibrierung}
 \end{figure}
 Mit Gleichung \eqref{eqn:effizienz} soll die Effizienz des Detektors bestimmt werden.
@@ -74,28 +90,16 @@ Daraus ergibt sich eine Aktivität von
 \begin{align*}
 A_\text{Messung}=\SI{1760+-26}{\becquerel} \text{ .}
 \end{align*}
-Leider wurde der Abstand $d$ zwischen Probe und Detektor nicht gemessen.
-Der Wert von $d=\SI{8.8+-0.3}{\centi\meter}$ wird deshalb dem Protokoll einer befreundeten Gruppe entnommen \cite{abstand}.
-Der Radius der Probe beträgt $r=\SI{2.25}{\centi\meter}$ \cite{sample}.
+Leider wurde der Abstand $d$ zwischen der Probe und der Schutzhaube des Detektors nicht gemessen.
+Der Wert von $d=\SI{8.8}{\centi\meter}$ wird deshalb dem Protokoll einer befreundeten Gruppe entnommen \cite{abstand}.
+Der Radius des Detektors beträgt $r=\SI{2.25}{\centi\meter}$ \cite{sample}.
 Aus
 \begin{align}
-\frac{\Omega}{4\pi}=\frac{1}{2}\left( 1- \frac{d}{\sqrt{d^2+r^2}}\right)
+\Omega=2\pi\left( 1- \frac{a}{\sqrt{a^2+r^2}}\right)
 \end{align}
-lässt sich dann der Raumwinkel $\Omega=\SI{1.96+-0.021}{}$ berechnen.
+lässt sich dann der Raumwinkel $\Omega=\SI{0.177}{}$ berechnen, wobei $a=\SI{8.8}{\centi\meter}+\SI{1.5}{\centi\meter}=\SI{10.3}{\centi\meter}$ gewählt wird, da der wahrscheinlichste Absorptionspunkt ca. $\SI{1.5}{\centi\meter}$ unter der Schutzhaube liegt \cite{sample}.
 Mit diesem Wert und den aus den Gauß-Fits berechneten Flächeninhalten der Gauß-Funktionen lassen sich nun die in Tabelle \ref{tab:atab2} angegebenen Effizienzen berechnen.
 Dabei ist zu Berücksichtigen, dass die Zählrate aus Formel \ref{eqn:effizienz} gerade den Inhalten geteilt durch die Messdauer $t_\text{Messung}=\SI{7764}{\second}$ entspricht.
-\begin{table}
-\centering
-\caption{Inhalte der Gauß-Fits und die daraus berechneten Effizienzen.}
-\begin{tabular}{c c c}
-\hline \\
-Energie in $\SI{}{\electronvolt}$ & Inhalt & Effizienz in \%\\
-\hline \\
-121.78 & 28310$\pm$90 & 45.5$\pm$0.6 \\ 244.70 & 4770$\pm$40 & 28.80$\pm$0.5 \\ 295.94 & 230$\pm$30 & 27.0$\pm$3.0 \\ 344.30 & 11700$\pm$70 & 20.3$\pm$0.3 \\ 411.12 & 740$\pm$20 & 15.4$\pm$0.5 \\ 443.96 & 1010$\pm$20 & 15.0$\pm$0.4 \\ 678.00 & 40$\pm$10 & 1.00$\pm$0.3 \\ 688.67 & 240$\pm$20 & 12.0$\pm$1.0 \\ 778.90 & 2320$\pm$40 & 8.3$\pm$0.2 \\ 867.37 & 640$\pm$30 & 7.0$\pm$0.3 \\ 964.08 & 2080$\pm$40 & 6.6$\pm$0.2 \\ 1005.30 & 90$\pm$10 & 7.0$\pm$1.0 \\ 1085.90 & 1170$\pm$40 & 5.3$\pm$0.2 \\ 1112.10 & 1830$\pm$40 & 6.2$\pm$0.2 \\ 1299.10 & 160$\pm$20 & 4.6$\pm$0.5 \\ 1408.00 & 2290$\pm$70 & 5.0$\pm$0.2 \\ 1457.60 & 180$\pm$50 & 16.0$\pm$5.0\\
-\hline
-\end{tabular}
-\label{tab:atab2}
-\end{table}
 Es wird angenommen, dass die Effizienz $Q$ mit steigender Energie wie eine Potenzfunktion
 \begin{align}
 Q(E)=c E^{d}
@@ -103,16 +107,17 @@ Q(E)=c E^{d}
 abnimmt.
 Die in Abbildung \ref{fig:Effizienz} dargestellte Regressionsrechnung liefert die Parameter
 \begin{align*}
-c&=\SI{80+-40}{}\\
-d&=\SI{-1.03+-0.07}{}\text{ .}
+c&=\SI{150+-100}{\per\kilo\electronvolt}\\
+d&=\SI{-1.10+-0.1}{}\text{ .}
 \end{align*}
 \begin{figure}
 \centering
 \includegraphics[width=0.8\textwidth]{python/plots/effizienz.pdf}
 \caption{Darstellung der Abnahme der Effizienz mit Steigender Energie durch eine Regressionsrechnung. Energien unterhalb von $\SI{150}{\electronvolt}$ werden nicht betrachtet.}
-Dabei wird der Peak bei ca. $\SI{778}{\electronvolt}$ vernachlässigt, da eine Inhaltsbestimmung wegen des Untergrunds kaum möglich ist.
 \label{fig:Effizienz}
 \end{figure}
+
+\FloatBarrier
 
 \subsection{Bestimmungen von Detektoreigenschaften}
 \label{subsec:a2}
@@ -186,7 +191,7 @@ ein Vergleichswert bestimmt. Die relative Abweichung des über den Fit bestimmte
 \begin{align}
   \frac{\lvert x_{1/2} - x_{1/2}^{\text{th}} \rvert}{x_{1/2}^{\text{th}}} = \SI{29}{\percent}.
 \end{align}
-
+\FloatBarrier
 \subsubsection{Vermessung des Compton-Kontinuums}
 \label{subsubsec:a22}
 Zwei charakteristische Positionen im Bereich des Comptonkontinuums sind der Rückstreupeak, sowie die
@@ -232,7 +237,7 @@ Dieser Wert kann allerdings nur als grober Richtwert für den tatsächlichen Inh
 denn die für den Fit verwendeten Daten sind Resultat einer Überlagerung des eigentlichen Compton-Kontinuums mit
 Untergrund und Signalen anderer Effekte. Eine graphische Darstellung des Fits ist in Abbildung \ref{fig:kontinuumplot}
 zu finden.
-
+\FloatBarrier
 \subsubsection{Vergleich von Compton-Kontinuum und Photo-Peak}
 \label{subsubsec:a23}
 Um die Inhalte des Compton-Kontinuums und des Photo-Peaks zu vergleichen, ist es sinnvoll die jeweilige Absorptionswahrscheinlichkeiten für den Photoeffekt zu
@@ -269,7 +274,6 @@ Dies entspricht einer relativen Abweichung $\delta$ von
   \delta = \SI{78.3}{\percent} .
 \end{align*}
 
-\FloatBarrier
 \begin{figure}
   \centering
   \includegraphics[width=\textwidth]{python/plots/gaussfit}
@@ -289,10 +293,8 @@ Dies entspricht einer relativen Abweichung $\delta$ von
   \caption{Fit zur Bestimmung des Inhalts des Compton-Kontinuums.}
   \label{fig:kontinuumplot}
 \end{figure}
+
 \FloatBarrier
-
-
-
 \subsection{Aktivitätsbestimmung von Barium 133}
 \label{subsec:a3}
 In Abbildung \ref{fig:Spektrum_Barium} ist das Spektrum einer Barium 133 Probe dargestellt.
@@ -311,20 +313,20 @@ Die Ergebnisse dieser Rechnung finden sich ebenfalls in Tabelle \ref{tab:a_d_1}.
 \caption{Für die Berechnung der Aktivität wichtige Daten je Spektrallinie \cite{sample}.}
 \begin{tabular}{c c c c}
 \hline \\
-Lage in keV & Intensität in s$^{-1}$&  Emissionswahrscheinlichkeit in \%& Aktivität in $\SI{}{\becquerel}$\\
+$E_{\gamma}$ / keV & Inhalte & $W$ / \%& Aktivität / $\SI{}{\becquerel}$\\
 \hline \\
-184.93 $\pm$0.15  &  0.04  $\pm$0.02  &  2.20  &  102  $\pm$57 \\ 278.34 $\pm$0.02  &  2.93  $\pm$1.59  &  34.06  &  540  $\pm$293 \\ 543.81 $\pm$0.32  &  0.14  $\pm$0.10  &  0.65  &  1365  $\pm$919 \\ 753.17 $\pm$0.15  &  0.08  $\pm$0.05  &  0.45  &  1101  $\pm$678 \\ 931.69 $\pm$0.02  &  1.54  $\pm$0.92  &  7.20  &  1341  $\pm$804 \\ 1020.80 $\pm$0.03  &  3.96  $\pm$2.40  &  18.30  &  1360  $\pm$822 \\ 1198.10 $\pm$0.01  &  13.29  $\pm$8.14  &  62.10  &  1344  $\pm$823 \\ 1291.30 $\pm$0.05  &  1.96  $\pm$1.21  &  8.90  &  1382  $\pm$853 \\
+53,49 $\pm$0,05  &  163  $\pm$30 &  2,20  &  90  $\pm$75 \\ 81,40 $\pm$0,01  &  8643  $\pm$217 &  34,06  &  490  $\pm$412 \\ 160,73 $\pm$0,10  &  207  $\pm$73 &  0,65  &  1310  $\pm$1253 \\ 223,29 $\pm$0,04  &  82  $\pm$14 &  0,45  &  1085  $\pm$1010 \\ 276,63 $\pm$0,01  &  1288  $\pm$22 &  7,20  &  1345  $\pm$1250 \\ 303,26 $\pm$0,01  &  3021  $\pm$59 &  18,30  &  1374  $\pm$1288 \\ 356,24 $\pm$0,00  &  8589  $\pm$80 &  62,10  &  1377  $\pm$1308 \\ 384,09 $\pm$0,02  &  1171  $\pm$38 &  8,90  &  1424  $\pm$1362 \\ 
 \hline
 \end{tabular}
 \label{tab:a_d_1}
 \end{table}
 Als Mittelwert dieser einzelnen Aktivitäten ergibt sich das gesamt Ergebnis der Aktivität
 \begin{align*}
-A_{Ba-133}=\SI{1320+-100}{\becquerel} \text{ .}
+A_{Ba-133}=\SI{1100+-500}{\becquerel} \text{ .}
 \end{align*}
 Die Aktivitäten, welche aus den ersten beiden Spektrallinien berechnet werden, werden bei dieser Rechnung vernachlässigt.
 
-
+\FloatBarrier
 \subsection{Untersuchung von Zerfallsketten in einem unbekannten Strahler }
 \label{subsec:a4}
 Es wird eine raioaktive Probe untersucht, deren Spektrum in Abbildung \ref{fig:spectrum_4} zu sehen ist.
@@ -425,3 +427,4 @@ In Tabelle \ref{tab:nuklide} sind die Spekrallinien der jeweiligen Nuklide aufge
 %  \caption{Plot.}
 %  \label{fig:plot}
 %\end{figure}
+\FloatBarrier

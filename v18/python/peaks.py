@@ -30,55 +30,87 @@ A=np.array([121,244,295,344,411,443,678,688,778,867,964,1005,1085,1112,1299,1408
 def f(x,a,b):
     return a*x+b
 
-params,covariance=curve_fit(f,X,Y)
-
+params,covariance=curve_fit(f,Y,X)
+'''
 import matplotlib.pyplot as plt
 
 plt.rcParams['figure.figsize'] = (10, 8)
 plt.rcParams['font.size'] = 16
 
-plt.plot(np.linspace(100,1500,100),f(np.linspace(100,1500,100),*params),label='Lineare Regression')
-plt.plot(X,Y,'rx',label='Messwerte')
-plt.ylabel('Kanalnummer')
-plt.xlabel('Energie in keV')
+plt.plot(np.linspace(400,5000,100),f(np.linspace(400,5000,100),*params),label='Lineare Regression')
+plt.plot(Y,X,'rx',label='Messwerte')
+plt.xlabel('Kanalnummer')
+plt.ylabel('Energie in keV')
 plt.legend()
 plt.savefig("plots/kalibrierung.pdf")
-
+'''
 #Kalibrierungsparameter
 kal=unp.uarray(params,np.sqrt(np.diag(covariance)))
 print('Kalibrierungswerte :',kal)
 #Funktionen
 #Gauss
+def g(x,p1,p2,p3,p4):
+    return p4*np.e**(-p1*(x-p2)**2) + p3
 def gauss(a,s):
  X2=np.linspace(a-s,a+s,2*s+1)
-# print('X2',X2)
  Y2=WERTE[a-s:a+s+1]
- #print('Y2',Y2)
- def g(x,p1,p2,p3,p4):
-    return p4*np.e**(-p1*(x-p2)**2) + p3
-
  params2,covariance2 = curve_fit(g,X2,Y2, p0=[1,a,0,1])
- return params2, covariance2
- '''#Plot Vorbereiten
+ #Plot Vorbereiten
  import matplotlib.pyplot as plt
  plt.rcParams['figure.figsize'] = (10, 8)
  plt.rcParams['font.size'] = 16
- 
  plt.plot(X2,Y2,'rx')
  plt.plot(np.linspace(a-s,a+s,500),g(np.linspace(a-s,a+s,500),*params2))
- plt.show() 
- '''
+ return params2, covariance2
  
+def gauss1(a,s):
+    X2=f(np.linspace(a-s,a+s,2*s+1),*params)
+    Y2=WERTE[a-s:a+s+1]
+    params2,covariance2 = curve_fit(g,X2,Y2, p0=[30,f(a,*params),0,1])
+    #Plot Vorbereiten
+    import matplotlib.pyplot as plt
+    plt.rcParams['figure.figsize'] = (10, 8)
+    plt.rcParams['font.size'] = 16
+    plt.plot(X2,Y2,'rx',label='Messwerte')
+    plt.plot(f(np.linspace(a-s,a+s,500),*params),g(f(np.linspace(a-s,a+s,500),*params),*params2),label='Gaussfit')
+    plt.xlabel('Energie in keV')
+    plt.ylabel('Zaehlergebnis')
+    plt.legend()
+    plt.savefig('plots/diskussion1.pdf')
+    return params2, covariance2
+def gauss2(a,s):
+    X2=f(np.linspace(a-s,a+s,2*s+1),*params)
+    Y2=WERTE[a-s:a+s+1]
+    params2,covariance2 = curve_fit(g,X2,Y2, p0=[30,f(a,*params),0,1])
+    #Plot Vorbereiten
+    import matplotlib.pyplot as plt
+    plt.rcParams['figure.figsize'] = (10, 8)
+    plt.rcParams['font.size'] = 16
+    plt.plot(X2,Y2,'rx',label='Messwerte')
+    plt.plot(f(np.linspace(a-s,a+s,500),*params),g(f(np.linspace(a-s,a+s,500),*params),*params2),label='Gaussfit')
+    plt.xlabel('Energie in keV')
+    plt.ylabel('Zaehlergebnis')
+    plt.legend()
+    plt.savefig('plots/diskussion2.pdf')
+    return params2, covariance2
 
 #Abgelesene Y Werte mit Gauss fitten und in Y eintragen
 C=[]
 D=[]
 s_g=[20,20,30,20,30,20,30,30,20,30,20,30,20,20,30,20,60]
+'''
+#diskussion
+gauss1(Y[6],s_g[6])
+import matplotlib.pyplot as plt
+plt.clf()
+gauss2(Y[16],s_g[16])
+'''
 for i in range(len(Y)):
     c,d=gauss(Y[i],s_g[i])
     C=C+[c]
     D=D+[d]
     Y[i]=C[i][1] 
+
 #Zeige werte an
 #for i in range(len(C)):
  #   print(Y[i])
@@ -111,8 +143,10 @@ Zaehlrate=I/7764
 
 #Berechne die Effizienz
 
-omega=0.2
-
+abstand=0.088+0.015
+radius=0.025
+omega=2*np.pi*(1-abstand/unp.sqrt(abstand**2+radius**2))
+print('*omega', omega)
 t=unp.uarray( 6084 ,1)
 
 Aktivitaet=unp.uarray(4130,60)*unp.exp(-unp.log(2)/(unp.uarray(4943,5))*t)
@@ -123,21 +157,18 @@ Q=4*np.pi/omega/Aktivitaet*Zaehlrate/W
 
 print('Effizienz ',Q)
 print('Aktivitaet',Aktivitaet)
-np.savetxt('Guess.txt',f(A,*params),delimiter=' ; ',newline=' ; ',fmt='%3d')
-
-
-
+np.savetxt('Guess.txt',f(Y,*params),delimiter=' ; ',newline=' ; ',fmt='%3d')
 
 #Potenzfunktion der Effizienz
 def eff(x,p1,p2):
     return p1*np.power(x,p2)
 
-Y_umgerechnet=y/params[0]-params[1]/params[0]
+Y_umgerechnet=f(Y,*params)
 #Lasse schlechte werte raus
-Y_umgerechnet=np.delete(Y_umgerechnet,[0,6])
-Q=np.delete(Q,[0,6])
-params3,covariance3 = curve_fit(eff,unp.nominal_values(Y_umgerechnet),unp.nominal_values(Q))
+Y_umgerechnet=np.delete(Y_umgerechnet,[0])
+Q=np.delete(Q,[0])
 
+params3,covariance3 = curve_fit(eff,unp.nominal_values(Y_umgerechnet),unp.nominal_values(Q))
     
 print('Effizienzfunktion a*x^b mit:')
 print('a,b = ',unp.uarray(params3,np.sqrt(np.diag(covariance3))))
@@ -154,7 +185,9 @@ plt.xlabel('Energie in keV')
 plt.legend()
 plt.savefig("plots/effizienz.pdf")
 #plt.show()
-#np.savetxt('europium.txt',np.array([Y,X,W*100]).T,delimiter=' & ',newline=' ;newline; ',fmt="%.2f")
-#np.savetxt('effizienz.txt',np.array([X,unp.nominal_values(I),unp.std_devs(I),unp.nominal_values(Q)*100,unp.std_devs(Q)*100]).T,delimiter=' & ',newline=' ;newline; ',fmt="%.2f")
-print(Y_umgerechnet[6])
 '''
+np.savetxt('europium.txt',np.array([unp.nominal_values(y),unp.std_devs(y),unp.nominal_values(f(y,*params)),unp.std_devs(f(y,*params)),X,W*100]).T,delimiter=' & ',newline=' ;newline; ',fmt="%.2f")
+#np.savetxt('effizienz.txt',np.array([f(y),unp.nominal_values(I),unp.std_devs(I),unp.nominal_values(Q)*100,unp.std_devs(Q)*100]).T,delimiter=' & ',newline=' ;newline; ',fmt="%.2f")
+print(Y_umgerechnet[6])
+
+print('done.')
