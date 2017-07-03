@@ -122,6 +122,12 @@ Um diesen Einfluss zu verringern werden Germanium-Detektoren in der Regel auf $\
 Wichtige Kenngrößen eines Germanium-Detektors sind das energetische Auflösungsvermögen und die Effizienz.
 Das energetische Auflösungsvermögen wird größtenteils von der Halbwertsbreite $\Delta E_{\frac{1}{2}}$ eines Peaks des Spektrums beschrieben. 
 Wie Abbildung \ref{fig:halbwertsbreite} zeigt, können zwei benachbarte Spektrallinien hinreichend gut unterschieden werden, wenn der Abstand zwischen ihnen mindestens der Halbwertsbreite entspricht.
+\begin{figure}
+\centering
+\includegraphics[width=0.8\textwidth]{content/skizzen/halbwertsbreite.png}
+\caption{Durch die Überlagerung zweier Gaußkurven wird die Unterscheidbarkeit von zwei verschiedenen Spektrallinien dargestellt.}
+\label{fig:halbwertsbreite}
+\end{figure}
 Die Halbwertsbreite wird von der Anzahl $n$ der nach Einfall eines Gamma-Quants freigesetzten Elektron-Loch-Paare bestimmt.
 Da typischer Weise $n\gg 1$ beobachtet wird, kann die Verteilungsfunktion durch eine Gauß-Verteilung angenähert werden.
 Ist $\sigma_E$ die Standardabweichung der Gauß-Verteilung, so gilt für die Halbwertsbreite
@@ -133,9 +139,9 @@ wobei $E_{\gamma}$ die Energie des einfallenden Gamma-Quants, $E_{\text{EL}}$ di
 Weitere Faktoren sind unter anderem der Leckstrom, Inhomogenitäten des elektrischen Feldes oder das Verstärkerrauschen.
 Jeder dieser Faktoren kann durch geeignete Gegenmaßnahmen verringert werden.
 Etwa durch Kühlung der Apparatur, hohe Spannungen und Vergrößerung des Detektors.
-Das energetische Auflösungsvermögen hängt mittels
+Das energetische Auflösungsvermögen hängt neben der Halbwertsbreite der oben diskutierten Verteilung mittels
 \begin{align}
-H_\text{ges}^2 = \delta E_{\frac{1}{2}}^2 + H_\text{R}^2 + H_\text{I}^2 + H_\text{E}^2
+H_\text{ges}^2 = \Delta E_{\frac{1}{2}}^2 + H_\text{R}^2 + H_\text{I}^2 + H_\text{E}^2
 \end{align}
 von den Halbwertsbreiten ab, welche durch den Leckstrom ($H_\text{R}$), die Feldinhomogenität ($H_\text{I}$) und das Verstärkerrauschen ($H_\text{E}$) enstehen.
 Die Effizienz beschreibt die Abhängigkeit der Vollenergie-Nachweiswahrscheinlichkeit eines Detektors von der Energie der einfallenden Gamma-Quanten.
