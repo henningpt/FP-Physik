@@ -27,6 +27,9 @@ I3 *= 1.0 * 10**(-11)
 I4 *= 0.3 * 10**(-10)
 I5 *= 0.3 * 10**(-10)
 
+Tstart = 210.0
+W_lit = 0.66
+t_lit = 4 * 10**(-14)
 
 # haenge daten aneinander
 I12 = np.append(I1, I2)
@@ -60,8 +63,9 @@ def lin(Tinv, intercept, slope):
     return(intercept + Tinv * slope)
 
 
-def tau0(Tmax, W, b):
-    return(sc.k * Tmax**2 * np.e**(-W / (sc.k * Tmax)) / (W * b))
+def tau0(T_0, Tmax, W, b):
+    return(sc.k * Tmax**2 * (np.e**(-W / (sc.k * Tmax)) -
+           np.e**(-W / (sc.k * T_0))) / (W * b))
 
 
 def efct(T, a, b):
@@ -79,11 +83,11 @@ def heizrate(T, zeit):
 
 
 # rechnung
-A = kreisf(2.5*10**(-3))
+A = kreisf(1.5*10**(-3))
 
 # untergrundfit + abziehen
-Iu = np.append(I[9:11], I[28:34])
-Tu = np.append(T[9:11], T[28:34])
+Iu = np.append(I[10:12], I[28:30])
+Tu = np.append(T[10:12], T[28:30])
 
 params_u, covariance_u = curve_fit(lin, Tu, Iu)
 eparams_u = unp.uarray(params_u, np.sqrt(np.diag(covariance_u)))
@@ -97,8 +101,8 @@ Ir = Ik2[Ik2 >= 0]
 Tr = Tk2[Ik2 >= 0]
 
 # Anfangsfit
-lin_fits = 3
-lin_fite = 8
+lin_fits = 4
+lin_fite = 9
 Ic = Ir[lin_fits:lin_fite]
 jc = Ir/A  # stromdichte
 Tc = Tr[lin_fits:lin_fite]
@@ -108,10 +112,11 @@ interc_lin = ufloat(params_lin[0], errors_lin[0])
 slope_lin = ufloat(params_lin[1], errors_lin[1])
 W = -slope_lin * sc.k / sc.elementary_charge
 
+deltaW1 = abs(W - W_lit) / W_lit
 
 # integration
 intg_s = 4
-intg_e = len(Ir) - 1
+intg_e = len(Ir)
 integ = np.zeros(len(Ir[intg_s:intg_e]))
 for i, val in enumerate(Ir[intg_s:intg_e]):
     integ_a = intg_s + i
@@ -127,26 +132,29 @@ interc_int = uparams_int[0]
 
 W2 = slope_int * sc.k / sc.elementary_charge
 
+deltaW2 = abs(W2 - W_lit) / W_lit
+
 # tau
 bnew = heizrate(Tr, 60)
 Tm = Tr[np.argmax(Ir)]
-t0 = tau0(Tm, W2 * sc.e,  bnew)
+t0 = tau0(Tstart, Tm, W2 * sc.e,  bnew)
 
+delta_t = abs(t0 - t_lit) / t_lit
 
 # plotten
 # werte auswahl etc.
 plt.figure(1)  # T, I 1
 plt.plot(T, I, 'rx', label=r'$\mathrm{unkorr.} \ \mathrm{Werte}$')
 plt.plot(T, lin(T, *params_u), label=r'$\mathrm{Untergrund-Fit}$')
-plt.plot(T, Ik, 'gx',  label=r'$\mathrm{korr.} \ \mathrm{Werte}$')
-plt.plot(Tr, Ir, 'x', color=(1.0, 0.0, 1.0),
+plt.plot(T, Ik, 'x', color=(1.0, 0.0, 1.0),  label=r'$\mathrm{korr.} \ \mathrm{Werte}$')
+plt.plot(Tr, Ir, 'gx',
          label=r'$\mathrm{pos.korr.} \ \mathrm{Werte}$')
 
 # plt.plot(Tc, Ic, 'gx', label=r'$\mathrm{Werte} \ \mathrm{fuer} \ \mathrm{Anfangskurve}$')
 plt.xlabel(r'$T / \mathrm{K}$')
 plt.ylabel(r'$I / \mathrm{A}$')
 plt.legend(loc='best')
-plt.show()
+plt.savefig("plots/ti1.pdf")
 
 
 # anfangsplot
@@ -155,9 +163,9 @@ x_plot = np.linspace(np.min(Tc), np.max(Tc), 1000)
 plt.plot(1/Tc, np.log(Ic), 'rx', label=r'$\mathrm{umgerechnete} \ \mathrm{Messwerte}$')
 plt.plot(1/x_plot, lin(1/x_plot, *params_lin), 'b', label=r'$\mathrm{linearer} \ \mathrm{Fit}$')
 plt.xlabel(r'$\frac{1}{T} \ / \ \frac{1}{\mathrm{K}}$')
-plt.ylabel(r'$\ln(j \cdot \mathrm{m^2} \ / \ \mathrm{A}) $')
+plt.ylabel(r'$\ln(Ix  / \ \mathrm{A}) $')
 plt.legend(loc='best')
-plt.show()
+plt.savefig("plots/lin1.pdf")
 
 # plot lin fit integration
 plt.figure(3)
@@ -167,12 +175,36 @@ plt.plot(1/x_plot, lin(1/x_plot, *params_int), 'b', label=r'$\mathrm{linearer} \
 plt.xlabel(r'$\frac{1}{T} \ / \ \frac{1}{\mathrm{K}}$')
 plt.ylabel(r'$\ln\frac{\mathrm{integral}}{I(T)}$')
 plt.legend(loc='best')
-plt.show()
+plt.savefig("plots/lnlin1.pdf")
 
 
 # ausgabe
 # lin fit ergebnis W
-print("Aktivierungsenergie W: ", W)
-print("Aktivierungsenergie W2: ", W2)
-print("tau0: ", t0)
+print("\n\nAktivierungsenergie W: ", W)
+print("\nAktivierungsenergie W2: ", W2)
+print("\n\ntau0: ", t0)
+print("\nb: ", bnew)
+
+
+print("\n\n Abweichung W1 : ", deltaW1)
+print("\n Abweichung W2 : ", deltaW2)
+print("\n Abweichung t0 : ", delta_t)
+
+# paramter der Fits
+print("\n\nslope untergrund : ", slope_u)
+print("\ninterc untergrund : ", interc_u)
+
+print("\n\nslope anfang : ", slope_lin)
+print("\ninterc anfang : ", interc_lin)
+
+print("\n\nslope integral : ", slope_int)
+print("\ninterc integral : ", interc_int)
+
+np.savetxt('werte_untergrund1.txt',np.column_stack([Iu, Tu]), header="I untergrund, T untergrund")
+
+# werte fuer anfangsfit und integration abspeichern
+np.savetxt('werte_anfang1.txt', np.column_stack([Ic, Tc]),
+           header="I anfang, T anfang")
+
+np.savetxt('werte_integration1.txt', np.column_stack([Ir[intg_s:intg_e], Tr[intg_s:intg_e]]), header="I anfang, T anfang")
 # print("\nTr: ", Tr)
