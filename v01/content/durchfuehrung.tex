@@ -2,25 +2,26 @@
 \label{sec:Durchführung}
 Um die Messung der Lebensdauer von Myonen durchführen zu können muss die in Kapitel \ref{subsec:Messung der Lebensdauer} beschriebene Schaltung aufgebaut, und ihre Funktionstüchtigkeit überprüft werden.
 Um die Signale der verschiedenen Bauteile zu betrachten wird ein Oszilloskop verwendet.
-Beim betrachten der SEV Signale wird klar, dass aufgrund ihrer unregelmäßigen Form ein Diskriminator nötig ist, der die Signale in Rechtecksignale umwandelt.
+Beim Betrachten der SEV Signale wird klar, dass aufgrund ihrer unregelmäßigen Form ein Diskriminator nötig ist, der die Signale in Rechtecksignale umwandelt.
 Die Längen der Rechtecksignale der Diskriminatoren werden auf $\SI{20}{\nano\second}$ eingestellt.
 Zusätzlich werden die Schwellen beider Diskriminatoren so eingestellt, dass an beiden Eingängen der Koinzidenzschaltung ungefähr die gleiche Signalrate zu messen ist.
-Da es unmöglich ist beide SEV exakt gleich zu fertigen kann es vorkommen, dass die beiden SEV unterschiedliche Reaktionszeiten aufweisen.
+Da es unmöglich ist beide SEV exakt gleich zu fertigen kann es vorkommen, dass die beiden SEV aufgrund verschiedener elektrischer Eigenschaften unterschiedliche Reaktionszeiten aufweisen.
 Daher werden Verzögerungsleitungen zwischen die SEV und die Diskriminatoren geschaltet.
 Für verschiedene Verzögerungszeiten wird die Signalrate am Ausgang der Koinzidenzschaltung gemessen.
 Aufgrund der in Abbildung \ref{fig:verzoegerungszeit} dargestellten Verteilung wird einer der SEV um $\SI{4}{\nano\second}$ verzögert.
 \begin{wrapfigure}{r}{0.5\textwidth}
 \centering
 \includegraphics[width=0.5\textwidth]{python/plots/verzoegerungszeit.jpg}
-\caption{Signalrate am Ausgang der Koinzidenzschaltung für verschiedene Verzögerungszeiten.}
+\caption{Zählergebnis am Ausgang der Koinzidenzschaltung für verschiedene Verzögerungszeiten $t$. Die Messzeit beträgt $\SI{10}{\second}$ für jeden Messwert.
+}
 \label{fig:verzoegerungszeit}
 \end{wrapfigure}
 Die Apparatur muss vor der Messung kalibriert werden.
 Dazu werden die Eingänge der Koinzidenzschaltung, an welche die SEV angeschlossen sind, vorübergehend deaktiviert und ein Doppelimpulsgenerator wird an einen freien Eingang angeschlossen.
 Dieser gibt mit einer festgelegten Frequenz je zwei Impulse in einstellbaren Abständen zwischen $\SI{0}{\nano\second}$ und $\SI{9.9}{\nano\second}$ an die Koinzidenzschaltung ab.
 Um die verfügbaren Kanäle des Vielkanalanalysators optimal ausnutzen zu können wird die Spannungsausgabe des TAC so eingestellt, dass bei Impulsabständen von $\SI{9.9}{\nano\second}$ ungefähr der mittlere Kanal aufgefüllt wird.
-Auf diese Weise wird gewährleistet, dass über die gesamte Suchzeit, welche auf $T_s=\SI{20}{\nano\second}$ eingestellt wird, Werte in die Kanäle eingetragen werden können und, dass möglichst wenige Kanäle leer bleiben.
-Für Impulsabstände von $\SI{0}{\nano\second}$ bis $\SI{9}{\nano\second}$ wird in Schritten von $\SI{1}{\nano\second}$ jeweils $\SI{20}{\second}$ lang die Anzahl der Signale gezählt.
+Auf diese Weise wird gewährleistet, dass über die gesamte Suchzeit, welche auf $T_s=\SI{20}{\micro\second}$ eingestellt wird, Werte in die Kanäle eingetragen werden können und, dass möglichst wenige Kanäle leer bleiben.
+Für Impulsabstände von $\SI{0}{\micro\second}$ bis $\SI{9}{\micro\second}$ wird in Schritten von $\SI{1}{\micro\second}$ jeweils $\SI{20}{\second}$ lang die Anzahl der Signale gezählt.
 Den aufgefüllten Kanälen kann nun die entsprechende Zeit zugeordnet werden.
 Nach der Kalibration wird der Doppelimpulsgenerator wieder entfernt und die den SEV zugeordneten Eingänge der Koinzidenzschaltung werden wieder aktiviert.
 Für eine Gesamtdauer von $T=\SI{169098}{\second}$ werden nun die Lebensdauern einzelner Myonen gemessen.
