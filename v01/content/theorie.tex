@@ -22,14 +22,14 @@ Diese ist durch den Erwartungswert der Lebensdauerverteilung einzelner Myonen ge
 Da Teilchenzerfälle rein statistische Prozesse sind, wird für die Zerfallswahrscheinlichkeit $dW$ eines Teilchens im Zeitraum $dt$ der Ansatz
 \begin{align}
 \text{d} W = -  \lambda \text{d} t
-\end{align} 
+\end{align}
 gemacht.
 Insbesondere hängt die Zerfallswahrscheinlichkeit nicht von der Anzahl der vorhandenen Teilchen $N$ ab.
 Für die Änderung der Teilchenzahl im Zeitraum $dt$ gilt also
 \begin{align}
 \text{d} N = - N \text{d} W = - N \lambda \text{d} t\text{ ,}
-\end{align} 
-was durch Integration auf 
+\end{align}
+was durch Integration auf
 \begin{align}
 N(t)=N_0\exp(-\lambda t)
 \end{align}
@@ -37,7 +37,8 @@ führt.
 Um auf die Verteilungsfunktion zu schließen, muss betrachtet werden wie viele Teilchen eine Lebensdauer im Bereich von $t$ bis $dt$ haben.
 Diese Betrachtung führt auf eine Exponentialverteilung
 \begin{align}
-\text{d} N(t)=N_0 \lambda \exp(-\lambda t) \text{d} t \text{ .}
+  \label{eqn:exp}
+  \text{d} N(t)=N_0 \lambda \exp(-\lambda t) \text{d} t \text{ .}
 \end{align}
 Die Lebensdauer $\tau$ eines Teilchens ist der Erwartungswert dieser Verteilung, welcher gerade $\tau = \frac{1}{\lambda}$ ist.
 \cite{sample}
