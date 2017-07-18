@@ -4,15 +4,15 @@
 \subsection{Einleitung}
 \label{subsec:Einleitung}
 
-Die im folgenden dargestellte Untersuchung eines Reinst-Germanium-Detektors hat im wesentlichen zwei Ziele. 
+Die im folgenden dargestellte Untersuchung eines Reinst-Germanium-Detektors hat im wesentlichen zwei Ziele.
 Zum einen sollen charakteristische Eigenschaften des Detektors, wie die Effizienz und das Energieauflösungsvermögen bestimmt werden.
 Zum anderen soll der Germanium-Detektor eingesetzt werden, um die Aktivität einer Probe eines unbekannten Materials zu bestimmen und, um Glieder der Zerfallsreihe einer weiteren Probe zu identifizieren.
-Der hier verwendete Detektor ist als Instrument der Gamma-Spektroskopie für den Nachweis von bei Kernzerfällen entstehenden Photonen, welche auch Gamma-Quanten genannt werden, entwickelt worden. 
-Im Gegensatz zu den übrigen Kapiteln wird in Kapitel \ref{subsec:t1} von Photonen statt von Gamma-Quanten gesprochen, um die allgemeine Gültigkeit der dort getätigten Aussagen nicht zu Beschränken.
+Der hier verwendete Detektor ist als Instrument der Gamma-Spektroskopie für den Nachweis von bei Kernzerfällen entstehenden Photonen, welche auch Gamma-Quanten genannt werden, entwickelt worden.
+Im Gegensatz zu den übrigen Kapiteln wird in Kapitel \ref{subsec:t1} von Photonen statt von Gamma-Quanten gesprochen, um die allgemeine Gültigkeit der dort getätigten Aussagen nicht zu beschränken.
 
 \subsection{Gamma-Strahlung in Materie}
 \label{subsec:t1}
-Diese Strahlung kann auf verschiedene Weise mit den Elektronen sowie Atomkernen im Detektor
+Diese Strahlung kann auf verschiedene Weise mit den Elektronen sowie Atomkernen in Materie
 interagieren.\\
 Jeder Wechselwirkung lässt sich ein sogenannter Wirkungsquerschnitt
 $\sigma$ zuordnen. Dieser ist ein Maß für die Wahrscheinlichkeit,
@@ -23,15 +23,22 @@ Für diesen gilt
   \label{eqn:extinktion}
   \mu = \sigma \cdot n .
 \end{equation}
-In Abbildung \ref{fig:extinktion} ist die Energieabhängigkeit des Extinktionskoeffizienten für wichtige
-Prozesse gezeigt.
+Dabei bezeichnet $n$ die Atomdichte pro Volumen des Absorbers.\\
+In Abbildung \ref{fig:extinktion} ist die Energieabhängigkeit des Extinktionskoeffizienten für Photoeffekt, Comptoneffekt
+und Elektronenpaarbildung gezeigt.
 Die Wahrscheinlichkeit für den jeweiligen Prozess, lässt sich dann mithilfe des Extinktionskoeffizenten als
 
 \begin{equation}
   \label{eqn:wkeit}
   w = 1 - e^{-\mu \cdot D}
 \end{equation}
-bestimmen. Dabei bezeichnet $D$ die Dicke des Absorbers.\\ \\
+bestimmen. Aus eqref{eqn:wkeit} folgt das Absorptionsgesetz
+\begin{equation}
+  \label{eqn:absorption}
+  N(D) = N_{0} \cdot e^{-\mu \cdot D}.
+\end{equation}
+Dabei bezeichnet $D$ die Dicke des Absorbers. Das Absorptionsgesetz gibt an, wie viele Photonen
+noch nicht mit der Materie in Wechselwirkung getreten sind.\\ \\
 Bei bei der Interaktion von Gamma-Strahlung mit Elektronen und Atomkernen sind vor allem
 der Photoeffekt, der Comptoneffekt und die Paarbildung relevante
 Prozesse. Auf diese wird im Folgenden näher eingegangen.\\ \\
@@ -40,17 +47,18 @@ einer Photonenergie oberhalb der Bindungsenergie des Elektrons dafür sorgt, das
 aus seinem Energiezustand entfernt werden kann. Überschüssige Energie bleibt als kinetische
 Energie des ausgelösten Elektrons erhalten. Die Unterbesetzung der Schale, der das ausgelöste
 Elektron enstammte, wird ausgeglichen, indem ein Elektron aus einer energetisch höheren Schale
-die unvollständige Schale auffüllt. Dabei gibt das nachrückende Elektron seine Energie wieder
+die unvollständige Schale auffüllt. Dabei gibt das nachrückende Elektron seine Energie
 in Form von Röntgenstrahlung ab. Für den dem Photoeffekt zugeordneten Wirkungsquerschnitt $\sigma_\text{ph}$ gilt
 
 \begin{equation}
   \label{eqn:phquerschnitt}
   \sigma_\text{ph} \propto z^{\alpha} \cdot E^{\delta}.
 \end{equation}
-Dabei bezeichnet $z$ die Kernladungszahl, $\alpha$ und $\delta$ Paramter, die sich je nach konkretem Anwendungsfall
-ändern und $E$ die Energie. Bei Energien unterhalb von $\SI{5}{\mega\electronvolt}$ liegt $\alpha$ zwischen den Zahlen
+Dabei bezeichnet $z$ die Kernladungszahl des Absorbers, $\alpha$ und $\delta$ Paramter, die sich je nach konkretem Anwendungsfall
+ändern und $E$ die Energie des Photons. Bei Energien unterhalb von $\SI{5}{\mega\electronvolt}$ liegt $\alpha$ zwischen den Zahlen
 $4$ und $5$ und $\delta$ nimmt einen Wert von ca. $-3.5$ an.\\ \\
-Der Comptoneffekt beschreibt die inelastische Streuung hochenergetischer Photonen mit einem
+Der Comptoneffekt beschreibt die inelastische Streuung von Photonen, deren Energie im Bereich von ca.
+$\SI{0.01}{\mega\electronvolt}$ bis $\SI{10}{\mega\electronvolt}$ mit einem
 ruhenden Elektron.\\
 Dabei wird ein vom Streuwinkel $\psi_{\gamma}$ abhängiger Energieanteil an das Elektron übertragen.
 Der maximale Energieübertrag findet bei der Rückstreuung also einem Streuwinkel
@@ -78,9 +86,9 @@ Für den Wirkungsquerschnitt $\sigma_\text{compton}$ ergibt sich
   \cdot \left( \frac{2 + 2\varepsilon}{1 + 2\varepsilon} - \varepsilon^{-1} \ln\left( 1 + 2\varepsilon \right) \right)
   + \frac{1}{2\varepsilon} \ln\left( 1 + 2\varepsilon \right) - \frac{1 + 3\varepsilon}{(1 + 2\varepsilon)^2}  \right) .
 \end{equation}
-Wird $\varepsilon$ beliebig klein, so ergibt sich als Wirkungsquerschnitt der Wirkungsquerschnitt nach Thomson
+Wird $\varepsilon$ beliebig klein, so ergibt sich der Wirkungsquerschnitt nach Thomson
 $\sigma_\text{Th}$. Für diesen lässt sich der Streuprozess als elastisch charakterisieren.\\
-Es lässt sich zeigen, dass $\sigma_\text{compton}$ sich folgendermaßen mit der Energie ändert
+Es lässt sich zeigen, dass $\sigma_\text{compton}$ sich folgendermaßen mit der Energie, der gestoßenen Elektronen ändert
 
 \begin{equation}
   \label{eqn:dsig}
@@ -92,13 +100,19 @@ Es lässt sich zeigen, dass $\sigma_\text{compton}$ sich folgendermaßen mit der
 \\ \\
 Bei der Elektronen-Paarbildung wird aus der Energie eines Photons ein Elektron und ein Positron erzeugt.\\
 Damit dies möglich ist, muss die Energie des Photons mindestens doppelt so groß wie die Ruhemasse eines Elektrons
-sein. Weiterhin muss der Prozess in Beisein eines Atomkerns oder Elektrons stattfinden. Aufgrund des vergleichsweise
-hohen Schwellenwerts für das Stattfinden dieses Prozesses, ist dieser offensichtlich erst bei sehr großen Energien
-von Bedeutung.
+sein. Weiterhin muss der Prozess in Beisein eines Atomkerns oder Elektrons stattfinden. Damit in letzterem Fall
+die Paarbildung stattfinden kann muss die Photonergie die vierfache Ruhemasse eines Elektrons überschreiten.
+Aufgrund des vergleichsweise hohen Schwellenwerts für das Stattfinden dieses Prozesses, ist dieser offensichtlich erst bei sehr Energien im
+Bereich einiger $\si{\mega\electronvolt}$ von Bedeutung.\\
+Der Wirkungsquerschnitt für die Paarbildung hat folgende Gestalt
+\begin{equation}
+  \label{eqn:paarbildung}
+  \sigma_\text{Pa} = \alpha \cdot r_\text{e}^2 \cdot z^2 \cdot \left( \frac{28}{9} \cdot \ln\left( \epsilon \right) - \frac{218}{27} \right)
+\end{equation}
 
 \begin{figure}
   \includegraphics[width=\textwidth]{content/skizzen/extinktion.png}
-  \caption{Energieabhängigkeit der Extinktionskoeffizienten wichtiger Prozesse bei der Wechselwirkung von Gamma-Strahlung mit Materie \cite{sample}.}
+  \caption{Energieabhängigkeit der Extinktionskoeffizienten der betrachteten Prozesse bei der Wechselwirkung von Gamma-Strahlung mit Materie \cite{sample}.}
   \label{fig:extinktion}
 \end{figure}
 \FloatBarrier
@@ -116,11 +130,11 @@ Die Gesamtladung $Q$ ist dabei proportional zur Energie des $Gamma$-Quants, welc
 Ein Ziel bei der Konstruktion eines Germanium-Detektors ist es also, eine möglichst breite ladungsarme Zone zu erreichen.
 Dies ist zum Beispiel durch ein starkes elektrisches Feld und eine unsymmetische Dotierung möglich.
 Aufgrund der thermischen Bewegungen von Elektronen im Material entsteht ein Rauschen, welches die Messung negativ beeinflusst.
-Ein starkes elektrisches Feld zeichnet eine Bewegungsrichtung für die thermische Bewegung der Elektronen aus, was zu einem stärkeren Rauschen führt. 
+Ein starkes elektrisches Feld zeichnet eine Bewegungsrichtung für die thermische Bewegung der Elektronen aus, was zu einem stärkeren Rauschen führt.
 Um diesen Einfluss zu verringern werden Germanium-Detektoren in der Regel auf $\SI{77}{\kelvin}$ gekühlt.
 
 Wichtige Kenngrößen eines Germanium-Detektors sind das energetische Auflösungsvermögen und die Effizienz.
-Das energetische Auflösungsvermögen wird größtenteils von der Halbwertsbreite $\Delta E_{\frac{1}{2}}$ eines Peaks des Spektrums beschrieben. 
+Das energetische Auflösungsvermögen wird größtenteils von der Halbwertsbreite $\Delta E_{\frac{1}{2}}$ eines Peaks des Spektrums beschrieben.
 Wie Abbildung \ref{fig:halbwertsbreite} zeigt, können zwei benachbarte Spektrallinien hinreichend gut unterschieden werden, wenn der Abstand zwischen ihnen mindestens der Halbwertsbreite entspricht.
 \begin{figure}
 \centering
@@ -192,7 +206,7 @@ sich das Compton-Kontinuum, das mit dem sogenannten Rückstreupeak überlagert i
 Der Rückstreupeak kommt dadurch zustande, dass nicht alle Photonen direkt im Detektor Wechselwirken, sondern zum Teil
 erst in der Abschirmung oder anderen nahegelegenen Medien  gemäß des Compton-Effekts gestreut werden. Liegt dabei
 ein sehr großer Streuwinkel vor, so tragen sie zum Rückstreupeak bei. Die Lage des Rückstreupeaks lässt sich durch
-die Energie rückwärtsgestreuter(Compton-Effekt) Photonen
+die Energie rückwärtsgestreuter(Compton-Effekt) Photonen mit
 
 \begin{equation}
   \label{eqn:rstreupos}
@@ -208,13 +222,13 @@ approximieren.\\ \\
 \end{figure}
 \FloatBarrier
 Ein wichtiger Zusammenhang bei der Untersuchung der Spektrallinien eines Gamma-Strahlers ist der für
-das Zählergebnis
+die Zählrate
 
 \begin{equation}
   \label{eqn:effizienz}
-  Z = \frac{\Omega}{4\cdot \pi} \cdot A \cdot w \cdot Q .
+  z = \frac{\Omega}{4\cdot \pi} \cdot A \cdot W \cdot Q .
 \end{equation}
-Dabei bezeichnet $\Omega$ den Raumwinkekl der mit dem Detektor beobachtet werden kann, $w$ die
+Dabei bezeichnet $\Omega$ den Raumwinkel der mit dem Detektor beobachtet werden kann, $W$ die
 Emmissionswahrscheinlichkeit für eine ausgewählte Linien des betrachteten Strahlers und $Q$ die
 Effizienz des verwendeten Detektors. Die Effizienz gibt an, wie wahrscheinlich es ist ein Messergebnis für eine ausgewählte
 Energie zu erhalten.
